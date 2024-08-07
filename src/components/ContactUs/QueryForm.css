@@ -1,0 +1,10 @@
+.query-form{
+    background-color: #D9D9D9;
+    padding: 5vh 8vh;
+}
+.submit-btn{
+    background-color: #FFD84D;
+    color: black;
+    border: 0px;
+    margin-left: 40%;
+}

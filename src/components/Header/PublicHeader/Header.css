@@ -1,0 +1,54 @@
+.header {
+    background-color: #ffffff;
+    padding: 1rem;
+    border-bottom: 1px solid #D9D9D9;
+  }
+  
+  .menu {
+    display: flex;
+    align-items: center;
+  }
+  
+  .menu img {
+    height: 50px;
+    margin-left: 3rem;
+  }
+  
+  .menu nav ul {
+    list-style: none;
+    display: flex;
+    gap: 2rem;
+    margin-left: 6rem;
+    padding: 0;
+  }
+  
+  .menu nav ul li a {
+    color: rgb(0, 0, 0);
+    text-decoration: none;
+    font-size: 1rem;
+  }
+  
+  .menu nav ul li a:hover {
+    text-decoration: underline;
+  }
+  .search-box {
+    display: flex;
+    align-items: center;
+    margin-left: 30px;
+  }
+  
+  .search-box input {
+    padding: 0.5rem;
+    background-color: #D9D9D9;
+    border: none;
+    border-radius: 20px; 
+    outline: none;
+  }
+  .header-btn button{
+    margin-left: 54px;
+    padding: 5px 17px;
+    background-color: #FFD84D;
+    color: black;
+    border: none;
+    border-radius: 4px;
+  }
