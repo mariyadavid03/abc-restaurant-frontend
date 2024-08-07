@@ -5,6 +5,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import Slider from '../../components/Slider/Slider';
 import Grid from '../../components/Gallery/Grid';
 import QueryForm from '../../components/ContactUs/QueryForm';
+import Footer from '../../components/Footer/PublicFooter/Footer';
 
 
 
@@ -145,6 +146,18 @@ function HomePage(){
                 </div>
             
             </div>
+
+            <div className='contact-details'>
+                <div className='detail-box'>
+                    <img src={require('../../assets/images/mobile-icon.png')} alt='Mobile'></img>
+                    <h5>+94 764 7764</h5>
+                </div>
+                <div className='detail-box'>
+                    <img src={require('../../assets/images/mail-icon.png')} alt='Mobile'></img>
+                    <h5>abcresturant@gmail.com</h5>
+                </div>
+            </div>
+            <Footer/>
             
         </div>
     )

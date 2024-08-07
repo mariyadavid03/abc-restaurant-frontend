@@ -191,3 +191,44 @@ body {
   .location-container{
     display: flex;
   }
+  .location-section{
+    width: 100%;
+    height: fit-content;
+    background-color: var(--black);
+    color: white;
+  }
+
+  .location-section h1{
+    padding-top: 10vh;
+    padding-bottom: 8vh;
+  }
+  .map-box{
+    width: 65%
+  }
+
+  .location-text{
+    width: 35%;
+    padding-bottom: 14vh;
+    
+  }
+  .map-box iframe{
+    width: 65%;
+    margin-left: 20%;
+    height: 65vh;
+  }
+  .contact-details{
+    display: flex;
+    width: 100%;
+    justify-content: space-evenly;
+    height: 130px;
+    padding: 4%;
+    border-bottom: 2px solid var(--pink);
+    border-top: 2px solid var(--pink);
+  }
+  .detail-box{
+    display: flex;
+  }
+  .detail-box img{
+    height: 38px;
+    margin-right: 20px;
+  }
