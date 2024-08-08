@@ -6,23 +6,31 @@ const Footer = () => {
     <footer className="footer">
       <div className="footer-section">
         <h3>General Contact</h3>
-        <p>Phone: (123) 456-7890</p>
-        <p>Phone: (987) 654-3210</p>
+        <p>+94 764 7764</p>
+        <p>+94 875 47382</p>
+        <br/>
+        <p>abcresturant@gmail.com</p>
       </div>
       <div className="footer-section">
         <h3>Quick Links</h3>
-        <ul>
-          <li><a href="#home">Home</a></li>
-          <li><a href="#about">About Us</a></li>
-          <li><a href="#services">Services</a></li>
-          <li><a href="#contact">Contact</a></li>
-        </ul>
+        <div className="quick-links">
+          <ul>
+            <li><a href="#home">Home</a></li>
+            <li><a href="#menu">Menu</a></li>
+            <li><a href="#reserve">Reserve</a></li>
+          </ul>
+          <ul>
+            <li><a href="#about">About Us</a></li>
+            <li><a href="#services">Services</a></li>
+            <li><a href="#contact">Contact</a></li>
+          </ul>
+        </div>
       </div>
       <div className="footer-section">
         <h3>Open Hours</h3>
-        <p>Monday - Friday: 9:00 AM - 6:00 PM</p>
-        <p>Saturday: 10:00 AM - 4:00 PM</p>
-        <p>Sunday: Closed</p>
+        <p>Monday - Friday <br/>11:00AM - 10:00PM</p>
+        <p>Weekends <br/>10:00 AM - 11:30 PM</p>
+        <p>Closed on Bank Holidays</p>
       </div>
     </footer>
   );

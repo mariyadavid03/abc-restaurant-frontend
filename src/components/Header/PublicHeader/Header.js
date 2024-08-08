@@ -1,8 +1,14 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './Header.css';
 import logo from '../../../assets/images/abcshort-high-resolution-logo-transparent.png';
 
 function Header() {
+  const [isOpen, setIsOpen] = useState(false);
+  const toggleMenu = () => {
+    setIsOpen(prevState => !prevState);
+  };
+
+
   return (
     <header className='header'>
       <div className='menu'>
@@ -23,6 +29,20 @@ function Header() {
         <div className='header-btn'>
             <button type='button'>Login</button>
         </div>
+        <div className="hamburger" onClick={toggleMenu}>
+          <div></div>
+          <div></div>
+          <div></div>
+        </div>
+        {isOpen && (
+          <div className='dropdown-menu'>
+            <a href='/'>Home</a>
+            <a href='/about'>About</a>
+            <a href='/menu'>Menu</a>
+            <a href='/service'>Services</a>
+            <a href='/contact'>Contact Us</a>
+          </div>
+        )}
       </div>
     </header>
   );

@@ -6,6 +6,9 @@ import Slider from '../../components/Slider/Slider';
 import Grid from '../../components/Gallery/Grid';
 import QueryForm from '../../components/ContactUs/QueryForm';
 import Footer from '../../components/Footer/PublicFooter/Footer';
+import mainTitleImage from '../../assets/images/homepage-title-img-new.jpg';
+import titleLogo from '../../assets/images/abc-restaurant-logo-white-transparent.png';
+import ScrollToTopButton from '../../components/ScrollToTop/ScrollToTopButton';
 
 
 
@@ -14,75 +17,84 @@ function HomePage(){
         <div className='home-page'>
             <Header/>
             <div className='main-title-container'>
-                <img src={require('../../assets/images/homepage-main-image.jpg')} alt='Main Title' className='title-bg-image'></img>
+                <img src={mainTitleImage} alt='Main Title' className='title-bg-image' />
                 <div className='main-title'>
-                    <img src={require('../../assets/images/abc-restaurant-logo-white-transparent.png')} alt='Title' className='title-image'></img>
+                    <img src={titleLogo} alt='Title' className='title-image' />
                     <p>Elevating culinary standards with exquisite flavors and unparalleled service</p>
                     <div className='main-title-btn'>
-                        <button type='button'>Reserve Now</button>
-                        <button type='button'>Order Now</button>
+                    <button type='button'>Reserve Now</button>
+                    <button type='button'>Order Now</button>
                     </div>
                 </div>
-                
             </div>
             <div className='offer-section'>
                 <Slider/>
 
             </div>
 
-            {/* Add Menu */}
+            <div className='menu-section'>
+                <div className='menu-img'>
+                    <img src={require('../../assets/images/menu-section-image.jpg')} alt='Menu'></img>
+                </div>
+                <div className='menu-text'>
+                    <h2 className='menu-heading'>Our Specials</h2>
+                    <div className='menu-text-content'>     
+                        <div className='menu-item-name'>
+                            <h5 className='menu-item'>Special Menu Item 1</h5>
+                            <p className='menu-item-desc'>small desc about item</p>
+
+                            <h5 className='menu-item'>Special Menu Item 1</h5>
+                            <p className='menu-item-desc'>small desc about item</p>
+
+                            <h5 className='menu-item'>Special Menu Item 1</h5>
+                            <p className='menu-item-desc'>small desc about item</p>
+
+                            <h5 className='menu-item'>Special Menu Item 1</h5>
+                            <p className='menu-item-desc'>small desc about item</p>
+
+                            <h5 className='menu-item'>Special Menu Item 1</h5>
+                            <p className='menu-item-desc'>small desc about item</p>
+
+
+                        </div>
+                        <div className='menu-item-price'>
+                            <h5 className='item-price'>Rs. 1000</h5>
+                            <h5 className='item-price'>Rs. 1000</h5>
+                            <h5 className='item-price'>Rs. 1000</h5>
+                            <h5 className='item-price'>Rs. 1000</h5>
+                            <h5 className='item-price'>Rs. 1000</h5>
+                            
+                        </div>
+                            
+                        
+                    </div>
+                    
+                    <button type='button' className='view-menu-btn'>View Menu</button>
+                </div>
+            </div>
 
 
             <div className='about-us-section'>
-                <h1><center>About Us</center></h1>
                 <div className='about-us-container'>
-                    <div className='about-us-text'>
-                        <h2>Our Roots</h2>
-                        <p className='about-us-desc'>
-                            Founded in 2018, ABC Restaurant has grown from a small family-owned eatery to one 
-                            of Sri Lanka's most beloved dining destinations. Our journey began with a passion 
-                            for authentic cuisine and a commitment to quality, and these principles continue to 
-                            guide us today.
-                        </p>
-                    </div>
-                    <div className='about-us-img'>
-                        <img src={require('../../assets/images/about-us-root.jpg')} alt='About Us' />
-                    </div>
+                    <img src={require('../../assets/images/about-us-img-1.jpg')} alt='About Us 1' />
                 </div>
-                <br/><br/>
+
+                <div className='about-us-container-img'>
+                    <h1><center>About Us</center></h1>
+                    <h4>Discover Our story</h4>
+                    <p>At ABC Restaurant, we're more than just a place to dine— we're a journey into culinary excellence. <br/>
+                        Explore our rich heritage, meet our talented chefs, and find out what makes us stand out in the culinary world.
+                    </p>
+                    <button type='button'>Learn More</button>
+                </div>
 
                 <div className='about-us-container'>
-                    <div className='about-us-img'>
-                        <img src={require('../../assets/images/about-us-root.jpg')} alt='Community' className='about-us-img-2' />
-                    </div>
-                    <div className='about-us-text'>
-                        <h2>Community Engagement</h2>
-                        <p className='about-us-desc'>
-                            We are proud to be an active member of the community, regularly participating in local 
-                            events and supporting charitable causes. Our commitment to sustainability and eco-friendly 
-                            practices reflects our respect for the environment and the community we serve.
-                        </p>
-                    </div>
+                    <img src={require('../../assets/images/about-us-root.jpg')} alt='About Us 2' />
                 </div>
+                
       
             </div>
-            <div className='we-offer-section'>
-                <h1><center>We Offer</center></h1>
-                <div className='we-offer-container'>
-                    <div className='we-section'>
-                        <img src={require('../../assets/images/delivery.png')} alt='delivery'></img>
-                        <h4>Delivery</h4>
-                    </div>
-                    <div className='we-section'>
-                        <img src={require('../../assets/images/dine-in.png')} alt='dine-in'></img>
-                        <h4>Dine-in</h4>
-                    </div>
-                    <div className='we-section'>
-                        <img src={require('../../assets/images/take-away.png')} alt='Takeaway'></img>
-                        <h4>Takeaway</h4>
-                    </div>
-                </div>
-            </div>
+          
             <div className='facilities-section'>
                 <div className='facilities-conatiner'>
                     <h3>Our Facilities</h3>
@@ -91,9 +103,14 @@ function HomePage(){
                         sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
                     <button type='button'>More Facilities</button>
                 </div>
+                <div className='facilities-img'>
+                    <img src={require('../../assets/images/facilities-banner.jpg')}></img>
+                </div>
             </div>
             <div className='gallery-section'>
                 <h1><center>Gallery</center></h1>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor 
+                incididunt ut labore et dolore magna aliqua</p>
                 <div className='gallery-box'>
                     <Grid/>
                 </div>
@@ -102,7 +119,7 @@ function HomePage(){
 
             <div className='reserve-section'>
                 <div className='reserve-container'>
-                    <div className='reserve-box'>
+                <div className='reserve-box' style={{ borderRight: '1px solid var(--yellow)', paddingRight: '9%' }}>
                         <h4>RESERVE YOUR TABLE NOW!</h4>
                         <button type='button'>RESERVE NOW</button>
                     </div>
@@ -115,8 +132,13 @@ function HomePage(){
 
             <div className='contact-us-section'>
                 <div className='contact-us-container'>
-                    <h1><center>Contact Us</center></h1>
-                    <QueryForm/>
+                    <div className='contact-us-img'>
+                        <img src={require('../../assets/images/contact-us-banner.jpg')}></img>
+                    </div>
+                    <div className='contact-us-form-section'>
+                        <h1><center>Contact Us</center></h1>
+                        <QueryForm/>
+                    </div>   
                 </div>               
             </div>
 
@@ -153,9 +175,10 @@ function HomePage(){
                     <h5>+94 764 7764</h5>
                 </div>
                 <div className='detail-box'>
-                    <img src={require('../../assets/images/mail-icon.png')} alt='Mobile'></img>
-                    <h5>abcresturant@gmail.com</h5>
+                    <img src={require('../../assets/images/mail-icon.png')} alt='Email'></img>
+                    <h5>abcrestaurant@gmail.com</h5>
                 </div>
+                <ScrollToTopButton/>
             </div>
             <Footer/>
             
