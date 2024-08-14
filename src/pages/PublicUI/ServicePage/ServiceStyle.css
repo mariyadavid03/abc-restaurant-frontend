@@ -1,0 +1,46 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap');
+:root {
+    --pink: #D3017F;
+    --grey: #515350;
+    --black: #2D2D2D;
+    --yellow: #FDB734;
+    --light-grey:#D9D9D9;
+  }
+.service-heading-container{
+    background-color: var(--black);
+    color: white;
+    text-align: center;
+    width: 100%;
+    height: fit-content;
+    padding: 5vh 10vh;
+}
+
+.service-heading-container h2{
+    font-family: "Playfair Display", serif;
+    color: var(--yellow);
+    font-weight: 600;
+    padding-bottom: 23px;
+}
+.service-content-conatiner{
+    width: 100%;
+    height: fit-content;
+    background-color: var(--light-grey);
+    color: black;
+}
+.service-container{
+    margin: auto;
+    width: 80%;  
+    padding: 10px 58px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
+    background-color: white;
+    display: flex;
+}
+.service-text{
+    text-align: left;
+    width: 50vh;
+}
+.service-img img{
+    width: 50vh;
+    height: 100%;
+    object-fit: cover;
+}
