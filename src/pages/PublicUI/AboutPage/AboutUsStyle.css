@@ -1,0 +1,11 @@
+.about-us-page{
+    background-color: black;
+    color: white;
+}
+
+.about-us-container{
+    display: flex;
+}
+.about-us-section1, .about-us-section2{
+    width: 100%;
+}
