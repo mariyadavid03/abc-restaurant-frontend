@@ -8,6 +8,7 @@ import ReservationPage from './pages/PublicUI/ReservationPage/ReservationPage';
 import AboutUsPage from './pages/PublicUI/AboutPage/AboutUsPage';
 import MenuPage from './pages/PublicUI/MenuPage/MenuPage';
 import ServicePage from './pages/PublicUI/ServicePage/ServicePage';
+import CartPage from './pages/PublicUI/CartPage/CartPage';
 
 function App() {
   return (
@@ -18,7 +19,8 @@ function App() {
       {/* <ReservationPage/> */}
       {/* <AboutUsPage/> */}
       {/* <MenuPage/> */}
-      <ServicePage/>
+      {/* <ServicePage/> */}
+      <CartPage/>
     </div>
   );
 }

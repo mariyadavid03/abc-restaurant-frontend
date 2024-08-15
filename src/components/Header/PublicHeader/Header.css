@@ -59,8 +59,16 @@
   margin-left: auto;
   margin-right: 1rem;
   order: 4;
+  display: flex;
 }
-
+.header-btn img{
+  width: 40px;
+  height: auto;
+  padding: 6px;
+}
+.header-btn img:hover{
+  cursor: pointer;
+}
 .header-btn button {
   padding: 5px 17px;
   background-color: #D3017F;

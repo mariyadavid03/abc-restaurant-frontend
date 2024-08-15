@@ -27,8 +27,12 @@ function Header() {
             <input type="text" placeholder="Search..." />
         </div>
         <div className='header-btn'>
-            <button type='button'>Login</button>
+          <div className='cart'>
+            <img src={require('../../../assets/images/cart.png')} alt='Cart'></img>
+          </div>  
+          <button type='button'>Login</button>
         </div>
+        
         <div className="hamburger" onClick={toggleMenu}>
           <div></div>
           <div></div>

@@ -12,6 +12,10 @@ function Appetizers() {
                     </div>
                     <div>
                         <p>Rs.10000</p>
+                        <div className="add-to-cart">
+                            <p>+</p>
+                            
+                        </div>
                     </div>
                 </div>
             </div>

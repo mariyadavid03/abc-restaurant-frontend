@@ -84,6 +84,7 @@ h2{
     background-color: var(--black);
     border: 1px solid #747474;
     border-radius: 8px;
+    position: relative;
     padding: 20px;
     text-align: center;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -105,6 +106,38 @@ h2{
 }
 .menu-item-text p{
     font-size: 0.9rem;
+}
+.add-to-cart {
+    position: absolute;
+    top: 72%;
+    right: 21px;
+    transform: scale(1.01);
+    border-radius: 50%;
+    border: 1px solid var(--yellow);
+    width: 37px;
+    height: 37px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    background-color: var(--black);
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.add-to-cart:hover {
+    background-color: var(--yellow);
+    transform: scale(1.1);
+}
+
+.add-to-cart p {
+    color: var(--yellow);
+    font-size: 28px;
+    margin: 0; 
+    transition: color 0.3s ease; 
+}
+
+.add-to-cart:hover p {
+    color: var(--black); 
 }
 
 @media (max-width: 768px) {

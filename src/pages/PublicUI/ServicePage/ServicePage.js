@@ -11,6 +11,11 @@ function ServicePage(){
                 <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor 
                 incididunt ut </p>
             </div>
+             {/* Search Bar */}
+             <div className="service-search-container">
+                    <input type="text" placeholder="Search services..." className="service-search-input" />
+                    <button className="service-search-button">Search</button>
+                </div>
             <div className="service-content-conatiner">
                 
                 <div className="service-container">
