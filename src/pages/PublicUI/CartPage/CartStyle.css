@@ -13,16 +13,22 @@ body{
     justify-content: space-between;
     padding: 20px;
     gap: 20px;
+    height: calc(100vh - 100px);
 }
 
 .cart-order-container {
     width: 60%;
+    max-height: 100%;
+    overflow-y: auto;
+    padding-right: 10px;
 }
 
 .order-summary-container {
     width: 35%;
-    border-left: 2px solid var(--grey);
+    max-height: 100%;
+    overflow-y: auto;
     padding-left: 20px;
+    border-left: 2px solid var(--grey);
 }
 
 .item-container {
@@ -30,7 +36,7 @@ body{
     justify-content: space-between;
     align-items: center;
     padding: 10px 0;
-    border-bottom: 1px solid var(--light-grey);
+    box-shadow: 2px 4px 12px rgba(0, 0, 0, 0.1);
 }
 
 .item-img img {
