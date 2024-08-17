@@ -1,0 +1,105 @@
+:root {
+    --main: #5067EB;
+    --bg: #F2F2F2;
+    --yellow: #FFDB65;
+}
+
+body{
+    background-color: var(--main) ;
+}
+h2{
+    font-size: 1.5rem;
+    color: black;
+}
+.back-arrow{
+    width: 20px;
+    height: auto;
+    position: fixed;
+    top: 20px;
+    left: 50px;
+}
+.main-page{
+    background-color: var(--bg);
+    width: 85%;
+    height: fit-content;
+    padding: 10px 20px;
+    border-radius: 10px;
+    margin: auto;
+    margin-top: 21px;
+}
+.header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+
+.search-bar-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 20px 0;
+}
+
+.search-bar {
+    width: 50%;
+    padding: 10px 15px;
+    border-radius: 20px;
+    border: 1px solid #ccc;
+    font-size: 16px;
+}
+
+.search-button {
+    margin-left: -80px;
+    padding: 10px 15px;
+    background-color: var(--main);
+    color: white;
+    border: none;
+    border-radius: 20px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.search-button:hover {
+    background-color: #3b4fd3;
+}
+
+.search-bar:focus {
+    outline: none;
+    border-color: var(--main);
+    box-shadow: 0 0 5px var(--main);
+}
+.reservation-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-family: Arial, sans-serif;
+    margin: 20px 0;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
+}
+
+.reservation-table th, .reservation-table td {
+    padding: 12px 15px;
+    text-align: left;
+    background-color: #f9f9f9; 
+}
+
+.reservation-table th {
+    background-color: #f0f0f0; 
+    font-weight: bold;
+    font-size: 1rem;
+}
+
+.reservation-table tr {
+    border-bottom: 1px solid #dddddd; 
+    font-size: 0.9rem;
+}
+
+.reservation-table tr:last-child {
+    border-bottom: none; 
+}
+
+.reservation-table tr:hover {
+    background-color: #f1f1f1; 
+}

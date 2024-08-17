@@ -1,0 +1,46 @@
+:root {
+    --main: #5067EB;
+    --bg: #F2F2F2;
+    --yellow: #FFDB65;
+  }
+.side-nav {
+  width: 250px;
+  height: 100vh;
+  background-color: #ffffff;
+  color: #444;
+  transition: left 0.3s ease;
+  padding-top: 60px;
+}
+.side-nav img{
+
+    height: auto;
+    width: 141px;
+    margin-inline: 57px;
+    margin-bottom: 30px;
+}
+
+.side-nav h6{
+    text-align: center;
+    margin-top: 10vh;
+    padding: 15px;
+}
+h6:hover{
+    cursor: pointer;
+}
+.side-nav ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.side-nav ul li {
+  padding: 15px;
+  text-align: center;
+  cursor: pointer;
+  border-bottom: 1px solid #dadada;
+}
+
+.side-nav ul li:hover {
+    background-color: var(--main);
+    color: white;
+}
+

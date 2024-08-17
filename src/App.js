@@ -10,6 +10,8 @@ import MenuPage from './pages/PublicUI/MenuPage/MenuPage';
 import ServicePage from './pages/PublicUI/ServicePage/ServicePage';
 import CartPage from './pages/PublicUI/CartPage/CartPage';
 import CheckPage from './pages/PublicUI/CheckoutPage/CheckPage';
+import StaffDashboard from './pages/StaffUI/StaffDashboard';
+import ManageReservation from './pages/StaffUI/ManageReservation';
 
 function App() {
   return (
@@ -22,7 +24,9 @@ function App() {
       {/* <MenuPage/> */}
       {/* <ServicePage/> */}
       {/* <CartPage/> */}
-      <CheckPage/>
+      {/* <CheckPage/> */}
+      {/* <StaffDashboard/> */}
+      <ManageReservation/>
     </div>
   );
 }
