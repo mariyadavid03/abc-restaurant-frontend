@@ -1,6 +1,6 @@
 import React from 'react';
-import StaffHeader from '../../components/Header/StaffHeader/StaffHeader';
-import './DashboardStyle.css';
+import AdminHeader from '../../components/Header/AdminHeader/AdminHeader';
+import '../StaffUI/DashboardStyle.css';
 
 function getDate() {
     const today = new Date();
@@ -10,11 +10,11 @@ function getDate() {
     return `${month}/${date}/${year}`;
   }
 
-function StaffDashboard(){
+  function AdminDashboard(){
     return(
         <>
         <div className='dashboard'>
-            <StaffHeader />
+            <AdminHeader />
             <div className='main-content'>
                 <div className='user-info-col'>
                     <img src={require('../../assets/images/user-icon.png')}/>
@@ -22,7 +22,7 @@ function StaffDashboard(){
                 </div>
                 <div className='welcome-msg'>
                     <div className='welcome-text'>
-                        <h6>Good Day Staff!</h6>
+                        <h6>Good Day Admin!</h6>
                         <p>Today is {getDate()}</p>
                     </div>
                     <img src={require('../../assets/images/staff-welcome-img.png')}/>
@@ -33,6 +33,11 @@ function StaffDashboard(){
                         <div className='box'>Respond Queries</div>
                         <div className='box'>View Payments</div>
                         <div className='box'>Manage Menu</div>
+                        <div className='box'>Manage Accounts</div>
+                        <div className='box'>Manage Gallery</div>
+                        <div className='box'>Manage Facilities</div>
+                        <div className='box'>Manage Offers</div>
+                        <div className='box'>Reports</div>
                     </div>
                     <br/>
                     <label className='links'>
@@ -49,4 +54,4 @@ function StaffDashboard(){
 
     );
 }
-export default StaffDashboard;
+export default AdminDashboard;

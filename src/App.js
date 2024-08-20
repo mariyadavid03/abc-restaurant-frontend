@@ -1,33 +1,27 @@
 
 import React from 'react';
+import {BrowserRouter as Router, Route, Routes} from 'react-router-dom';
 import HomePage from './pages/PublicUI/HomePage';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import LoginPage from './pages/PublicUI/LoginPage/LoginPage';
-import SignupPage from './pages/PublicUI/LoginPage/SignupPage';
-import ReservationPage from './pages/PublicUI/ReservationPage/ReservationPage';
-import AboutUsPage from './pages/PublicUI/AboutPage/AboutUsPage';
-import MenuPage from './pages/PublicUI/MenuPage/MenuPage';
-import ServicePage from './pages/PublicUI/ServicePage/ServicePage';
-import CartPage from './pages/PublicUI/CartPage/CartPage';
-import CheckPage from './pages/PublicUI/CheckoutPage/CheckPage';
+import AdminLogin from './pages/AdminUI/AdminLogin';
+import StaffLogin from './pages/StaffUI/StaffLogin';
 import StaffDashboard from './pages/StaffUI/StaffDashboard';
-import ManageReservation from './pages/StaffUI/ManageReservation';
+import AdminDashboard from './pages/AdminUI/AdminDashboard';
+
+
 
 function App() {
   return (
-    <div className="App">
-      {/* <HomePage/> */}
-      {/* <LoginPage/> */}
-      {/* <SignupPage/> */}
-      {/* <ReservationPage/> */}
-      {/* <AboutUsPage/> */}
-      {/* <MenuPage/> */}
-      {/* <ServicePage/> */}
-      {/* <CartPage/> */}
-      {/* <CheckPage/> */}
-      {/* <StaffDashboard/> */}
-      <ManageReservation/>
-    </div>
+    <Router>
+      <Routes>
+        <Route path='/' element={<HomePage/>}/>
+        <Route path='/admin-login' element={<AdminLogin/>}/>
+        <Route path='/admin' element={<AdminDashboard/>}/>
+        <Route path='/staff-login' element={<StaffLogin/>}/>
+        <Route path='/staff' element={<StaffDashboard/>}/>
+        
+      </Routes>
+    </Router>
   );
 }
 

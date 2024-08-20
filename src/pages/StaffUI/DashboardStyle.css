@@ -4,53 +4,69 @@
     --yellow: #FFDB65;
   }
 
-body{
+  body {
     background-color: var(--bg);
+    overflow-x: hidden; 
 }
-.dashboard{
+
+.dashboard {
     display: flex;
-    
+    width: 100%;
+    overflow-x: hidden;
 }
 .main-content{
     padding-inline: 15vh;
 }
-.user-info-col{
+.user-info-col {
     padding-top: 10px;
     padding-bottom: 10px;
     display: flex;
     position: fixed;
-    right: 41px;
+    right: 16px; 
     top: 16px;
+    align-items: center; 
 }
-.user-info-col img{
+
+.user-info-col img {
     width: 35px;
-    height: fit-content;
-    margin-right: 32px;
+    height: auto;
+    margin-right: 10px;
 }
-.user-info-col h6{
-    margin-top: 10px;
+
+.user-info-col h6 {
+    margin: 0;
+    font-size: 1rem;
 }
-.welcome-msg{
+.welcome-msg {
     border-radius: 20px;
     background-color: var(--main);
     color: white;
     margin: auto;
     display: flex;
     align-items: center;
-    padding-inline: 30px;
-    width: 156vh;
-    margin-top: 15vh;
+    justify-content: space-between;
+    padding: 20px;
+    width: 100%;
+    margin-top: 10vh;
 }
-.welcome-msg img{
-    height: 100%;
-    width: 40vh;
-    /* margin-left: 66%; */
 
+.welcome-text {
+    flex-grow: 1;
+    text-align: center;
 }
-.welcome-text{
-    width: 128px;
-    padding-top: 14px;
-    padding-bottom: 4px;
+
+.welcome-text h6 {
+    font-size: 1.5rem;
+}
+
+.welcome-text p {
+    font-size: 1.2rem;
+    margin-top: 10px;
+}
+
+.welcome-msg img {
+    width: 40vh;
+    height: auto;
 }
 .box-grid {
     display: grid;

@@ -1,0 +1,67 @@
+import React, { useState } from 'react';
+import Button from 'react-bootstrap/Button';
+import '../StaffUI/PagesStyle.css';
+import OfferAddNew from '../../components/OffCanvas/OfferAddNew';
+import OfferEdit from '../../components/OffCanvas/OfferEdit';
+
+
+function ManageOffer() {
+    const [showAdd, setShowAdd] = useState(false);
+    const [showEdit, setShowEdit] = useState(false);
+    const [selectedItem, setSelectedItem] = useState(null);
+
+    const handleShowAdd = () => setShowAdd(true);
+    const handleCloseAdd = () => setShowAdd(false);
+
+    const handleShowEdit = (item) => {
+        setSelectedItem(item);
+        setShowEdit(true);
+    };
+    const handleCloseEdit = () => setShowEdit(false);
+
+    return (
+        <div className='page-body'>
+            <div className="main-page">
+                <img src={require("../../assets/images/arrow.png")} className="back-arrow" alt="Go Back" />
+                <div className='menu-add-button-line'>
+                    <h2>Manage Promotions & Offers</h2>
+                    <Button onClick={handleShowAdd} className='add-btn'>
+                            Add New Offer
+                    </Button>
+                </div>
+
+                <div className='table-container'>
+                    <table className='main-table'>
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Offer Name</th>
+                                <th>Description</th>
+                                <th>Discount Rate</th>
+                                <th>Valid Period</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>1</td>
+                                <td>Offer Name 1</td>
+                                <td>Some Description</td>
+                                <td>3.4%</td>
+                                <td>July 13 - November 13</td>
+                                <td>
+                                    <img src={require('../../assets/images/edit.png')} onClick={() => handleShowEdit({ id: 1, name: 'Offer Name 1', description: 'Description 1', rate: '3.4%' , valid: 'July 13 - November 13'})} className='edit-btn' alt="Edit"/>
+                                </td>
+                            </tr>
+                            {/* Add more rows as needed */}
+                        </tbody>
+                    </table>
+                </div>
+                <OfferAddNew show={showAdd} handleClose={handleCloseAdd} />
+                <OfferEdit show={showEdit} handleClose={handleCloseEdit} item={selectedItem} />
+            </div>
+        </div>
+    );
+}
+
+export default ManageOffer;

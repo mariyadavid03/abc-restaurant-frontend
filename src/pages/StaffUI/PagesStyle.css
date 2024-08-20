@@ -4,9 +4,17 @@
     --yellow: #FFDB65;
 }
 
-body{
-    background-color: var(--main) ;
+.page-body {
+    background-color: var(--main);
+    min-height: 100vh; 
+    width: 100%; 
+    display: flex; 
+    justify-content: center; 
+    align-items: center; 
+    padding: 20px;
+    box-sizing: border-box; 
 }
+
 h2{
     font-size: 1.5rem;
     color: black;
@@ -27,6 +35,7 @@ h2{
     margin: auto;
     margin-top: 21px;
 }
+
 .header {
     display: flex;
     align-items: center;
@@ -71,7 +80,13 @@ h2{
     border-color: var(--main);
     box-shadow: 0 0 5px var(--main);
 }
-.reservation-table {
+.table-container {
+    overflow-x: auto;
+    width: 100%;
+}
+
+.main-table {
+    min-width: 800px; 
     width: 100%;
     border-collapse: collapse;
     font-family: Arial, sans-serif;
@@ -79,27 +94,128 @@ h2{
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
 }
 
-.reservation-table th, .reservation-table td {
+.main-table th, .main-table td {
     padding: 12px 15px;
     text-align: left;
     background-color: #f9f9f9; 
 }
 
-.reservation-table th {
+.main-table th {
     background-color: #f0f0f0; 
     font-weight: bold;
     font-size: 1rem;
 }
 
-.reservation-table tr {
+.main-table tr {
     border-bottom: 1px solid #dddddd; 
     font-size: 0.9rem;
+    transition: color 0.3s ease, box-shadow 0.3s ease;
 }
 
-.reservation-table tr:last-child {
+
+.main-table tbody tr:hover {
+    background-color: #dddddd !important;
+    color: rgb(146, 146, 146);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.main-table tr:last-child {
     border-bottom: none; 
 }
 
-.reservation-table tr:hover {
+.main-table tr:hover {
     background-color: #f1f1f1; 
+}
+.delete-btn{
+    background-color: red;
+    font-size: 13px;
+    padding: 5px 10px;
+}
+.delete-btn:hover{
+    background-color: rgb(151, 0, 0);
+    color: rgb(225, 225, 225);
+}
+.delete-btn:active{
+    background-color: rgb(151, 0, 0) !important;
+    color: rgb(225, 225, 225) !important;
+}
+
+
+/* Menu Styles */
+
+.edit-btn{
+    width: 28px;
+}
+.edit-btn:hover{
+    cursor: pointer;
+}
+.menu-sub-heading {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid grey;
+    padding: 10px;
+    font-size: 1.1rem;
+}
+
+.add-btn {
+    background-color: var(--main);
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 5px 15px;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: background-color 0.3s ease;
+}
+.menu-add-button-line{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+}
+
+/* Report */
+.report-info {
+    margin: 20px 0;
+    display: flex;
+    justify-content: space-between;
+}
+
+.info-section {
+    margin-bottom: 10px;
+}
+
+.info-section label {
+    font-weight: bold;
+    margin-right: 10px;
+}
+
+.info-section p {
+    display: inline-block;
+    background-color: #f0f0f0;
+    padding: 5px 10px;
+    border-radius: 5px;
+    font-size: 0.95rem;
+}
+
+.button-group {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 20px;
+}
+
+.export-btn {
+    background-color: var(--main);
+    color: white;
+    border: none;
+    border-radius: 5px; 
+    padding: 10px 20px;
+    margin-left: 10px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.export-btn:hover {
+    background-color: #3b4fd3;
 }
