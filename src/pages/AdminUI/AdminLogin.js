@@ -7,6 +7,7 @@ function AdminLogin() {
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const navigate = useNavigate();
+  const role = "admin";
 
   const handleLogin = async () => {
     try {
@@ -15,7 +16,7 @@ function AdminLogin() {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ username, password, role: 'admin' }), 
+        body: JSON.stringify({ username, password, role}), 
       });
 
       if (response.ok) {

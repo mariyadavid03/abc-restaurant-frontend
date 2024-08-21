@@ -7,6 +7,7 @@ function StaffLogin() {
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const navigate = useNavigate();
+  const role = "staff";
 
   const handleLogin = async () => {
     try {
@@ -15,7 +16,7 @@ function StaffLogin() {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ username, password, role: 'staff' }), 
+        body: JSON.stringify({ username, password, role}), 
       });
 
       if (response.ok) {
