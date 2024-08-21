@@ -62,3 +62,10 @@
   .login-form button:hover {
     background-color: #3b4fd3;
   }
+  .error-message{
+    padding: 4px 10px;
+    border: 1px solid #e98e8e;
+    background-color: #fdf4f8;
+    color: #e07575;
+    border-radius: 6px;
+  }

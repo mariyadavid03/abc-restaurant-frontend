@@ -1,16 +1,39 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import './LoginPageStyle.css'; // Updated CSS styles
+import './LoginPageStyle.css';
 
 function AdminLogin() {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const [error, setError] = useState('');
   const navigate = useNavigate();
 
-  const handleLogin = () => {
-    console.log('Admin login:', { username, password });
-    navigate('/admin/dashboard'); // Redirect to Admin Dashboard on successful login
+  const handleLogin = async () => {
+    try {
+      const response = await fetch('http://localhost:8080/user/login', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ username, password, role: 'admin' }), 
+      });
+
+      if (response.ok) {
+        const data = await response.json();
+        if (data.role === 'admin') {
+          navigate('/admin/dashboard');
+        } else {
+          setError('Access denied: You do not have the required permissions.');
+        }
+      } else {
+        setError('Invalid username or password');
+      }
+    } catch (error) {
+      console.error('Login error:', error);
+      setError('An error occurred. Please try again later.');
+    }
   };
+
 
   return (
     <div className="admin-login-container">
@@ -18,6 +41,7 @@ function AdminLogin() {
         <img src={require('../../assets/images/admin-login.png')} alt="Admin Login" />
         <div className="login-form">
           <h2>Admin Login</h2>
+          {error && <p className="error-message">{error}</p>}
           <label>Username:</label>
           <input
             type="text"

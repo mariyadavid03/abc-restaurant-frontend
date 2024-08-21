@@ -1,6 +1,7 @@
 import React from 'react';
 import StaffHeader from '../../components/Header/StaffHeader/StaffHeader';
 import './DashboardStyle.css';
+import { useNavigate } from 'react-router-dom';
 
 function getDate() {
     const today = new Date();
@@ -10,7 +11,12 @@ function getDate() {
     return `${month}/${date}/${year}`;
   }
 
-function StaffDashboard(){
+  const StaffDashboard = () => {
+    const navigate = useNavigate();
+  
+    const handleLogout = () => {
+      navigate('/login');
+    };
     return(
         <>
         <div className='dashboard'>

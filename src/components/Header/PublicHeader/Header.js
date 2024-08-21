@@ -1,13 +1,18 @@
 import React, { useState } from 'react';
 import './Header.css';
 import logo from '../../../assets/images/abcshort-high-resolution-logo-transparent.png';
+import { useNavigate } from 'react-router-dom';
+
 
 function Header() {
   const [isOpen, setIsOpen] = useState(false);
+  const navigate = useNavigate();
   const toggleMenu = () => {
     setIsOpen(prevState => !prevState);
   };
-
+  const handleLoginClick = () => {
+    navigate('/login');
+  };
 
   return (
     <header className='header'>
@@ -30,7 +35,7 @@ function Header() {
           <div className='cart'>
             <img src={require('../../../assets/images/cart.png')} alt='Cart'></img>
           </div>  
-          <button type='button'>Login</button>
+          <button type='button'onClick={handleLoginClick}>Login</button>
         </div>
         
         <div className="hamburger" onClick={toggleMenu}>
