@@ -79,7 +79,7 @@
     
 }
 
-.menu-section{
+.menu-section-updated {
   width: 100%;
   height: fit-content;
   background-color: #000000;
@@ -87,59 +87,64 @@
   padding-left: 10%;
   padding-right: 10%;
   padding-top: 10vh;
-  border-top: 1px solid var(--pink) ;
+  border-top: 1px solid var(--pink);
 }
-.menu-heading{
+
+.menu-heading-updated {
   font-family: "Playfair Display", serif;
   color: var(--yellow);
   font-weight: 600;
   padding-bottom: 23px;
 }
-.menu-text, .menu-img{
+
+.menu-text-updated, .menu-img-updated {
   width: 100%;
 }
-.menu-text{
+
+.menu-text-updated {
   color: rgb(214, 214, 214);
 }
-.menu-img img{
+
+.menu-img-updated img {
   width: 400px;
   height: 589px;
   object-fit: cover;
 }
 
-.menu-text-content{
+.menu-text-content-updated {
   display: flex;
 }
 
-.menu-item-price{
+.menu-item-price-updated {
   width: 51%;
   text-align: right;
   color: var(--yellow);
 }
-.menu-item-desc{
+
+.menu-item-desc-updated {
   margin-top: -8px;
 }
-.view-menu-btn{
-  
+
+.view-menu-btn-updated {
   color: var(--yellow);
   background-color: #000000;
-  
   font-weight: 600;
   padding: 5px 15px;
-  
   border: 1px solid var(--yellow);
   transition: background-color 0.3s;
 }
 
-.view-menu-btn:hover{
+.view-menu-btn-updated:hover {
   cursor: pointer;
   background-color: var(--yellow);
   color: black;
   border: 1px solid black;
 }
-.item-price{
+
+.item-price-updated {
   padding-bottom: 36px;
 }
+
 .about-us-section {
     max-width: 100%;
     display: flex;

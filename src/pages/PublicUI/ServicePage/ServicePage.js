@@ -1,10 +1,15 @@
-import React from "react";
+import React, { useRef } from 'react';
 import './ServiceStyle.css';
 import Header from "../../../components/Header/PublicHeader/Header";
 
 function ServicePage(){
+    const contactUsRef = useRef(null);
+
+    const scrollToContactUs = () => {
+        contactUsRef.current.scrollIntoView({ behavior: 'smooth' });
+    };
     return(
-        <><Header />
+        <><Header onContactUsClick={scrollToContactUs} />
         <div className="service-page">
             <div className="service-heading-container">
                 <h2>Our Services</h2>

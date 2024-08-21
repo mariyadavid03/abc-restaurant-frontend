@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import { Link, useNavigate } from 'react-router-dom';
@@ -25,6 +25,8 @@ function LoginForm(){
       if (response.ok) {
         const data = await response.json();
         if (data.role === 'customer') {
+          sessionStorage.setItem('user', JSON.stringify(data));
+          sessionStorage.setItem('isLoggedIn', 'true');
           navigate('/');
         } else {
           setError('Access denied: You do not have the required permissions.');

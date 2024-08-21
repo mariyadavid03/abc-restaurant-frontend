@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import Header from '../../components/Header/PublicHeader/Header';
 import './Styles.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -9,21 +9,30 @@ import Footer from '../../components/Footer/PublicFooter/Footer';
 import mainTitleImage from '../../assets/images/homepage-title-img-new.jpg';
 import titleLogo from '../../assets/images/abc-restaurant-logo-white-transparent.png';
 import ScrollToTopButton from '../../components/ScrollToTop/ScrollToTopButton';
-
-
+import { Link } from 'react-router-dom';
 
 function HomePage(){
+    const contactUsRef = useRef(null);
+
+    const scrollToContactUs = () => {
+        contactUsRef.current.scrollIntoView({ behavior: 'smooth' });
+    };
+
     return(
         <div className='home-page'>
-            <Header/>
+            <Header onContactUsClick={scrollToContactUs} />
             <div className='main-title-container'>
                 <img src={mainTitleImage} alt='Main Title' className='title-bg-image' />
                 <div className='main-title'>
                     <img src={titleLogo} alt='Title' className='title-image' />
                     <p>Elevating culinary standards with exquisite flavors and unparalleled service</p>
                     <div className='main-title-btn'>
-                    <button type='button'>Reserve Now</button>
-                    <button type='button'>Order Now</button>
+                    <Link to="/reservation">
+                        <button type='button'>Reserve Now</button>
+                    </Link>
+                    <Link to="/cart">
+                        <button type='button'>Order Now</button>
+                    </Link>
                     </div>
                 </div>
             </div>
@@ -32,44 +41,40 @@ function HomePage(){
 
             </div>
 
-            <div className='menu-section'>
-                <div className='menu-img'>
-                    <img src={require('../../assets/images/menu-section-image.jpg')} alt='Menu'></img>
+            <div className='menu-section-updated'>
+                <div className='menu-img-updated'>
+                    <img src={require('../../assets/images/menu-section-image.jpg')} alt='Menu' />
                 </div>
-                <div className='menu-text'>
-                    <h2 className='menu-heading'>Our Specials</h2>
-                    <div className='menu-text-content'>     
-                        <div className='menu-item-name'>
-                            <h5 className='menu-item'>Special Menu Item 1</h5>
-                            <p className='menu-item-desc'>small desc about item</p>
+                <div className='menu-text-updated'>
+                    <h2 className='menu-heading-updated'>Our Specials</h2>
+                    <div className='menu-text-content-updated'>     
+                        <div className='menu-item-name-updated'>
+                            <h5 className='menu-item-updated'>Special Menu Item 1</h5>
+                            <p className='menu-item-desc-updated'>small desc about item</p>
 
-                            <h5 className='menu-item'>Special Menu Item 1</h5>
-                            <p className='menu-item-desc'>small desc about item</p>
+                            <h5 className='menu-item-updated'>Special Menu Item 2</h5>
+                            <p className='menu-item-desc-updated'>small desc about item</p>
 
-                            <h5 className='menu-item'>Special Menu Item 1</h5>
-                            <p className='menu-item-desc'>small desc about item</p>
+                            <h5 className='menu-item-updated'>Special Menu Item 3</h5>
+                            <p className='menu-item-desc-updated'>small desc about item</p>
 
-                            <h5 className='menu-item'>Special Menu Item 1</h5>
-                            <p className='menu-item-desc'>small desc about item</p>
+                            <h5 className='menu-item-updated'>Special Menu Item 4</h5>
+                            <p className='menu-item-desc-updated'>small desc about item</p>
 
-                            <h5 className='menu-item'>Special Menu Item 1</h5>
-                            <p className='menu-item-desc'>small desc about item</p>
-
-
+                            <h5 className='menu-item-updated'>Special Menu Item 5</h5>
+                            <p className='menu-item-desc-updated'>small desc about item</p>
                         </div>
-                        <div className='menu-item-price'>
-                            <h5 className='item-price'>Rs. 1000</h5>
-                            <h5 className='item-price'>Rs. 1000</h5>
-                            <h5 className='item-price'>Rs. 1000</h5>
-                            <h5 className='item-price'>Rs. 1000</h5>
-                            <h5 className='item-price'>Rs. 1000</h5>
-                            
+                        <div className='menu-item-price-updated'>
+                            <h5 className='item-price-updated'>Rs. 1000</h5>
+                            <h5 className='item-price-updated'>Rs. 1000</h5>
+                            <h5 className='item-price-updated'>Rs. 1000</h5>
+                            <h5 className='item-price-updated'>Rs. 1000</h5>
+                            <h5 className='item-price-updated'>Rs. 1000</h5>
                         </div>
-                            
-                        
                     </div>
-                    
-                    <button type='button' className='view-menu-btn'>View Menu</button>
+                    <Link to="/menu">
+                        <button type='button' className='view-menu-btn-updated'>View Menu</button>
+                    </Link>
                 </div>
             </div>
 
@@ -85,7 +90,9 @@ function HomePage(){
                     <p>At ABC Restaurant, we're more than just a place to dine— we're a journey into culinary excellence. <br/>
                         Explore our rich heritage, meet our talented chefs, and find out what makes us stand out in the culinary world.
                     </p>
-                    <button type='button'>Learn More</button>
+                    <Link to="/about">
+                        <button type='button'>Learn More</button>
+                    </Link>
                 </div>
 
                 <div className='about-us-container'>
@@ -101,7 +108,10 @@ function HomePage(){
                     <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor 
                         incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis 
                         sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-                    <button type='button'>More Facilities</button>
+
+                    <Link to="/service">
+                        <button type='button'>More Facilities</button>
+                    </Link>
                 </div>
                 <div className='facilities-img'>
                     <img src={require('../../assets/images/facilities-banner.jpg')}></img>
@@ -121,16 +131,21 @@ function HomePage(){
                 <div className='reserve-container'>
                 <div className='reserve-box' style={{ borderRight: '1px solid var(--yellow)', paddingRight: '9%' }}>
                         <h4>RESERVE YOUR TABLE NOW!</h4>
-                        <button type='button'>RESERVE NOW</button>
+                        <Link to="/reservation">
+                            <button type='button'>RESERVE NOW</button>
+                        </Link>
                     </div>
                     <div className='reserve-box'>
+                    
                         <h4>ORDER YOUR DISH NOW!</h4>
-                        <button type='button'>ORDER NOW</button>
+                        <Link to="/cart">
+                            <button type='button'>ORDER NOW</button>
+                        </Link>
                     </div>
                 </div>
             </div>
 
-            <div className='contact-us-section'>
+            <div className='contact-us-section' ref={contactUsRef}>
                 <div className='contact-us-container'>
                     <div className='contact-us-img'>
                         <img src={require('../../assets/images/contact-us-banner.jpg')}></img>

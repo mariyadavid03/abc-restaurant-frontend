@@ -1,11 +1,16 @@
-import React from "react";
+import React, { useRef } from 'react';
 import Header from "../../../components/Header/PublicHeader/Header";
 import ReservationForm1 from "../../../components/Reservation/ReservationForm1";
 import ReservationForm2 from "../../../components/Reservation/ReservationForm2";
 
 function ReservationPage(){
+    const contactUsRef = useRef(null);
+
+    const scrollToContactUs = () => {
+        contactUsRef.current.scrollIntoView({ behavior: 'smooth' });
+    };
     return(
-        <><Header />
+        <><Header onContactUsClick={scrollToContactUs} />
         <div className="reservation-page">
             <h2>Make Your Reservations!</h2>
 
