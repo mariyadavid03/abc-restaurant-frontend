@@ -4,37 +4,20 @@ import Tabs from 'react-bootstrap/Tabs';
 import Tab from 'react-bootstrap/Tab';
 import DineInTable from '../../components/Reservation/DineInTable';
 import DeliveryTable from '../../components/Reservation/DeliveryTable';
+import { Link } from 'react-router-dom';
+
 
 function ManageReservation() {
     const [key, setKey] = useState('dineIn');
-    const [searchTerm, setSearchTerm] = useState('');
-
-    const handleSearchChange = (event) => {
-        setSearchTerm(event.target.value);
-    };
-
-    const handleSearchClick = () => {
-        console.log('Search clicked with term:', searchTerm);
-        // Add your search logic here
-    };
-
     return (
         <div className='page-body'>
             <div className="main-page">
-                <img src={require("../../assets/images/arrow.png")} className="back-arrow" alt="Go Back"/>
+                <Link to="/admin/dashboard">
+                <img src={require("../../assets/images/arrow-white.png")} className="back-arrow" alt="Go Back"/>
+                </Link>
+                
 
                 <h2>Customer Reservations</h2>
-    
-                <div className="search-bar-container">
-                    <input 
-                        type="text" 
-                        placeholder="Search reservations..." 
-                        value={searchTerm}
-                        onChange={handleSearchChange}
-                        className="search-bar"
-                    />
-                    <button onClick={handleSearchClick} className="search-button">Search</button>
-                </div>
                 <Tabs
                     id="controlled-tab-example"
                     activeKey={key}
@@ -43,12 +26,12 @@ function ManageReservation() {
                 >
                     <Tab eventKey="dineIn" title="Dine-In Reservations">
                         <div className="table-container">
-                            <DineInTable searchTerm={searchTerm} />
+                            <DineInTable/>
                         </div>
                     </Tab>
                     <Tab eventKey="delivery" title="Delivery Reservations">
                         <div className="table-container">
-                            <DeliveryTable searchTerm={searchTerm} />
+                            <DeliveryTable/>
                         </div>
                     </Tab>
                 </Tabs>

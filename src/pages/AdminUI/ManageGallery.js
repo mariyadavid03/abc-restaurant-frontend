@@ -3,27 +3,30 @@ import Button from 'react-bootstrap/Button';
 import '../StaffUI/PagesStyle.css';
 import GalleryAddNew from '../../components/OffCanvas/GalleryAddNew';
 
-
 function ManageGallery() {
     const [showAdd, setShowAdd] = useState(false);
 
     const handleShowAdd = () => setShowAdd(true);
     const handleCloseAdd = () => setShowAdd(false);
 
-    const handleShowEdit = (item) => {
-        setSelectedItem(item);
-        setShowEdit(true);
+   
+    const handleDelete = (itemId) => {
+        console.log('Delete item with ID:', itemId);
     };
-
 
     return (
         <div className='page-body'>
             <div className="main-page">
-                <img src={require("../../assets/images/arrow.png")} className="back-arrow" alt="Go Back" />
+                <img 
+                    src={require("../../assets/images/arrow.png")} 
+                    className="back-arrow" 
+                    alt="Go Back" 
+                    onClick={() => window.history.back()} // Navigate back on click
+                />
                 <div className='menu-add-button-line'>
                     <h2>Manage Gallery</h2>
                     <Button onClick={handleShowAdd} className='add-btn'>
-                            Add Gallery Item
+                        Add Gallery Item
                     </Button>
                 </div>
 
@@ -41,8 +44,12 @@ function ManageGallery() {
                                 <td>1</td>
                                 <td>Title Name 1</td>
                                 <td>
-                                    <img src={require('../../assets/images/edit.png')} onClick={() => handleShowEdit({ id: 1, name: 'Offer Name 1', description: 'Description 1', rate: '3.4%' , valid: 'July 13 - November 13'})} className='edit-btn' alt="Edit"/>
-                                    <Button className='delete-btn'>Delete</Button>
+                                    <Button 
+                                        className='delete-btn' 
+                                        onClick={() => handleDelete(1)} // Pass ID for deletion
+                                    >
+                                        Delete
+                                    </Button>
                                 </td>
                             </tr>
                             {/* Add more rows as needed */}
@@ -50,6 +57,7 @@ function ManageGallery() {
                     </table>
                 </div>
                 <GalleryAddNew show={showAdd} handleClose={handleCloseAdd} />
+                
             </div>
         </div>
     );

@@ -1,70 +1,113 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './PagesStyle.css';
-import Button from 'react-bootstrap/Button';
-import Offcanvas from 'react-bootstrap/Offcanvas';
-
-function QueryOffCanvas({ show, handleClose }) {
-    return (
-        <Offcanvas show={show} onHide={handleClose} placement="end">
-            <Offcanvas.Header closeButton>
-                <Offcanvas.Title>Query Info</Offcanvas.Title>
-            </Offcanvas.Header>
-            <Offcanvas.Body>
-                <h5>Query</h5>
-                <input type="text" value="Sample query text here" disabled />
-                <h5>Query Response</h5>
-                <input type="text" placeholder="Enter Response" />
-                <Button className='submit-btn' style={{ marginTop: '10px' }}>
-                    Submit Response
-                </Button>
-                <Button className='delete-btn' style={{ marginTop: '10px', width: '100%', textAlign: "center" }}>
-                    Delete
-                </Button>
-            </Offcanvas.Body>
-        </Offcanvas>
-    );
-}
+import axios from 'axios';
+import { Link } from 'react-router-dom';
+import QueryRespond from '../../components/OffCanvas/QueryRespond';
 
 function ManageQuery() {
+    const [queries, setQueries] = useState([]);
     const [showOffCanvas, setShowOffCanvas] = useState(false);
+    const [successMessage, setSuccessMessage] = useState('');
+    const [selectedQueryId, setSelectedQueryId] = useState(null);
 
-    const handleRowClick = () => {
+    useEffect(() => {
+        fetchQueries();
+    }, []);
+
+    // Fetch query data
+    const fetchQueries = async () => {
+        try {
+            const response = await axios.get('http://localhost:8080/query'); 
+            setQueries(response.data);
+        } catch (error) {
+            console.error('Error fetching queries:', error);
+        }
+    };
+
+    const handleRowClick = (queryId) => {
+        setSelectedQueryId(queryId);
         setShowOffCanvas(true);
     };
 
     const handleCloseOffCanvas = () => {
         setShowOffCanvas(false);
+        setSelectedQueryId(null);
+    };
+
+    const handleDelete = async (id) => {
+        const isConfirmed = window.confirm('Are you sure you want to delete this query?');
+        if (isConfirmed) {
+            try {
+                await axios.delete(`http://localhost:8080/query/remove/${id}`);
+                setQueries(queries.filter(query => query.id !== id));
+                fetchQueries();
+
+                // Show success message
+                setSuccessMessage('Query deleted successfully!');
+                setTimeout(() => setSuccessMessage(''), 3000);
+                
+            } catch (error) {
+                console.error('Error deleting query:', error);
+                alert('An error occurred while deleting the query.');
+            }
+        }
+    };
+
+    // Handle success after response submission
+    const handleSuccess = () => {
+        setSuccessMessage('Response submitted successfully!');
+        setTimeout(() => {
+            setSuccessMessage('');
+            fetchQueries();
+        }, 3000);
     };
 
     return (
         <div className='page-body'>
             <div className="main-page">
-                <img src={require("../../assets/images/arrow.png")} className="back-arrow" alt="Go Back" />
+                <Link to="/admin/dashboard">
+                    <img src={require("../../assets/images/arrow-white.png")} className="back-arrow" alt="Go Back"/>
+                </Link>
                 <h2>Customer Queries</h2>
                 <div className='table-container'>
+                    {successMessage && <div className="success-message">{successMessage}</div>}
                     <table className='main-table'>
                         <thead>
                             <tr>
                                 <th>ID</th>
                                 <th>Date & Time</th>
+                                <th>Status</th>
                                 <th>Customer Name</th>
                                 <th>Email Address</th>
+                                <th>Subject</th>
+                                <th>-</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr onClick={handleRowClick}>
-                                <td>Data 1</td>
-                                <td>Data 2</td>
-                                <td>Data 3</td>
-                                <td>Date 4</td>
-                            </tr>
-                            {/* Add more rows as needed */}
+                            {queries.map(query => (
+                                <tr onClick={() => handleRowClick(query.id)} key={query.id}>
+                                    <td>{query.id}</td>
+                                    <td>{new Date(query.created_at).toLocaleString()}</td>
+                                    <td>{query.status}</td>
+                                    <td>{query.sender_name}</td>
+                                    <td>{query.email}</td>
+                                    <td>{query.query_subject}</td>
+                                    <td>
+                                        <img src={require('../../assets/images/reply.png')} onClick={() => handleRowClick(query.id)} className='reply-btn' alt='Reply' />
+                                        <img src={require('../../assets/images/trash.png')} onClick={() => handleDelete(query.id)} className='trash-btn' alt='Delete' />
+                                    </td>
+                                </tr>
+                            ))}
                         </tbody>
                     </table>
                 </div>
             </div>
-
-            <QueryOffCanvas show={showOffCanvas} handleClose={handleCloseOffCanvas} />
+            <QueryRespond 
+                show={showOffCanvas} 
+                handleClose={handleCloseOffCanvas} 
+                queryId={selectedQueryId}
+                onSuccess={handleSuccess} 
+            />
         </div>
     );
 }

@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import AdminHeader from '../../components/Header/AdminHeader/AdminHeader';
 import '../StaffUI/DashboardStyle.css';
 import { useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 function getDate() {
     const today = new Date();
@@ -11,12 +12,17 @@ function getDate() {
     return `${month}/${date}/${year}`;
   }
 
-  const AdminDashboard = () => {
+  function AdminDashboard(){
     const navigate = useNavigate();
   
     const handleLogout = () => {
-      navigate('/login');
-    };
+        const confirmLogout = window.confirm('Are you sure you want to log out?');
+        if (confirmLogout) {
+        //   sessionStorage.removeItem('user');
+        //   setIsLoggedIn(false);
+          navigate('/admin');
+        }
+      };
     return(
         <>
         <div className='dashboard'>
@@ -35,23 +41,26 @@ function getDate() {
                 </div>
                 <div className='dashboard-content'>
                     <div className='box-grid'>
-                        <div className='box'>Manage Reservations</div>
-                        <div className='box'>Respond Queries</div>
-                        <div className='box'>View Payments</div>
-                        <div className='box'>Manage Menu</div>
-                        <div className='box'>Manage Accounts</div>
-                        <div className='box'>Manage Gallery</div>
-                        <div className='box'>Manage Facilities</div>
-                        <div className='box'>Manage Offers</div>
-                        <div className='box'>Reports</div>
+                        <Link to="/admin/reservation"><div className='box'>Manage Reservations</div></Link>
+                        <Link to="/admin/query"><div className='box'>Respond Queries</div></Link>
+                        <Link to="/admin/payment"><div className='box'>View Payments</div></Link>
+                        <Link to="/admin/menu"><div className='box'>Manage Menu</div></Link>
+                        <Link to="/admin/account"><div className='box'>Manage Accounts</div></Link>
+                        <Link to="/admin/gallery"><div className='box'>Manage Gallery</div></Link>
+                        <Link to="/admin/service"><div className='box'>Manage Services</div></Link>
+                        <Link to="/admin/offer"><div className='box'>Manage Offers</div></Link>
+                        <Link to="/admin/report"><div className='box'>Reports</div></Link>
                     </div>
                     <br/>
+                    <Link to="/">
                     <label className='links'>
+                        
                         <h6>Customer Website       {'\u00A0'}       
                         <img src={require('../../assets/images/external-link.png')} alt='external link' className='external-link-icon'/>
                         </h6>
 
                     </label>
+                    </Link>
 
                 </div>
             </div>

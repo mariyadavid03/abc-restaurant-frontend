@@ -31,6 +31,10 @@
   
   .login-form h2 {
     margin-bottom: 20px;
+    color: black;
+    font-family: 'Lato';
+    font-size: 1.6rem;
+    font-weight: 700;
   }
   
   .login-form label {
