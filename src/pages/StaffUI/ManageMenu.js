@@ -285,7 +285,7 @@ function ManageMenu() {
                     show={showEdit} 
                     handleClose={handleCloseEdit} 
                     item={selectedItem}
-                    onSuccess={handleEditSuccess} // Pass the callback here
+                    onSuccess={handleEditSuccess}
                 />
             </div>
         </div>

@@ -1,4 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
+import axios from 'axios';
 import Button from 'react-bootstrap/Button';
 import '../StaffUI/PagesStyle.css';
 import AccountNew from '../../components/OffCanvas/AccountNew.js';
@@ -8,6 +10,8 @@ function ManageAccount() {
     const [showAdd, setShowAdd] = useState(false);
     const [showEdit, setShowEdit] = useState(false);
     const [selectedItem, setSelectedItem] = useState(null);
+    const [accounts, setAccounts] = useState([]);
+    const [successMessage, setSuccessMessage] = useState('');
 
     const handleShowAdd = () => setShowAdd(true);
     const handleCloseAdd = () => setShowAdd(false);
@@ -18,10 +22,54 @@ function ManageAccount() {
     };
     const handleCloseEdit = () => setShowEdit(false);
 
+    
+    const handleDelete = async (id) => {
+        const isConfirmed = window.confirm('Are you sure you want to remove this account?');
+        if (isConfirmed) {
+            try {
+                await axios.delete(`http://localhost:8080/user/remove/${id}`);
+                await fetchData();
+                setSuccessMessage('Account deleted successfully!');
+                setTimeout(() => setSuccessMessage(''), 3000);
+            } catch (error) {
+                console.error('Error deleting account:', error);
+                alert('Can not delete as the account is linked');
+            }
+        }
+    };
+
+    const handleEditSuccess = async () => {
+        await fetchData();
+        setSuccessMessage('Account updated successfully!');
+        setTimeout(() => setSuccessMessage(''), 3000);
+        handleCloseEdit();
+    };
+
+    const handleAddSuccess = async () => {
+        await fetchData();
+        setSuccessMessage('Account added successfully!');
+        setTimeout(() => setSuccessMessage(''), 3000);
+    };
+    const fetchData = async () => {
+        try{
+            const response = await axios.get('http://localhost:8080/user');
+            setAccounts(response.data);
+            
+        }catch (error){
+            console.error('Error fetching accounts:', error);
+        }
+    };
+
+    useEffect(() => {
+        fetchData();
+    }, []);
+
     return (
         <div className='page-body'>
             <div className="main-page">
-                <img src={require("../../assets/images/arrow.png")} className="back-arrow" alt="Go Back" />
+                <Link to="/admin/dashboard">
+                    <img src={require("../../assets/images/arrow-white.png")} className="back-arrow" alt="Go Back" />
+                </Link>
                 <div className='menu-add-button-line'>
                     <h2>Manage Accounts</h2>
                     <Button onClick={handleShowAdd} className='add-btn'>
@@ -29,35 +77,45 @@ function ManageAccount() {
                     </Button>
                 </div>
 
-
+                {successMessage && <div className="success-message">{successMessage}</div>}
                 <div className='table-container'>
                     <table className='main-table'>
                         <thead>
                             <tr>
-                                <th>ID</th>
                                 <th>Username</th>
-                                <th>Created At</th>
                                 <th>Type</th>
                                 <th>Name</th>
                                 <th>Email</th>
                                 <th>Phone</th>
-                                <th>Action</th>
+                                <th>Created At</th>
+                                <th>-</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td>1</td>
-                                <td>username1</td>
-                                <td>2022/10/23:00:12</td>
-                                <td>Admin</td>
-                                <td>Some Name</td>
-                                <td>somename@gmail.com</td>
-                                <td>0837466647</td>
-                                <td>
-                                    <img src={require('../../assets/images/edit.png')} onClick={() => handleShowEdit({ id: 1, username: 'username1', fname: 'Some',lname:'Name', email: 'somename@gmail.com', phone: '0837466647' })} className='edit-btn' alt="Edit"/>
-                                </td>
-                            </tr>
-                            {/* Add more rows as needed */}
+                            {accounts.map(item => (
+                                <tr key={item.id}>
+                                    <td>{item.username}</td>
+                                    <td>{item.role}</td>
+                                    <td>{item.name}</td>
+                                    <td>{item.email}</td>
+                                    <td>{item.mobileNo}</td>
+                                    <td>{new Date(item.createdAt).toLocaleString()}</td>
+                                    <td>
+                                        <img 
+                                            src={require('../../assets/images/edit.png')} 
+                                            onClick={() => handleShowEdit(item)} 
+                                            className='edit-btn' 
+                                            alt="Edit" 
+                                        />
+                                        <img 
+                                            src={require('../../assets/images/trash.png')} 
+                                            onClick={() => handleDelete(item.id)} 
+                                            className='trash-btn' 
+                                            alt="Delete" 
+                                        />
+                                    </td>
+                                </tr>
+                            ))}
                         </tbody>
                     </table>
                 </div>
@@ -66,8 +124,8 @@ function ManageAccount() {
 
                
 
-                <AccountNew show={showAdd} handleClose={handleCloseAdd} />
-                <AccountEdit show={showEdit} handleClose={handleCloseEdit} item={selectedItem} />
+                <AccountNew show={showAdd} handleClose={handleCloseAdd} onSuccess={handleAddSuccess}/>
+                <AccountEdit show={showEdit} handleClose={handleCloseEdit} item={selectedItem} onSuccess={handleEditSuccess}/>
             </div>
         </div>
     );

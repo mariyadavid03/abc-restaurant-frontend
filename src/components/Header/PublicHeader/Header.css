@@ -1,6 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap');
 
-.header {
+.header-main {
   background-color: #ffffff;
   padding: 1rem;
   border-bottom: 1px solid #D9D9D9;
@@ -12,7 +12,20 @@
   justify-content: space-between;
   flex-wrap: wrap;
 }
+.cart {
+  position: relative;
+}
 
+.badge {
+  position: absolute;
+    top: -10px;
+    right: 47px;
+    background-color: red;
+    color: white;
+    padding: 5px 10px;
+    border-radius: 50%;
+    font-size: 12px;
+}
 .menu img {
   height: 50px;
   margin-left: 1rem;
@@ -126,6 +139,10 @@
 @media only screen and (max-width: 916px) {
   .menu img {
     display: none;
+  }
+  .badge{
+    display: none;
+    background-color: white;
   }
 }
 

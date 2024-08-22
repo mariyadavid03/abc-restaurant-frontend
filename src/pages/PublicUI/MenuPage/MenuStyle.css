@@ -143,3 +143,12 @@
         grid-template-rows: auto;
     }
 }
+
+
+
+
+.add-to-cart.added {
+    background-color: green;
+    cursor: not-allowed;
+}
+

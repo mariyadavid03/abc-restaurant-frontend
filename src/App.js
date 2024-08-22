@@ -25,6 +25,7 @@ import ManageService from './pages/AdminUI/ManageService';
 import ManageOffer from './pages/AdminUI/ManageOffer';
 import ReportPage from './pages/AdminUI/ReportPage';
 import ManageMenu from './pages/StaffUI/ManageMenu';
+import CheckPage from './pages/PublicUI/CheckoutPage/CheckPage';
 
 function App() {
   return (
@@ -79,6 +80,15 @@ function App() {
           element={
             <ProtectedRoute>
               <CartPage />
+            </ProtectedRoute>
+          }
+        />
+
+        <Route
+          path="/payment"
+          element={
+            <ProtectedRoute>
+              <CheckPage />
             </ProtectedRoute>
           }
         />

@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import { Link, useNavigate } from 'react-router-dom';
+import axios from 'axios';
 import './FormStyles.css';
 
 function LoginForm(){
@@ -25,9 +26,21 @@ function LoginForm(){
       if (response.ok) {
         const data = await response.json();
         if (data.role === 'customer') {
-          sessionStorage.setItem('user', JSON.stringify(data));
-          sessionStorage.setItem('isLoggedIn', 'true');
-          navigate('/');
+          // Fetch user ID by username
+          try {
+            const userIdResponse = await axios.get(`http://localhost:8080/user/getByUsername`, {
+              params: { username }
+            });
+
+            // Store user ID and other data in session
+            sessionStorage.setItem('userId', userIdResponse.data);
+            sessionStorage.setItem('user', JSON.stringify(data));
+            sessionStorage.setItem('isLoggedIn', 'true');
+            navigate('/');
+          } catch (error) {
+            console.error('Error fetching user ID:', error.response ? error.response.data : error.message);
+            setError('Failed to fetch user ID.');
+          }
         } else {
           setError('Access denied: You do not have the required permissions.');
         }

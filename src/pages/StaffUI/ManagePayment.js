@@ -1,12 +1,35 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
+import axios from 'axios';
 import './PagesStyle.css';
 
-function ManagePayment(){
+function ManagePayment() {
+    const [payments, setPayments] = useState([]);
+    const [error, setError] = useState('');
+
+    const fetchData = async () => {
+        try {
+            const response = await axios.get('http://localhost:8080/payment');
+            setPayments(response.data);
+        } catch (error) {
+            console.error('Error fetching payments:', error);
+            setError('Failed to load payments. Please try again later.');
+        }
+    };
+
+    useEffect(() => {
+        fetchData();
+    }, []);
+
     return (
         <div className='page-body'>
             <div className="main-page">
-                <img src={require("../../assets/images/arrow.png")} className="back-arrow" alt="Go Back"/>
-                <h2>Customer Reservations</h2>
+                <Link to="/admin/dashboard">
+                    <img src={require("../../assets/images/arrow-white.png")} className="back-arrow" alt="Go Back" />
+                </Link>
+                <h2>Customer Payments</h2>
+
+                {error && <div className="error-message">{error}</div>}
 
                 <div className='table-container'>
                     <table className='main-table'>
@@ -14,20 +37,21 @@ function ManagePayment(){
                             <tr>
                                 <th>Payment ID</th>
                                 <th>Delivery ID</th>
-                                <th>Payment DateTime</th>
-                                <th>Total</th>
-                                <th>Status</th>
+                                <th>DateTime</th>
+                                <th>Total (LKR)</th>
+                                <th>Customer Username</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td>Data 1</td>
-                                <td>Data 2</td>
-                                <td>Data 3</td>
-                                <td>Date 4</td>
-                                <td>Date 4</td>
-                            </tr>
-                            {/* Add more rows as needed */}
+                            {payments.map(item => (
+                                <tr key={item.id}>
+                                    <td>{item.id}</td>
+                                    <td>{item.delivery.delivery_code}</td>
+                                    <td>{new Date(item.createdAt).toLocaleString()}</td>
+                                    <td>{item.amount}</td>
+                                    <td>{item.delivery.user.username}</td> {/* Corrected access */}
+                                </tr>
+                            ))}
                         </tbody>
                     </table>
                 </div>
@@ -35,4 +59,5 @@ function ManagePayment(){
         </div>
     );
 }
+
 export default ManagePayment;

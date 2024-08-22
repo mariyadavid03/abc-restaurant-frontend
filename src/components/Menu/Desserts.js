@@ -3,6 +3,7 @@ import axios from "axios";
 
 function Desserts() {
     const [desserts, setDesserts] = useState([]);
+    const [cartItems, setCartItems] = useState([]);
 
     useEffect(() => {
         const fetchDesserts = async () => {
@@ -15,8 +16,24 @@ function Desserts() {
         };
 
         fetchDesserts();
+        const storedCartItems = JSON.parse(sessionStorage.getItem('cartItems')) || [];
+        setCartItems(storedCartItems);
     }, []);
-
+    const handleAddToCart = (itemId) => {
+        const user = sessionStorage.getItem('user');
+        if (user) {
+            if (!cartItems.includes(itemId)) {
+                const updatedCartItems = [...cartItems, itemId];
+                setCartItems(updatedCartItems);
+                sessionStorage.setItem('cartItems', JSON.stringify(updatedCartItems));
+                alert('Item added to cart!');
+            } else {
+                alert('Item is already in the cart.');
+            }
+        } else {
+            alert('Please log in to add items to the cart.');
+        }
+    };
     return (
         <div className="menu-grid">
             {desserts.map((item) => (
@@ -33,8 +50,11 @@ function Desserts() {
                         </div>
                         <div>
                             <p>Rs.{item.price}</p>
-                            <div className="add-to-cart">
-                                <p>+</p>
+                            <div 
+                                className={`add-to-cart ${cartItems.includes(item.id) ? 'added' : ''}`}
+                                onClick={() => handleAddToCart(item.id)}
+                            >
+                                <p>{cartItems.includes(item.id) ? '✓' : '+'}</p>
                             </div>
                         </div>
                     </div>

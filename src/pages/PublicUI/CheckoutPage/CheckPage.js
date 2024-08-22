@@ -1,17 +1,68 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import axios from "axios";
 import './Checkout.css';
+import { useNavigate } from 'react-router-dom';
+
 
 function CheckPage() {
+    const [totalAmount, setTotalAmount] = useState(0);
+    const navigate = useNavigate();
+
+    useEffect(() => {
+        const amount = sessionStorage.getItem('totalAmount');
+        if (amount) {
+            setTotalAmount(amount);
+        }
+    }, []);
+
+    const handleBack = () => {
+        const isConfirmed = window.confirm("Leave the checkout process? Your cart will be cleared.");
+        if (isConfirmed) {
+            sessionStorage.removeItem('cartItems');
+            sessionStorage.removeItem('deliveryId');
+            sessionStorage.removeItem('totalAmount');
+            navigate('/'); 
+        }
+    };
+    const handlePayment = async () => {
+        const deliveryId = sessionStorage.getItem('deliveryId');
+        if (!deliveryId) {
+            alert('Delivery ID not found. Please try again.');
+            return;
+        }
+
+        const paymentData = {
+            delivery: { id: deliveryId },
+            amount: totalAmount,
+            createdAt: new Date().toISOString()
+        };
+
+        try {
+            const paymentResponse = await axios.post('http://localhost:8080/payment/add', paymentData);
+            if (paymentResponse.status === 201) {
+                alert('Successful payment');
+                sessionStorage.removeItem('cartItems');
+                sessionStorage.removeItem('deliveryId');
+                sessionStorage.removeItem('totalAmount');
+                window.location.href = '/';
+            } else {
+                alert('Failed to process payment. Please try again.');
+            }
+        } catch (error) {
+            console.error('Error processing payment:', error.response ? error.response.data : error.message);
+            alert('Failed to process payment. Please try again.');
+        }
+    };
     return (
         <div className="checkout-page">
             <div className="checkout-header">
-                <img src={require("../../../assets/images/arrow.png")} alt="Back" className="back-arrow" />
+                <img src={require("../../../assets/images/arrow.png")} alt="Back" className="back-arrow" onClick={handleBack} />
                 <h2>Checkout</h2>
             </div>
             <div className="payment-container">
                 <div className="total-cost">
                     <h5>Total Cost:</h5>
-                    <h5 className="payment-amount">LKR 3000</h5>
+                    <h5 className="payment-amount">LKR {totalAmount}</h5>
                 </div>
                 <div className="payment-details-form">
                     <h5>Payment Details</h5>
@@ -32,7 +83,7 @@ function CheckPage() {
                     <label>Card Holder's Name</label>
                     <input type="text" name="cardHolderName" placeholder="Enter Name" />
                 </div>
-                <button type="submit" className="confirm-button">Confirm Payment</button>
+                <button type="submit" className="confirm-button" onClick={handlePayment}>Confirm Payment</button>
             </div>
         </div>
     );

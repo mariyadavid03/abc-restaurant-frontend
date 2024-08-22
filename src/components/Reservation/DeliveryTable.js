@@ -80,7 +80,6 @@ function DeliveryTable() {
                     <th>Contact</th>
                     <th>Address</th>
                     <th>Delivery Instructions</th>
-                    <th>Date & Time</th>
                     <th> - </th>
                 </tr>
             </thead>
@@ -98,9 +97,7 @@ function DeliveryTable() {
                             style={{ cursor: 'pointer', color: 'blue', textDecoration: 'underline' }} 
                         >
                             view
-                        </td>
-
-                        <td>{new Date(reservation.delivery_date_time).toLocaleString()}</td>                 
+                        </td>              
                         <td>
                         <Button 
                             className='delete-btn'

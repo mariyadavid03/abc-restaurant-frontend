@@ -3,6 +3,7 @@ import axios from "axios";
 
 function Appetizers() {
     const [appetizers, setAppetizers] = useState([]);
+    const [cartItems, setCartItems] = useState([]);
 
     useEffect(() => {
         const fetchAppetizers = async () => {
@@ -15,17 +16,23 @@ function Appetizers() {
         };
 
         fetchAppetizers();
+
+        // Retrieve cart items from session storage
+        const storedCartItems = JSON.parse(sessionStorage.getItem('cartItems')) || [];
+        setCartItems(storedCartItems);
     }, []);
 
-
-    //Cart adding
     const handleAddToCart = (itemId) => {
         const user = sessionStorage.getItem('user');
         if (user) {
-            let cartItems = JSON.parse(sessionStorage.getItem('cartItems')) || [];
-            cartItems.push(itemId);
-            sessionStorage.setItem('cartItems', JSON.stringify(cartItems));
-            alert('Item added to cart!');
+            if (!cartItems.includes(itemId)) {
+                const updatedCartItems = [...cartItems, itemId];
+                setCartItems(updatedCartItems);
+                sessionStorage.setItem('cartItems', JSON.stringify(updatedCartItems));
+                alert('Item added to cart!');
+            } else {
+                alert('Item is already in the cart.');
+            }
         } else {
             alert('Please log in to add items to the cart.');
         }
@@ -47,8 +54,11 @@ function Appetizers() {
                         </div>
                         <div>
                             <p>Rs.{item.price}</p>
-                            <div className="add-to-cart" onClick={() => handleAddToCart(item.id)}>
-                                <p>+</p>
+                            <div 
+                                className={`add-to-cart ${cartItems.includes(item.id) ? 'added' : ''}`}
+                                onClick={() => handleAddToCart(item.id)}
+                            >
+                                <p>{cartItems.includes(item.id) ? '✓' : '+'}</p>
                             </div>
                         </div>
                     </div>

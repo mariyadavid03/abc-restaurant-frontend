@@ -58,7 +58,7 @@ const handleOtpVerify = async () => {
 
 const handleSignup = async () => {
   try {
-      const response = await fetch('http://localhost:8080/signup', {
+      const response = await fetch('http://localhost:8080/user/signup', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ email, username, password, name, mobileNo }),

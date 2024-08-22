@@ -6,8 +6,9 @@ import { Link } from 'react-router-dom';
 
 function Header({ onContactUsClick }) {
   const [isOpen, setIsOpen] = useState(false);
-  const navigate = useNavigate();
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [cartItemsCount, setCartItemsCount] = useState(0);
+  const navigate = useNavigate();
 
   const toggleMenu = () => {
     setIsOpen(prevState => !prevState);
@@ -16,11 +17,18 @@ function Header({ onContactUsClick }) {
   useEffect(() => {
     const user = sessionStorage.getItem('user');
     setIsLoggedIn(user !== null);
+
+    // Check cart items in session storage
+    const cartItems = JSON.parse(sessionStorage.getItem('cartItems')) || [];
+    setCartItemsCount(cartItems.length);
   }, []);
 
   const handleLogout = () => {
     const confirmLogout = window.confirm('Are you sure you want to log out?');
     if (confirmLogout) {
+      sessionStorage.removeItem('cartItems');
+      sessionStorage.removeItem('deliveryId');
+      sessionStorage.removeItem('totalAmount');
       sessionStorage.removeItem('user');
       setIsLoggedIn(false);
       navigate('/');
@@ -40,7 +48,7 @@ function Header({ onContactUsClick }) {
   };
 
   return (
-    <header className='header'>
+    <header className='header-main'>
       <div className='menu'>
         <img src={logo} alt="Logo" />
         <nav>
@@ -56,9 +64,12 @@ function Header({ onContactUsClick }) {
           {isLoggedIn && (
             <>
               <div className='cart'>
-              <Link to="/cart">
-                <img src={require('../../../assets/images/cart.png')} alt='Cart'></img>
-              </Link>
+                <Link to="/cart">
+                  <img src={require('../../../assets/images/cart.png')} alt='Cart' />
+                  {cartItemsCount > 0 && (
+                    <span className="badge">{cartItemsCount}</span>
+                  )}
+                </Link>
               </div>
               <button type='button' onClick={handleLogout}>Logout</button>
             </>
