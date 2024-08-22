@@ -23,13 +23,13 @@
     font-size: 1.15rem;
 }
 .item-info input, 
-.item-info textarea,
-.add-item-type select {
+.item-info textarea{
     box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
     width: 100%;
     padding: 12px;
     border: 1px solid #ccc;
     border-radius: 5px;
+    margin-bottom: 12px;
 }
 
 .image-box {
@@ -74,7 +74,13 @@
     display: flex;
 }
 .add-item-type select{
+    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
+    padding: 2px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-bottom: 12px;
     margin-left: 12px;
+    font-size: 16px;
 }
 
 .name-inputs {

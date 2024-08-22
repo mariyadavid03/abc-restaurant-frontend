@@ -26,7 +26,7 @@ function MenuPage(){
     return(
         <><Header />
         <div className="menu-page">
-            <h2><center>Menu</center></h2>
+            <h2 className="menu-heading"><center>Menu</center></h2>
             <div className="menu-container">
             <div className="tab-container">
                 <button
