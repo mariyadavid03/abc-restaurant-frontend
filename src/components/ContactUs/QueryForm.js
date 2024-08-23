@@ -1,39 +1,109 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
-import './QueryForm.css'
+import axios from 'axios';
+import './QueryForm.css';
 
 function QueryForm() {
-  return (
-    <Form className='query-form'>
-      <Form.Group className="mb-3" controlId="formName">
-        <Form.Label>Full Name</Form.Label>
-        <Form.Control type="text" placeholder="Enter yout name" />
-      </Form.Group>
+    const [formData, setFormData] = useState({
+        fullName: '',
+        email: '',
+        subject: '',
+        message: '',
+    });
+  
+    const [responseMessage, setResponseMessage] = useState('');
+    const [errorMessage, setErrorMessage] = useState('');
 
-      <Form.Group className="mb-3" controlId="formEmail">
-        <Form.Label>Email address</Form.Label>
-        <Form.Control type="email" placeholder="Enter email" required />
-        <Form.Text className="text-muted">
-          We'll never share your email with anyone else.
-        </Form.Text>
-      </Form.Group>
+    const handleChange = (e) => {
+        setFormData({
+            ...formData,
+            [e.target.name]: e.target.value,
+        });
+    };
 
-      <Form.Group className="mb-3" controlId="formSubject">
-        <Form.Label>Subject</Form.Label>
-        <Form.Control type="text" placeholder="Enter the subject of your message" required />
-      </Form.Group>
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        
+        axios.post('http://localhost:8080/query/add', {
+            sender_name: formData.fullName,
+            email: formData.email,
+            query_subject: formData.subject,
+            query_message: formData.message,
+        })
+        .then(response => {
+            alert('Your query has been submitted successfully! A reply will be sent to your email.');
+            setErrorMessage('');
+            setResponseMessage('');
+            setFormData({ fullName: '', email: '', subject: '', message: '' }); // Clear fields
+        })
+        .catch(error => {
+            alert('There was an error submitting your query.');
+            setResponseMessage('');
+            setErrorMessage('');
+        });
+    };
 
-      <Form.Group className="mb-3" controlId="formMessage">
-        <Form.Label>Message</Form.Label>
-        <Form.Control as="textarea" rows={3} placeholder="Enter your message" required />
-      </Form.Group>
+    return (
+        <div className="query-form-container">
+            <Form className='query-form' onSubmit={handleSubmit}>
+                <Form.Group className="mb-3" controlId="formName">
+                    <Form.Label>Name</Form.Label>
+                    <Form.Control 
+                        type="text" 
+                        placeholder="Enter your name" 
+                        name="fullName"
+                        value={formData.fullName}
+                        onChange={handleChange}
+                    />
+                </Form.Group>
 
-      <Button variant="primary" type="submit" className='submit-btn'>
-        Submit
-      </Button>
-    </Form>
-  );
+                <Form.Group className="mb-3" controlId="formEmail">
+                    <Form.Label>Email address</Form.Label>
+                    <Form.Control 
+                        type="email" 
+                        placeholder="Enter email" 
+                        name="email"
+                        value={formData.email}
+                        onChange={handleChange}
+                        required 
+                    />
+                    <Form.Text className="text-muted">
+                        We'll never share your email with anyone else.
+                    </Form.Text>
+                </Form.Group>
+
+                <Form.Group className="mb-3" controlId="formSubject">
+                    <Form.Label>Subject</Form.Label>
+                    <Form.Control 
+                        type="text" 
+                        placeholder="Enter the subject of your message" 
+                        name="subject"
+                        value={formData.subject}
+                        onChange={handleChange}
+                        required 
+                    />
+                </Form.Group>
+
+                <Form.Group className="mb-3" controlId="formMessage">
+                    <Form.Label>Message</Form.Label>
+                    <Form.Control 
+                        as="textarea" 
+                        rows={3} 
+                        placeholder="Enter your message" 
+                        name="message"
+                        value={formData.message}
+                        onChange={handleChange}
+                        required 
+                    />
+                </Form.Group>
+
+                <Button variant="primary" type="submit" className='submit-btn'>
+                    Submit
+                </Button>
+            </Form>
+        </div>
+    );
 }
 
 export default QueryForm;

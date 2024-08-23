@@ -13,7 +13,7 @@ function ServicePage() {
         axios.get('http://localhost:8080/service') 
             .then(response => {
                 setServices(response.data);
-                setFilteredServices(response.data); // Initialize filtered services
+                setFilteredServices(response.data); 
             })
             .catch(error => {
                 console.error("There was an error fetching the services!", error);
