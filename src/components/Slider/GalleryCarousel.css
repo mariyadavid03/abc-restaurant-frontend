@@ -1,0 +1,23 @@
+.carousel-container {
+    display: flex;
+    justify-content: center; 
+    align-items: center; 
+    width: 100%; 
+}
+
+.carousel-row {
+    display: flex;
+    justify-content: space-between; 
+    gap: 10px; 
+    max-width: 100%; 
+}
+
+.carousel-image {
+    flex: 1; 
+    max-width: calc(33.333% - 10px); 
+    height: auto; 
+    aspect-ratio: 4 / 3;
+    object-fit: cover; 
+    border-radius: 8px; 
+}
+

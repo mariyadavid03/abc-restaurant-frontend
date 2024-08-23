@@ -3,7 +3,7 @@ import Header from '../../components/Header/PublicHeader/Header';
 import './Styles.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Slider from '../../components/Slider/Slider';
-import Grid from '../../components/Gallery/Grid';
+import GalleryCarousel from '../../components/Slider/GalleryCarousel';
 import QueryForm from '../../components/ContactUs/QueryForm';
 import Footer from '../../components/Footer/PublicFooter/Footer';
 import mainTitleImage from '../../assets/images/homepage-title-img-new.jpg';
@@ -122,7 +122,7 @@ function HomePage(){
                 <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor 
                 incididunt ut labore et dolore magna aliqua</p>
                 <div className='gallery-box'>
-                    <Grid/>
+                    <GalleryCarousel />
                 </div>
                 
             </div>
