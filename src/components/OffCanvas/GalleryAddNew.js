@@ -61,7 +61,7 @@ function GalleryAddNew({ show, handleClose, onSuccess }) {
         });
     };
 
-    // Reset form fields and image preview
+    // Reset form fields
     const resetForm = () => {
         setFormData({ image_name: '' });
         setImagePreview(null);

@@ -8,7 +8,6 @@ import axios from 'axios';
 function ManageGallery() {
     const [showAdd, setShowAdd] = useState(false);
     const [successMessage, setSuccessMessage] = useState('');
-    const [loading, setLoading] = useState(true);
     const [galleryImages, setGalleryImages] = useState([]);
 
     const handleShowAdd = () => setShowAdd(true);
@@ -20,9 +19,7 @@ function ManageGallery() {
             setGalleryImages(response.data);
         } catch (error) {
             console.error('Error fetching gallery images:', error);
-        } finally {
-            setLoading(false);
-        }
+        } 
     };
 
     const handleDelete = async (id) => {
