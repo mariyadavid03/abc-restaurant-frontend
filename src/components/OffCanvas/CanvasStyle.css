@@ -113,3 +113,8 @@
     color: rgb(24, 38, 161) !important;
     border-color: rgb(24, 38, 161) !important;
 }
+
+.gallery-image{
+    height: 43px;
+    border-radius: 7px;
+}
