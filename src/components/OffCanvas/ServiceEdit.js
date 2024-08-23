@@ -4,21 +4,16 @@ import Button from 'react-bootstrap/Button';
 import './CanvasStyle.css';
 import axios from 'axios';
 
-function OfferEdit({ show, handleClose, item, onSuccess }) {
+function ServiceEdit({show, handleClose, item, onSuccess}){
     const fileInputRef = useRef(null); 
     const [selectedImage, setSelectedImage] = useState('');
-    const [offerName, setOfferName] = useState('');
-    const [offerDesc, setOfferDesc] = useState('');
-    const [discount, setDiscount] = useState('');
-    const [validPeriod, setValidPeriod] = useState('');
+    const [serviceName, setServiceName] = useState('');
+    const [serviceDesc, setServiceDesc] = useState('');
 
     useEffect(() => {
         if (item) {
-            setOfferName(item.offer_name || '');
-            setOfferDesc(item.offer_desc || '');
-            setDiscount(item.discount || '');
-            setValidPeriod(item.valid_period || '');
-
+            setServiceName(item.service_name || '');
+            setServiceDesc(item.service_desc || '');
             if (item.id) {
                 loadImage(item.id);
             }
@@ -27,7 +22,7 @@ function OfferEdit({ show, handleClose, item, onSuccess }) {
 
     const loadImage = async (id) => {
         try {
-            const response = await axios.get(`http://localhost:8080/offer/image/${id}`, {
+            const response = await axios.get(`http://localhost:8080/service/image/${id}`, {
                 responseType: 'arraybuffer'
             });
             const base64Image = btoa(
@@ -39,7 +34,7 @@ function OfferEdit({ show, handleClose, item, onSuccess }) {
             setSelectedImage(`data:image/jpeg;base64,${base64Image}`);
         } catch (error) {
             console.error('Error loading image:', error);
-            setSelectedImage(''); 
+            setSelectedImage('');  
         }
     };
 
@@ -54,23 +49,18 @@ function OfferEdit({ show, handleClose, item, onSuccess }) {
         }
     };
 
-    const handleNameChange = (e) => setOfferName(e.target.value);
-    const handleDescChange = (e) => setOfferDesc(e.target.value);
-    const handleDiscountChange = (e) => setDiscount(e.target.value);
-    const handleValidChange = (e) => setValidPeriod(e.target.value);
-
+    const handleNameChange = (e) => setServiceName(e.target.value);
+    const handleDescChange = (e) => setServiceDesc(e.target.value);
     const handleSaveChanges = async () => {
         const data = new FormData();
-        data.append('offerName', offerName);
-        data.append('offerDesc', offerDesc);
-        data.append('discount', discount);
-        data.append('validPeriod', validPeriod);
+        data.append('serviceName', serviceName);
+        data.append('serviceDesc', serviceDesc);
         if (fileInputRef.current.files[0]) {
             data.append('image', fileInputRef.current.files[0]);
         }
 
         try {
-            await axios.put(`http://localhost:8080/offer/update/${item.id}`, data, {
+            await axios.put(`http://localhost:8080/service/update/${item.id}`, data, {
                 headers: {
                     'Content-Type': 'multipart/form-data',
                 },
@@ -78,14 +68,14 @@ function OfferEdit({ show, handleClose, item, onSuccess }) {
             onSuccess();
             handleClose();
         } catch (error) {
-            console.error('Error updating offer:', error);
+            console.error('Error updating service:', error);
         }
     };
 
     return (
         <Offcanvas show={show} onHide={handleClose} placement="end">
             <Offcanvas.Header closeButton>
-                <Offcanvas.Title>Edit Offer</Offcanvas.Title>
+                <Offcanvas.Title>Edit Service</Offcanvas.Title>
             </Offcanvas.Header>
             <Offcanvas.Body>
                 <div className='item-info'>
@@ -104,19 +94,11 @@ function OfferEdit({ show, handleClose, item, onSuccess }) {
                         onChange={handleFileSelect}
                     />
 
+                    <label>Service Title</label>
+                    <input type="text" value={serviceName} onChange={handleNameChange} placeholder="Service Title" />
                     
-                    
-                    <label>Offer Title</label>
-                    <input type="text" value={offerName} onChange={handleNameChange} placeholder="Offer Title" />
-                    
-                    <label>Offer Description</label>
-                    <textarea value={offerDesc} onChange={handleDescChange} placeholder="Offer Description" />
-                    
-                    <label>Discount Rate (%)</label>
-                    <input type="text" value={discount} onChange={handleDiscountChange} placeholder="Discount Rate" maxLength={6} />
-                    
-                    <label>Valid Period</label>
-                    <input type="text" value={validPeriod} onChange={handleValidChange} placeholder="Valid Period" />
+                    <label>Service Description</label>
+                    <textarea value={serviceDesc} onChange={handleDescChange} placeholder="Service Description" />
                 </div>
                 
                 <Button className='submit-btn' style={{ marginTop: '10px' }} onClick={handleSaveChanges}>
@@ -125,6 +107,7 @@ function OfferEdit({ show, handleClose, item, onSuccess }) {
             </Offcanvas.Body>
         </Offcanvas>
     );
+
 }
 
-export default OfferEdit;
+export default ServiceEdit;
