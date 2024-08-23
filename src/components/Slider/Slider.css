@@ -24,12 +24,12 @@
   position: relative;
   z-index: 2;
   max-width: 50%;
-  padding: 20px;
-  background: rgba(0, 0, 0, 0.5); 
-  margin-left: 5%;
-  border-radius: 8px;
-  top: 48px;
-  left: 167px;
+  background: rgba(0, 0, 0, 0.5);
+  margin-left: 11%;
+  padding: 21px 35px;
+  top: -36%;
+  left: 17%;
+
 }
 
 .carousel-text h3 {
@@ -43,14 +43,14 @@
 }
 
 .carousel-text .discount-rate {
-  font-size: 2.5em;
-  text-align: center;
+  font-size: 1.8em;
   color: #FAEE0A; 
 }
 
 .carousel-text .valid-till-date {
   margin-top: 20px;
-  text-align: center;
-  font-size: 1.1em;
-  color: rgba(250, 238, 10, 0.9);
+  font-size: 1em;
 }
+
+
+
