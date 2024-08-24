@@ -9,8 +9,6 @@ function AdminHeader(){
   const handleLogout = () => {
     const confirmLogout = window.confirm('Are you sure you want to log out?');
     if (confirmLogout) {
-      // sessionStorage.removeItem('user');
-      // setIsLoggedIn(false);
       navigate('/admin');
     }
   };
@@ -26,8 +24,8 @@ function AdminHeader(){
           <li><a href="/admin/payment">Payment</a></li>
           <li><a href="/admin/menu">Menu</a></li>
           <li><a href="/admin/account">Accounts</a></li>
-          <li><a href="/admin/gallery">Services</a></li>
-          <li><a href="/admin/service">Gallery</a></li>
+          <li><a href="/admin/service">Services</a></li>
+          <li><a href="/admin/gallery">Gallery</a></li>
           <li><a href="/admin/offer">Offers</a></li>
           <li><a href="/admin/report">Reports</a></li>
         </ul>

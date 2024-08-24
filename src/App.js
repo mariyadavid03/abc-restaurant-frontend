@@ -26,6 +26,11 @@ import ManageOffer from './pages/AdminUI/ManageOffer';
 import ReportPage from './pages/AdminUI/ReportPage';
 import ManageMenu from './pages/StaffUI/ManageMenu';
 import CheckPage from './pages/PublicUI/CheckoutPage/CheckPage';
+import DineinReservationReport from './pages/AdminUI/Reports/DineinReservationReport';
+import DeliveryReport from './pages/AdminUI/Reports/DeliveryReport';
+import PaymentReport from './pages/AdminUI/Reports/PaymentReport';
+import QueryReport from './pages/AdminUI/Reports/QueryReport';
+
 
 function App() {
   return (
@@ -48,6 +53,10 @@ function App() {
         <Route path='/admin/service' element={<ManageService/>}/>
         <Route path='/admin/offer' element={<ManageOffer/>}/>
         <Route path='/admin/report' element={<ReportPage/>}/>
+        <Route path='/report-display/reservation'element={<DineinReservationReport/>}/>
+        <Route path='/report-display/delivery'element={<DeliveryReport/>}/>
+        <Route path='/report-display/payment'element={<PaymentReport/>}/>
+        <Route path='/report-display/query'element={<QueryReport/>}/>
 
         <Route path='/staff' element={<StaffLogin/>}/>
         <Route path='/staff/dashboard' element={<StaffDashboard/>}/>

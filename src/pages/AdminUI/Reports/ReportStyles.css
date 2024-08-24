@@ -1,0 +1,60 @@
+html, body {
+    height: 100%;
+    margin: 0;
+    font-family: Arial, sans-serif;
+}
+
+.page {
+    background-color: #5067eb;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+
+.report-main-page {
+    background-color: var(--bg);
+    width: 85%;
+    min-height: 90%;
+    padding: 25px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    overflow-y: auto; 
+    margin-bottom: 43px;
+    margin-top: 43px;
+}
+
+.report-heading {
+    font-family: 'ABCDiatype', sans-serif;
+    font-weight: 600;
+    color: #3f4b8e;
+    padding: 12px 0;
+    font-size: 1.9rem;
+    text-align: center;
+}
+
+.export-btn {
+    background-color: #3f4b8e;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 9px 18px;
+    text-decoration: none;
+    margin-left: 10px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    
+}
+
+.export-btn:hover {
+    background-color: #2a3c6c;
+}
+
+.report-info, .summary-info {
+    margin: 20px 0;
+}
+
+.report-info p {
+    margin: 0;
+}

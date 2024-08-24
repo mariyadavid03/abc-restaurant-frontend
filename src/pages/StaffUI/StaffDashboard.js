@@ -2,6 +2,7 @@ import React from 'react';
 import StaffHeader from '../../components/Header/StaffHeader/StaffHeader';
 import './DashboardStyle.css';
 import { useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 function getDate() {
     const today = new Date();
@@ -35,18 +36,21 @@ function getDate() {
                 </div>
                 <div className='dashboard-content'>
                     <div className='box-grid'>
-                        <div className='box'>Manage Reservations</div>
-                        <div className='box'>Respond Queries</div>
-                        <div className='box'>View Payments</div>
-                        <div className='box'>Manage Menu</div>
+                    <Link to="/admin/reservation"><div className='box'>Manage Reservations</div></Link>
+                        <Link to="/admin/query"><div className='box'>Respond Queries</div></Link>
+                        <Link to="/admin/payment"><div className='box'>View Payments</div></Link>
+                        <Link to="/admin/menu"><div className='box'>Manage Menu</div></Link>
                     </div>
                     <br/>
+                    <Link to="/">
                     <label className='links'>
+                        
                         <h6>Customer Website       {'\u00A0'}       
                         <img src={require('../../assets/images/external-link.png')} alt='external link' className='external-link-icon'/>
                         </h6>
 
                     </label>
+                    </Link>
 
                 </div>
             </div>

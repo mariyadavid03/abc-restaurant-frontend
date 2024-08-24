@@ -256,3 +256,11 @@ h2{
 .export-btn:hover {
     background-color: #3b4fd3;
 }
+
+.generate-btn{
+    background-color: forestgreen;
+    color: white;
+    border: none;
+    padding: 8px 15px;
+    border-radius: 8px;
+}

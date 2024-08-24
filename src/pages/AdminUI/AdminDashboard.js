@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import AdminHeader from '../../components/Header/AdminHeader/AdminHeader';
 import '../StaffUI/DashboardStyle.css';
 import { useNavigate } from 'react-router-dom';
@@ -18,8 +18,6 @@ function getDate() {
     const handleLogout = () => {
         const confirmLogout = window.confirm('Are you sure you want to log out?');
         if (confirmLogout) {
-        //   sessionStorage.removeItem('user');
-        //   setIsLoggedIn(false);
           navigate('/admin');
         }
       };
