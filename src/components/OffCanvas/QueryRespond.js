@@ -6,8 +6,10 @@ import axios from 'axios';
 
 function QueryRespond({ show, handleClose, queryId, onSuccess }) {
     const [queryDetails, setQueryDetails] = useState({
+        email: '',
         query_subject: '',
         query_message: '',
+        staff_name: '',
         response_message: '',
         status: ''
     });
@@ -17,6 +19,7 @@ function QueryRespond({ show, handleClose, queryId, onSuccess }) {
             fetchQueryDetails(queryId);
             setQueryDetails(prevDetails => ({
                 ...prevDetails,
+                staff_name: '',
                 response_message: ''
             }));
             fetchResponseDetails(queryId);
@@ -29,6 +32,7 @@ function QueryRespond({ show, handleClose, queryId, onSuccess }) {
             const queryData = response.data;
             setQueryDetails(prevDetails => ({
                 ...prevDetails,
+                email: queryData.email,
                 query_subject: queryData.query_subject,
                 query_message: queryData.query_message,
                 status: queryData.status
@@ -44,7 +48,8 @@ function QueryRespond({ show, handleClose, queryId, onSuccess }) {
             const responseData = response.data;
             setQueryDetails(prevDetails => ({
                 ...prevDetails,
-                response_message: responseData ? responseData.response_message : ''
+                response_message: responseData ? responseData.response_message : '',
+                staff_name: responseData && responseData.user ? responseData.user.name : ''
             }));
         } catch (error) {
             console.error('Error fetching response details:', error);
@@ -71,8 +76,15 @@ function QueryRespond({ show, handleClose, queryId, onSuccess }) {
             await axios.put(`http://localhost:8080/query/updateStatus/${queryId}`, {
                 status: 'Resolved'  
             });
-            
-            console.log('Response added and query status updated.');
+    
+            // Trigger email sending
+            await axios.post('http://localhost:8080/query-response', {
+                email: queryDetails.email,  
+                staff_name: queryDetails.staff_name, 
+                response: queryDetails.response_message
+            });
+    
+            console.log('Response added, query status updated, and email sent.');
             onSuccess();  
             handleClose();
         } catch (error) {

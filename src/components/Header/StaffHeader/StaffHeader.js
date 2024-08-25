@@ -8,6 +8,7 @@ function StaffHeader(){
   const handleLogout = () => {
     const confirmLogout = window.confirm('Are you sure you want to log out?');
     if (confirmLogout) {
+      sessionStorage.clear();
       navigate('/staff');
     }
   };
@@ -16,11 +17,11 @@ function StaffHeader(){
       <div className='side-nav'>
         <img src={require('../../../assets/images/logo.png')}/>
         <ul>
-          <li><a href="/admin/dashboard">Home</a></li>
-          <li><a href="/admin/reservation">Reservations</a></li>
-          <li><a href="/admin/query">Queries</a></li>
-          <li><a href="/admin/payment">Payment</a></li>
-          <li><a href="/admin/menu">Menu</a></li>
+          <li><a href="/staff/dashboard">Home</a></li>
+          <li><a href="/manage/reservation">Reservations</a></li>
+          <li><a href="/manage/query">Queries</a></li>
+          <li><a href="/manage/payment">Payment</a></li>
+          <li><a href="/manage/menu">Menu</a></li>
         </ul>
         <h6 onClick={handleLogout}>Logout</h6>
       </div>

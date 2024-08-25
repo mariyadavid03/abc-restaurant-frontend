@@ -9,6 +9,7 @@ function ManageQuery() {
     const [showOffCanvas, setShowOffCanvas] = useState(false);
     const [successMessage, setSuccessMessage] = useState('');
     const [selectedQueryId, setSelectedQueryId] = useState(null);
+    const userRole = sessionStorage.getItem('role');
 
     useEffect(() => {
         fetchQueries();
@@ -18,7 +19,8 @@ function ManageQuery() {
     const fetchQueries = async () => {
         try {
             const response = await axios.get('http://localhost:8080/query'); 
-            setQueries(response.data);
+            const sortedQueries = response.data.sort((a, b) => new Date(b.created_at) - new Date(a.created_at));
+            setQueries(sortedQueries);
         } catch (error) {
             console.error('Error fetching queries:', error);
         }
@@ -65,9 +67,17 @@ function ManageQuery() {
     return (
         <div className='page-body'>
             <div className="main-page">
-                <Link to="/admin/dashboard">
-                    <img src={require("../../assets/images/arrow-white.png")} className="back-arrow" alt="Go Back"/>
-                </Link>
+                {
+                    userRole === 'staff' ? (
+                        <Link to="/staff/dashboard">
+                            <img src={require("../../assets/images/arrow-white.png")} className="back-arrow" alt="Go Back"/>
+                        </Link>
+                    ) : userRole === 'admin' ? (
+                        <Link to="/admin/dashboard">
+                            <img src={require("../../assets/images/arrow-white.png")} className="back-arrow" alt="Go Back"/>
+                        </Link>
+                    ) : null
+                }
                 <h2>Customer Queries</h2>
                 <div className='table-container'>
                     {successMessage && <div className="success-message">{successMessage}</div>}
@@ -85,7 +95,7 @@ function ManageQuery() {
                         </thead>
                         <tbody>
                             {queries.map(query => (
-                                <tr onClick={() => handleRowClick(query.id)} key={query.id}>
+                                <tr key={query.id}>
                                     <td>{query.id}</td>
                                     <td>{new Date(query.created_at).toLocaleString()}</td>
                                     <td>{query.status}</td>

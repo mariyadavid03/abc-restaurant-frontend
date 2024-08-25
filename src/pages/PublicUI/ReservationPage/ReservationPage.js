@@ -6,7 +6,7 @@ import './ReservationStyle.css';
 function ReservationPage() {
     const contactUsRef = useRef(null);
     const [userData, setUserData] = useState({
-        fullName: '',
+        name: '',
         email: '',
         contactNo: ''
     });
@@ -28,7 +28,7 @@ function ReservationPage() {
                 .then(response => {
                     const { name, email, mobileNo } = response.data;
                     setUserData({
-                        fullName: name,
+                        name: name,
                         email: email,
                         contactNo: mobileNo
                     });
@@ -55,6 +55,7 @@ function ReservationPage() {
         e.preventDefault();
         const userId = sessionStorage.getItem('userId');
         const reservationCode = generateReservationCode();
+        const userEmail = userData.email;
     
         const reservationData = {
             reservation_code: reservationCode,
@@ -65,20 +66,34 @@ function ReservationPage() {
             num_guests: reservationDetails.numGuests,
             special_requests: reservationDetails.specialRequests,
             status: 'RESERVED'
+
         };
     
         axios.post('http://localhost:8080/dinein/add', reservationData)
             .then(response => {
-                alert('Reservation successful! Details will be sent to your email');
-                setReservationDetails({
-                    date: '',
-                    numGuests: '',
-                    specialRequests: ''
+                // Send the reservation details email
+                axios.post('http://localhost:8080/sendReservationEmail', {
+                    email: userEmail,
+                    reservation_code: reservationCode,
+                    reservation_date_time: reservationDetails.date,
+                    num_guests: reservationDetails.numGuests,
+                    special_requests: reservationDetails.specialRequests
+                })
+                .then(() => {
+                    alert('Reservation successful! Details will be sent to your email.');
+                    setReservationDetails({
+                        date: '',
+                        numGuests: '',
+                        specialRequests: ''
+                    });
+                    window.location.href = '/';
+                })
+                .catch(error => {
+                    console.error('Error sending reservation email:', error);
                 });
-                window.location.href = '/';
             })
             .catch(error => {
-                console.error('Error making reservation:', error);
+                console.error('Error making reservation:', error.response.data);
             });
     };
     return (
@@ -130,12 +145,12 @@ function ReservationPage() {
 
                                 <h2>Personal Details</h2>
                                 <div className="form-group">
-                                    <label htmlFor="full-name">Name:</label>
+                                    <label htmlFor="name">Name:</label>
                                     <input 
                                         type="text" 
-                                        id="full-name" 
-                                        name="full-name" 
-                                        value={userData.fullName} 
+                                        id="name" 
+                                        name="name" 
+                                        value={userData.name} 
                                         disabled 
                                     />
                                 </div>
@@ -155,8 +170,8 @@ function ReservationPage() {
                                     <label htmlFor="contact-no">Contact Number:</label>
                                     <input 
                                         type="tel" 
-                                        id="contact-no" 
-                                        name="contact-no" 
+                                        id="contactNo" 
+                                        name="contactNo" 
                                         value={userData.contactNo} 
                                         disabled 
                                     />

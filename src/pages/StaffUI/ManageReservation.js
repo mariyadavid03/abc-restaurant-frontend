@@ -9,12 +9,22 @@ import { Link } from 'react-router-dom';
 
 function ManageReservation() {
     const [key, setKey] = useState('dineIn');
+    const userRole = sessionStorage.getItem('role');
     return (
         <div className='page-body'>
             <div className="main-page">
-                <Link to="/admin/dashboard">
-                <img src={require("../../assets/images/arrow-white.png")} className="back-arrow" alt="Go Back"/>
-                </Link>
+                {
+                    userRole === 'staff' ? (
+                        <Link to="/staff/dashboard">
+                            <img src={require("../../assets/images/arrow-white.png")} className="back-arrow" alt="Go Back"/>
+                        </Link>
+                    ) : userRole === 'admin' ? (
+                        <Link to="/admin/dashboard">
+                            <img src={require("../../assets/images/arrow-white.png")} className="back-arrow" alt="Go Back"/>
+                        </Link>
+                    ) : null
+                }
+                
                 
 
                 <h2>Customer Reservations</h2>

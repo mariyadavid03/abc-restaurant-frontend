@@ -70,7 +70,7 @@ const handleSignup = async () => {
 
       const data = await response.text();
       console.log('Success:', data);
-      navigate('/'); 
+      navigate('/login'); 
   } catch (error) {
       console.error('Fetch error:', error);
       setError('Signup failed');

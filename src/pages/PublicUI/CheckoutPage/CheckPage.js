@@ -6,12 +6,30 @@ import { useNavigate } from 'react-router-dom';
 
 function CheckPage() {
     const [totalAmount, setTotalAmount] = useState(0);
+    const [email, setEmail] = useState('');
+    const [deliveryCode,setDeliveryCode] = useState('');
     const navigate = useNavigate();
 
     useEffect(() => {
         const amount = sessionStorage.getItem('totalAmount');
+        const deliveryId = sessionStorage.getItem('deliveryId');
         if (amount) {
             setTotalAmount(amount);
+        }
+
+        // Fetch email and delivery code
+        if (deliveryId) {
+            const fetchEmail = async () => {
+                try {
+                    const response = await axios.get(`http://localhost:8080/delivery/${deliveryId}`);
+                    console.log("RESPONSE: ", response.data);
+                    setEmail(response.data.user.email);
+                    setDeliveryCode(response.data.delivery_code);
+                } catch (error) {
+                    console.error('Error fetching email:', error.response ? error.response.data : error.message);
+                }
+            };
+            fetchEmail();
         }
     }, []);
 
@@ -40,7 +58,15 @@ function CheckPage() {
         try {
             const paymentResponse = await axios.post('http://localhost:8080/payment/add', paymentData);
             if (paymentResponse.status === 201) {
-                alert('Successful payment');
+                // Send email
+                await axios.post('http://localhost:8080/sendPaymentEmail', {
+                    email: email,
+                    code: deliveryCode,
+                    amount: totalAmount,
+                    createdAt: paymentData.createdAt
+                });
+
+                alert('Successful payment. Email regarding the order placement will be sent to your email.');
                 sessionStorage.removeItem('cartItems');
                 sessionStorage.removeItem('deliveryId');
                 sessionStorage.removeItem('totalAmount');

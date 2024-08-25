@@ -30,6 +30,7 @@ function Header({ onContactUsClick }) {
       sessionStorage.removeItem('deliveryId');
       sessionStorage.removeItem('totalAmount');
       sessionStorage.removeItem('user');
+      sessionStorage.clear();
       setIsLoggedIn(false);
       navigate('/');
     }

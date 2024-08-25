@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './LoginPageStyle.css';
+import axios from 'axios';
 
 function AdminLogin() {
   const [username, setUsername] = useState('');
@@ -22,7 +23,20 @@ function AdminLogin() {
       if (response.ok) {
         const data = await response.json();
         if (data.role === 'admin') {
-          navigate('/admin/dashboard');
+          try {
+            const userIdResponse = await axios.get(`http://localhost:8080/user/getByUsername`, {
+              params: { username }
+            });
+            sessionStorage.setItem('userId', userIdResponse.data);
+            sessionStorage.setItem('role', role);
+            sessionStorage.setItem('user', JSON.stringify(data));
+            sessionStorage.setItem('isLoggedIn', 'true');
+            navigate('/admin/dashboard');
+            
+          } catch (error) {
+            console.error('Error fetching user ID:', error.response ? error.response.data : error.message);
+            setError('Failed to fetch user ID.');
+          }
         } else {
           setError('Access denied: You do not have the required permissions.');
         }

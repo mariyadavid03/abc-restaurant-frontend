@@ -1,15 +1,15 @@
 import React from 'react';
 import { Navigate } from 'react-router-dom';
 
-const ProtectedRoute = ({ children }) => {
+const StaffProtectedRoute = ({ children }) => {
   const isLoggedIn = sessionStorage.getItem('isLoggedIn') === 'true';
 
   if (!isLoggedIn) {
-    alert('Please log in to access this page.');
-    return <Navigate to="/login" />;
+    alert('Can not acess the page');
+    return <Navigate to="/" />;
   }
 
   return children;
 };
 
-export default ProtectedRoute;
+export default StaffProtectedRoute;

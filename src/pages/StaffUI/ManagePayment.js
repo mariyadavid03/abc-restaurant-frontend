@@ -6,7 +6,7 @@ import './PagesStyle.css';
 function ManagePayment() {
     const [payments, setPayments] = useState([]);
     const [error, setError] = useState('');
-
+    const userRole = sessionStorage.getItem('role');
     const fetchData = async () => {
         try {
             const response = await axios.get('http://localhost:8080/payment');
@@ -24,9 +24,17 @@ function ManagePayment() {
     return (
         <div className='page-body'>
             <div className="main-page">
-                <Link to="/admin/dashboard">
-                    <img src={require("../../assets/images/arrow-white.png")} className="back-arrow" alt="Go Back" />
-                </Link>
+                {
+                    userRole === 'staff' ? (
+                        <Link to="/staff/dashboard">
+                            <img src={require("../../assets/images/arrow-white.png")} className="back-arrow" alt="Go Back"/>
+                        </Link>
+                    ) : userRole === 'admin' ? (
+                        <Link to="/admin/dashboard">
+                            <img src={require("../../assets/images/arrow-white.png")} className="back-arrow" alt="Go Back"/>
+                        </Link>
+                    ) : null
+                }
                 <h2>Customer Payments</h2>
 
                 {error && <div className="error-message">{error}</div>}

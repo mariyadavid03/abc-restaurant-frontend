@@ -26,13 +26,13 @@ function LoginForm(){
       if (response.ok) {
         const data = await response.json();
         if (data.role === 'customer') {
-          // Fetch user ID by username
+          // ID by username
           try {
             const userIdResponse = await axios.get(`http://localhost:8080/user/getByUsername`, {
               params: { username }
             });
 
-            // Store user ID and other data in session
+            // Store user ID in session
             sessionStorage.setItem('userId', userIdResponse.data);
             sessionStorage.setItem('user', JSON.stringify(data));
             sessionStorage.setItem('isLoggedIn', 'true');

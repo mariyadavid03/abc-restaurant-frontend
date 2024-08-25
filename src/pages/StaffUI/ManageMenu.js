@@ -11,7 +11,7 @@ function ManageMenu() {
     const [showEdit, setShowEdit] = useState(false);
     const [selectedItem, setSelectedItem] = useState(null);
     const [successMessage, setSuccessMessage] = useState('');
-
+    const userRole = sessionStorage.getItem('role');
     const [appetizers, setAppetizers] = useState([]);
     const [mainDishes, setMainDishes] = useState([]);
     const [beverages, setBeverages] = useState([]);
@@ -82,9 +82,17 @@ function ManageMenu() {
     return (
         <div className='page-body'>
             <div className="main-page">
-                <Link to="/admin/dashboard">
-                    <img src={require("../../assets/images/arrow-white.png")} className="back-arrow" alt="Go Back" />
-                </Link>
+                {
+                    userRole === 'staff' ? (
+                        <Link to="/staff/dashboard">
+                            <img src={require("../../assets/images/arrow-white.png")} className="back-arrow" alt="Go Back"/>
+                        </Link>
+                    ) : userRole === 'admin' ? (
+                        <Link to="/admin/dashboard">
+                            <img src={require("../../assets/images/arrow-white.png")} className="back-arrow" alt="Go Back"/>
+                        </Link>
+                    ) : null
+                }
                 <div className='menu-add-button-line'>
                     <h2>Manage Menu</h2>
                     <Button onClick={handleShowAdd} className='add-btn'>

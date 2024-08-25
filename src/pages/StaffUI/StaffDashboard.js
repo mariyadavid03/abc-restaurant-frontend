@@ -1,8 +1,9 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import StaffHeader from '../../components/Header/StaffHeader/StaffHeader';
 import './DashboardStyle.css';
 import { useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom';
+import axios from 'axios';
 
 function getDate() {
     const today = new Date();
@@ -12,12 +13,28 @@ function getDate() {
     return `${month}/${date}/${year}`;
   }
 
-  const StaffDashboard = () => {
+const StaffDashboard = () => {
     const navigate = useNavigate();
-  
-    const handleLogout = () => {
-      navigate('/login');
-    };
+    const [username, setUsername] = useState('');
+    const [name, setName] = useState('');
+
+    useEffect(() => {
+        const fetchUsername = async () => {
+          try {
+            const userId = sessionStorage.getItem('userId');
+            const response = await axios.get(`http://localhost:8080/user/${userId}`);
+            setUsername(response.data.username);
+            setName(response.data.name);
+          } catch (error) {
+            console.error('Error fetching username:', error);
+          }
+        };
+    
+        fetchUsername();
+      }, []);
+    
+
+
     return(
         <>
         <div className='dashboard'>
@@ -25,21 +42,21 @@ function getDate() {
             <div className='main-content'>
                 <div className='user-info-col'>
                     <img src={require('../../assets/images/user-icon.png')}/>
-                    <h6>User Name</h6>
+                    <h6>{username || 'User'}</h6>
                 </div>
                 <div className='welcome-msg'>
                     <div className='welcome-text'>
-                        <h6>Good Day Staff!</h6>
+                        <h6>Good Day {name}!</h6>
                         <p>Today is {getDate()}</p>
                     </div>
                     <img src={require('../../assets/images/staff-welcome-img.png')}/>
                 </div>
                 <div className='dashboard-content'>
                     <div className='box-grid'>
-                    <Link to="/admin/reservation"><div className='box'>Manage Reservations</div></Link>
-                        <Link to="/admin/query"><div className='box'>Respond Queries</div></Link>
-                        <Link to="/admin/payment"><div className='box'>View Payments</div></Link>
-                        <Link to="/admin/menu"><div className='box'>Manage Menu</div></Link>
+                        <Link to="/manage/reservation"><div className='box'>Manage Reservations</div></Link>
+                        <Link to="/manage/query"><div className='box'>Respond Queries</div></Link>
+                        <Link to="/manage/payment"><div className='box'>View Payments</div></Link>
+                        <Link to="/manage/menu"><div className='box'>Manage Menu</div></Link>
                     </div>
                     <br/>
                     <Link to="/">

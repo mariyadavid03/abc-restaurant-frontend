@@ -6,10 +6,10 @@ import './QueryForm.css';
 
 function QueryForm() {
     const [formData, setFormData] = useState({
-        fullName: '',
+        sender_name: '',
         email: '',
-        subject: '',
-        message: '',
+        query_subject: '',
+        query_message: '',
     });
   
     const [responseMessage, setResponseMessage] = useState('');
@@ -26,16 +26,16 @@ function QueryForm() {
         e.preventDefault();
         
         axios.post('http://localhost:8080/query/add', {
-            sender_name: formData.fullName,
+            sender_name: formData.sender_name,
             email: formData.email,
-            query_subject: formData.subject,
-            query_message: formData.message,
+            query_subject: formData.query_subject,
+            query_message: formData.query_message,
         })
         .then(response => {
             alert('Your query has been submitted successfully! A reply will be sent to your email.');
             setErrorMessage('');
             setResponseMessage('');
-            setFormData({ fullName: '', email: '', subject: '', message: '' }); // Clear fields
+            setFormData({ sender_name: '', email: '', query_subject: '', query_message: '' });
         })
         .catch(error => {
             alert('There was an error submitting your query.');
@@ -52,8 +52,8 @@ function QueryForm() {
                     <Form.Control 
                         type="text" 
                         placeholder="Enter your name" 
-                        name="fullName"
-                        value={formData.fullName}
+                        name="sender_name"
+                        value={formData.sender_name}
                         onChange={handleChange}
                     />
                 </Form.Group>
@@ -78,8 +78,8 @@ function QueryForm() {
                     <Form.Control 
                         type="text" 
                         placeholder="Enter the subject of your message" 
-                        name="subject"
-                        value={formData.subject}
+                        name="query_subject"
+                        value={formData.query_subject}
                         onChange={handleChange}
                         required 
                     />
@@ -91,8 +91,8 @@ function QueryForm() {
                         as="textarea" 
                         rows={3} 
                         placeholder="Enter your message" 
-                        name="message"
-                        value={formData.message}
+                        name="query_message"
+                        value={formData.query_message}
                         onChange={handleChange}
                         required 
                     />

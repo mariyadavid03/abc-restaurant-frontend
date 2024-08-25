@@ -1,15 +1,18 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import '../../pages/StaffUI/PagesStyle.css';
-import SmallModal from '../Modals/SmallModal.js';
+import LargeModal from '../Modals/LargeModal';
 import Button from 'react-bootstrap/esm/Button.js';
 
 function DeliveryTable() {
     const [reservations, setReservations] = useState([]);
-    const [modalShow, setModalShow] = useState(false);
-    const [modalContent, setModalContent] = useState('');
+    const [orders, setOrders] = useState([]);
+    const [payment, setPayment] = useState('')
     const [successMessage, setSuccessMessage] = useState('');
     const [searchTerm, setSearchTerm] = useState('');
+    const [showModal, setShowModal] = useState(false);
+    const [orderDetails, setOrderDetails] = useState([]);
+    const [totalAmount, setTotalAmount] = useState(0);
 
     useEffect(() => {
         fetchReservations();
@@ -25,10 +28,36 @@ function DeliveryTable() {
         }
     };
 
-    const handleShowModal = (data) => {
-        setModalContent(data);
-        setModalShow(true);
-    };
+    //Fetch orders & payment
+    const fetchOrders = async (id) => {
+        try{
+            const orderResponse = await axios.get(`http://localhost:8080/order/getbydelivery/${id}`);
+            setOrders(orderResponse.data);
+
+            const paymentResponse = await axios.get(`http://localhost:8080/payment/getbydelivery/${id}`);
+            setPayment(paymentResponse.data);
+
+        } catch (error) {
+            console.error('Error fetching orders:', error);
+        }
+    }
+    //Modal 
+    const handleModalOpen = (deliveryId) => {
+        axios.get(`http://localhost:8080/order/getbydelivery/${deliveryId}`)
+          .then(response => {
+            setOrderDetails(response.data);
+            return axios.get(`http://localhost:8080/payment/getbydelivery/${deliveryId}`);
+          })
+          .then(response => {
+            setTotalAmount(response.data.amount);
+            setShowModal(true);
+          })
+          .catch(error => {
+            console.error('Error fetching order or payment data:', error);
+          });
+      };
+    const handleModalClose = () => setShowModal(false);
+
 
     const handleSearchChange = (event) => {
         setSearchTerm(event.target.value);
@@ -75,12 +104,13 @@ function DeliveryTable() {
             <thead>
                 <tr>
                     <th>ID</th>
-                    <th>Status</th>
                     <th>Customer Name</th>
+                    <th>Username</th>
                     <th>Contact</th>
                     <th>Address</th>
                     <th>Delivery Instructions</th>
-                    <th> - </th>
+                    <th>Order</th>
+                    <th>-</th>
                 </tr>
             </thead>
             <tbody>
@@ -88,16 +118,20 @@ function DeliveryTable() {
                 filteredReservations.map(reservation =>(
                     <tr key={reservation.id}>
                         <td>{reservation.delivery_code}</td>
-                        <td>{reservation.status}</td>
                         <td>{reservation.user.name}</td>
+                        <td>{reservation.user.username}</td>
                         <td>{reservation.user.mobileNo}</td>
                         <td>{reservation.delivery_address}</td>
+                        <td>{reservation.special_instructions}</td>    
                         <td
-                            onClick={() => handleShowModal(reservation.special_instructions)} 
-                            style={{ cursor: 'pointer', color: 'blue', textDecoration: 'underline' }} 
+                            onClick={() => {
+                                fetchOrders(reservation.id);
+                                handleModalOpen(reservation.id);
+                            }} 
+                            style={{ cursor: 'pointer', color: 'blue', textDecoration: 'underline' }}
                         >
-                            view
-                        </td>              
+                            View
+                        </td>          
                         <td>
                         <Button 
                             className='delete-btn'
@@ -116,10 +150,12 @@ function DeliveryTable() {
             </tbody>
         </table>
 
-        <SmallModal 
-            show={modalShow} 
-            onHide={() => setModalShow(false)} 
-            content={modalContent} 
+        {/* Order Details Modal */}
+        <LargeModal 
+          show={showModal} 
+          onHide={handleModalClose} 
+          orderDetails={orderDetails} 
+          totalAmount={totalAmount} 
         />
     </>
     );
