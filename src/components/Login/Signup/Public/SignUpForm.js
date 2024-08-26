@@ -132,7 +132,7 @@ const handleSignup = async () => {
                   <button onClick={handleSignup}>Signup</button>
               </div>
           )}
-
+<br></br>
           {error && <p className="error-message">{error}</p>}
       </div>
   );

@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React, { useRef, useEffect, useState } from 'react';
 import Header from '../../components/Header/PublicHeader/Header';
 import './Styles.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -6,17 +6,33 @@ import Slider from '../../components/Slider/Slider';
 import GalleryCarousel from '../../components/Slider/GalleryCarousel';
 import QueryForm from '../../components/ContactUs/QueryForm';
 import Footer from '../../components/Footer/PublicFooter/Footer';
-import mainTitleImage from '../../assets/images/homepage-title-img-new.jpg';
+import mainTitleImage from '../../assets/images/homepage-main.png';
 import titleLogo from '../../assets/images/abc-restaurant-logo-white-transparent.png';
 import ScrollToTopButton from '../../components/ScrollToTop/ScrollToTopButton';
 import { Link } from 'react-router-dom';
+import axios from "axios";
+
 
 function HomePage(){
+    const [mainDishes, setMainDishes] = useState([]);
     const contactUsRef = useRef(null);
 
     const scrollToContactUs = () => {
         contactUsRef.current.scrollIntoView({ behavior: 'smooth' });
     };
+
+    useEffect(() => {
+        const fetchMain = async () => {
+            try {
+                const response = await axios.get('http://localhost:8080/menu/type/main');
+                setMainDishes(response.data);
+            } catch (error) {
+                console.error('Error fetching data:', error.response ? error.response.data : error.message);
+            }
+        };
+
+        fetchMain();
+    }, []);
 
     return(
         <div className='home-page'>
@@ -43,33 +59,24 @@ function HomePage(){
 
             <div className='menu-section-updated'>
                 <div className='menu-img-updated'>
-                    <img src={require('../../assets/images/menu-section-image.jpg')} alt='Menu' />
+                    <img src={require('../../assets/images/imgage.jpg')} alt='Menu' />
                 </div>
                 <div className='menu-text-updated'>
-                    <h2 className='menu-heading-updated'>Our Specials</h2>
+                    <h2 className='menu-heading-updated'>Our Main Specials</h2>
                     <div className='menu-text-content-updated'>     
                         <div className='menu-item-name-updated'>
-                            <h5 className='menu-item-updated'>Special Menu Item 1</h5>
-                            <p className='menu-item-desc-updated'>small desc about item</p>
-
-                            <h5 className='menu-item-updated'>Special Menu Item 2</h5>
-                            <p className='menu-item-desc-updated'>small desc about item</p>
-
-                            <h5 className='menu-item-updated'>Special Menu Item 3</h5>
-                            <p className='menu-item-desc-updated'>small desc about item</p>
-
-                            <h5 className='menu-item-updated'>Special Menu Item 4</h5>
-                            <p className='menu-item-desc-updated'>small desc about item</p>
-
-                            <h5 className='menu-item-updated'>Special Menu Item 5</h5>
-                            <p className='menu-item-desc-updated'>small desc about item</p>
+                            {mainDishes.map((item) => (
+                                <div key={item.id} className='menu-item-updated'>
+                                <h5 className='menu-item-name-updated'>{item.item_name}</h5>
+                                </div>
+                            ))}
                         </div>
                         <div className='menu-item-price-updated'>
-                            <h5 className='item-price-updated'>Rs. 1000</h5>
-                            <h5 className='item-price-updated'>Rs. 1000</h5>
-                            <h5 className='item-price-updated'>Rs. 1000</h5>
-                            <h5 className='item-price-updated'>Rs. 1000</h5>
-                            <h5 className='item-price-updated'>Rs. 1000</h5>
+                            {mainDishes.map((item) => (
+                                 <div key={item.id} className='item-price-updated'>
+                                    <h5 className='menu-item-price-updated'>Rs. {item.price}</h5>
+                                </div>
+                            ))}
                         </div>
                     </div>
                     <Link to="/menu">
@@ -103,24 +110,24 @@ function HomePage(){
             </div>
           
             <div className='facilities-section'>
-                <div className='facilities-conatiner'>
-                    <h3>Our Facilities</h3>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor 
-                        incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis 
-                        sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-
+                <div className='facilities-container'>
+                    <h1>Our Services</h1>
+                    <p>
+                    Discover a range of exceptional services crafted to enhance your dining experience. 
+                    From elegant fine dining to seamless delivery options, we cater to your every need 
+                    with the highest standards of excellence.
+                    </p>
                     <Link to="/service">
-                        <button type='button'>More Facilities</button>
+                    <button type='button'>More Facilities</button>
                     </Link>
                 </div>
-                <div className='facilities-img'>
-                    <img src={require('../../assets/images/facilities-banner.jpg')}></img>
-                </div>
+                {/* <div className='facilities-img'></div> */}
             </div>
             <div className='gallery-section'>
                 <h1><center>Gallery</center></h1>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor 
-                incididunt ut labore et dolore magna aliqua</p>
+                <p>Explore the vibrant essence of our restaurant through our gallery. 
+                    From delectable dishes to unforgettable events, 
+                    each moment is captured to give you a glimpse of our world</p>
                 <div className='gallery-box'>
                     <GalleryCarousel />
                 </div>
@@ -148,7 +155,7 @@ function HomePage(){
             <div className='contact-us-section' ref={contactUsRef}>
                 <div className='contact-us-container'>
                     <div className='contact-us-img'>
-                        <img src={require('../../assets/images/contact-us-banner.jpg')}></img>
+                        <img src={require('../../assets/images/contact-us-banner.jpg')} alt='Contact Us'></img>
                     </div>
                     <div className='contact-us-form-section'>
                         <h1><center>Contact Us</center></h1>
@@ -162,23 +169,23 @@ function HomePage(){
                 <div className='location-container'>
                     <div className='map-box'>
                         <iframe src="https://www.google.com/maps/d/u/5/embed?mid=1YKztDLjVj8rbTFs2szC_KkpfpReI8uU&ehbc=2E312F&noprof=1" 
-                        width="640" height="480" className='location-map'></iframe>
+                        width="640" height="480" className='location-map' title='Map of the resturants'></iframe>
                     </div>
                     <div className='location-text'>
-                        <h5>Location 1</h5>
-                        <p>Location, address, city</p>
+                        <h5>ABC Restaurant, Kandy</h5>
+                        <p>23/A, Queen's Road, Kandy</p>
 
-                        <h5>Location 2</h5>
-                        <p>Location, address, city</p>
+                        <h5>ABC Restaurant, Colombo</h5>
+                        <p>543, Galle Road, Colombo 07 </p>
 
-                        <h5>Location 3</h5>
-                        <p>Location, address, city</p>
+                        <h5>ABC Restaurant, Negambo</h5>
+                        <p>21, Colombo Road, Negambo</p>
 
-                        <h5>Location 4</h5>
-                        <p>Location, address, city</p>
+                        <h5>ABC Restaurant, Galle</h5>
+                        <p>765, Mathara Road, Galle</p>
 
-                        <h5>Location 5</h5>
-                        <p>Location, address, city</p>
+                        <h5>ABC Restaurant, Kegalle</h5>
+                        <p>78/C, Colombo Road, Kegalle</p>
                     </div>
                 </div>
             

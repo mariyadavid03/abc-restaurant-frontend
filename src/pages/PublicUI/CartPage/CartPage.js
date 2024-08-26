@@ -105,7 +105,7 @@ function CartPage() {
                     // Store deliveryId and totalAmount in sessionStorage
                     sessionStorage.setItem('deliveryId', deliveryId);
                     sessionStorage.setItem('totalAmount', totalAmount);
-                    window.location.href = '/payment';
+                    window.location.href = '/cart/payment';
                 } else {
                     setError('Failed to retrieve delivery ID.');
                 }

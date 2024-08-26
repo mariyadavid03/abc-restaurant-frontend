@@ -1,56 +1,65 @@
+@import url('https://fonts.googleapis.com/css2?family=Archivo+Black&family=Great+Vibes&display=swap');
+
+
 .custom-carousel {
   color: white;
 }
 
 .carousel-content {
-  position: relative;
-  height: 400px; 
-  width: 70%;
-}
-
-.carousel-image img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  position: absolute;
-  top: 0;
-  left: 0;
-  z-index: 1;
-  margin-left: 22%;
-  border-radius: 49px;
+  display: flex;
+  height: 400px;
+  width: 63%;
+  margin: auto;
 }
 
 .carousel-text {
-  position: relative;
-  z-index: 2;
-  max-width: 50%;
-  background: rgba(0, 0, 0, 0.5);
-  margin-left: 11%;
-  padding: 21px 35px;
-  top: -36%;
-  left: 17%;
-
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background-color: #fdb734; 
+  padding: 20px;
+  color: black;
+  font-family: Arial, sans-serif;
 }
 
 .carousel-text h3 {
   margin-bottom: 20px;
-  font-size: 2em;
+  font-size: 2.4em;
+  text-transform: uppercase;
+  font-family: "Archivo Black", sans-serif;
 }
 
 .carousel-text p {
   margin-bottom: 10px;
-  font-size: 1.2em;
+  font-size: 1em;
+  font-weight: 600;
+  width: 85%;
 }
 
 .carousel-text .discount-rate {
-  font-size: 1.8em;
-  color: #FAEE0A; 
+  font-size: 2.5em;
+  font-family: "Archivo Black", sans-serif;
+  font-weight: bold;
 }
 
 .carousel-text .valid-till-date {
   margin-top: 20px;
-  font-size: 1em;
+  font-size: 0.7em;
+  text-align: center;
+  color: rgb(62, 62, 62);
 }
 
+.carousel-image-1 {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
 
-
+.carousel-image-1 img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 10px;
+}

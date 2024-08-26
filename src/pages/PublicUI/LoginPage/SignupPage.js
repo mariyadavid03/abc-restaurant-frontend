@@ -11,13 +11,13 @@ function SignupPage() {
             </Link>
             <div className="login-container">
                 <div className="login-form-container">
-                    <div className="login-form">
+                    <div className="login-formm">
                         <h3>Signup</h3>
                         <SignUpForm/>
                     </div>
                 </div>
                 <div className="login-img-container">
-                    <img src={require("../../../assets/images/imgage.jpg")} alt="Login" />
+                    <img src={require("../../../assets/images/for-gourmets.jpg")} alt="Login" />
                 </div>
             </div>
         </div>

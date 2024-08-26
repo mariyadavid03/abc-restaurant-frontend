@@ -12,7 +12,7 @@ body {
 }
 
 .service-heading-container {
-    background-color: var(--black);
+    background-color: black;
     color: white;
     text-align: center;
     width: 100%;
@@ -25,8 +25,13 @@ body {
     color: var(--yellow);
     font-weight: 600;
     padding-bottom: 23px;
+    font-size: 3.5rem;
 }
-
+.service-heading-container p{
+    width: 49%;
+    margin: auto;
+    font-size: 1.1rem;
+}
 /* Search Bar Styles */
 .service-search-container {
     display: flex;
@@ -59,11 +64,12 @@ body {
     background-color: var(--pink);
 }
 
-.service-content-conatiner {
+.service-content-container {
     width: 100%;
     height: fit-content;
-    background-color: var(--light-grey);
+    background-color: white;
     color: black;
+    padding-bottom: 27px;
 }
 
 .service-container {

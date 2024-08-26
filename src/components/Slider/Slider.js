@@ -7,9 +7,8 @@ function Slider() {
   const [offers, setOffers] = useState([]);
 
   useEffect(() => {
-
     // Fetch the offers from your backend
-    axios.get('http://localhost:8080/offer') 
+    axios.get('http://localhost:8080/offer')
       .then(response => {
         setOffers(response.data);
       })
@@ -23,18 +22,18 @@ function Slider() {
       {offers.map((offer, index) => (
         <Carousel.Item key={index}>
           <div className="carousel-content">
-            <div className="carousel-image">
+            <div className="carousel-text">
+              <h3>{offer.offer_name}</h3>
+              <p>{offer.offer_desc}</p>
+              <p className="discount-rate">{` ${offer.discount} OFF`}</p>
+              <p className="valid-till-date">{`Valid Till ${offer.valid_period}`}</p>
+            </div>
+            <div className="carousel-image-1">
               <img
                 className="d-block w-100"
                 src={`data:image/jpeg;base64,${offer.offer_image_data}`}
                 alt={`Slide ${index + 1}`}
               />
-            </div>
-            <div className="carousel-text">
-              <h3>{offer.offer_name}</h3>
-              <p>{offer.offer_desc}</p>
-              <p className='discount-rate'>{`Up to ${offer.discount}%`}</p>
-              <p className='valid-till-date'>{`Valid Till ${offer.valid_period}`}</p>
             </div>
           </div>
         </Carousel.Item>

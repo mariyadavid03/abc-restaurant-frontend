@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import LoginForm from "../../../components/Login/Signup/Public/LoginForm";
 import './Page.css';
 import { Link } from "react-router-dom";
@@ -6,19 +6,19 @@ import { Link } from "react-router-dom";
 function LoginPage() {
     return (
         <div className="login-page">
-           <Link to="/">
+           <Link to='/'>
                 <img src={require("../../../assets/images/arrow.png")} alt="Back Arrow" className="back-arrow-img" />
             </Link>
             <div className="login-container">
                 <div className="login-form-container">
-                    <div className="login-form">
+                    <div className="login-formm">
                         <h3>Welcome Back!</h3>
                         <LoginForm
                         />
                     </div>
                 </div>
                 <div className="login-img-container">
-                    <img src={require("../../../assets/images/imgage.jpg")} alt="Login" />
+                    <img src={require("../../../assets/images/for-gourmets.jpg")} alt="Login" />
                 </div>
             </div>
         </div>

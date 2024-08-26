@@ -9,10 +9,10 @@
 .text-muted{
     color: rgb(116, 116, 116) !important;
 }
-a{
+/* a{
     margin-left: 12px;
-    color: #f371bf;
-}
+    color: #5067eb;
+} */
 .btn-primary{
     background-color: #D3017F;
     padding: 5px 16px;

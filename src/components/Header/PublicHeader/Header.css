@@ -1,9 +1,10 @@
 @import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap');
 
 .header-main {
-  background-color: #ffffff;
+  background-color: #000000;
   padding: 1rem;
-  border-bottom: 1px solid #D9D9D9;
+  border-bottom: 1px solid #5e4811;
+  color: white;
 }
 
 .menu {
@@ -11,6 +12,7 @@
   align-items: center;
   justify-content: space-between;
   flex-wrap: wrap;
+  color: white;
 }
 .cart {
   position: relative;
@@ -38,12 +40,14 @@
   gap: 2rem;
   padding: 0;
   margin: 1rem 0;
+  color: #ffa140;
 }
 
 .menu nav ul li a {
-  color: rgb(0, 0, 0);
+  color: #ffa140;
   text-decoration: none;
   font-size: 1rem;
+  letter-spacing: 2px;
   font-family: 'DM Sans', sans-serif;
 }
 
@@ -84,11 +88,17 @@
 }
 .header-btn button {
   padding: 5px 17px;
-  background-color: #D3017F;
-  color: #fff;
-  border: none;
+  background-color: #000000;
+  color:#ffa140 ;
+  border: 1px solid #ffa140;
   border-radius: 4px;
   font-family: 'DM Sans', sans-serif;
+  transition: 0.3s background-color;
+}
+.header-btn button:hover{
+  background-color: #ffa140;
+  color: black ;
+  border: 1px solid #ffa140;
 }
 
 .hamburger {

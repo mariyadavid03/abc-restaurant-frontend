@@ -4,7 +4,7 @@
     right: 20px;
     width: 40px;
     height: 40px;
-    background-color: #96005a; /* or your preferred color */
+    background-color: rgb(224, 154, 13); 
     color: white;
     border: none;
     border-radius: 50%;
@@ -18,7 +18,7 @@
   }
   
   .scroll-to-top:hover {
-    background-color: #b3006b; /* darker shade on hover */
+    background-color: rgb(153, 105, 8); ; 
   }
   
   .scroll-to-top:focus {

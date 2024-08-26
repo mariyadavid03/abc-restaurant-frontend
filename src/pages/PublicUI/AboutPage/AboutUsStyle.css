@@ -1,11 +1,119 @@
-.about-us-page{
-    background-color: black;
+.about-us-page {
     color: white;
+    font-family: Arial, sans-serif;
 }
 
-.about-us-container{
-    display: flex;
+.about-us-page h1 {
+    text-align: center;
+    font-size: 3em;
+    margin-bottom: 30px;
+    color: #FDB734;
 }
-.about-us-section1, .about-us-section2{
+
+.our-story-section {
+    display: flex;
+    align-items: center;
+    margin-bottom: 50px;
+    padding: 60px 42px;
+}
+
+.our-story-image img {
     width: 100%;
+    height: auto;
+    border-radius: 10px;
+}
+
+.our-story-text {
+    margin-left: 30px;
+    max-width: 600px;
+}
+
+.our-story-text h2 {
+    font-size: 2.5em;
+    margin-bottom: 20px;
+    color: #000000;
+}
+
+.our-story-text p {
+    font-size: 1.2em;
+    line-height: 1.6;
+    color: black;
+}
+
+.our-values-section {
+    margin-bottom: 50px;
+    text-align: center;
+}
+
+.our-values-section h2 {
+    font-size: 2.5em;
+    margin-bottom: 40px;
+    color: #000000;
+}
+
+.values-container {
+    display: flex;
+    justify-content: space-around;
+    text-align: center;
+}
+
+.value-item {
+    max-width: 250px;
+}
+
+.value-item h3 {
+    font-size: 1.8em;
+    margin-bottom: 20px;
+    color: #000000;
+}
+
+.value-item p {
+    font-size: 1.1em;
+    line-height: 1.5;
+    color: #000000;
+}
+
+.value-item img{
+    height: 109px;
+    margin-bottom: 48px;
+    margin-top: 22px;
+}
+
+.our-team-section {
+    margin-bottom: 50px;
+    text-align: center;
+}
+
+.our-team-section h2 {
+    font-size: 2.5em;
+    margin-bottom: 40px;
+    color: #000000;
+}
+
+.team-container {
+    display: flex;
+    justify-content: space-around;
+    text-align: center;
+}
+
+.team-member {
+    max-width: 200px;
+}
+
+.team-member img {
+    width: 100%;
+    height: auto;
+    border-radius: 50%;
+    margin-bottom: 20px;
+}
+
+.team-member h3 {
+    font-size: 1.5em;
+    margin-bottom: 10px;
+    color: #000000;
+}
+
+.team-member p {
+    font-size: 1.1em;
+    color: #000000;
 }

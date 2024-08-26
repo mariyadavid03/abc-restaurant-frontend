@@ -30,14 +30,24 @@ body {
 .login-container {
     display: flex;
     height: 100vh;
+    border-radius: 8px;
+    
 }
+.login-formm input {
+    width: calc(100% - 20px);
+    padding: 10px;
+    margin-bottom: 16px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
 
+}
 .login-form-container {
     flex: 0 0 40%;
     display: flex;
     flex-direction: column;
     justify-content: center;
-    padding: 0rem 6rem;
+    padding: 0rem 8rem;
     background-color: white; 
 }
 
@@ -52,13 +62,22 @@ body {
     object-fit: cover;
 }
 
-.login-form {
+.login-formm {
     width: 100%;
     max-width: 400px;
     text-align: left;
+    box-shadow: none;
 }
-
-.login-form h3 {
+.login-formm button{
+    background-color: #FDB734;
+    color: black;
+    border-radius: 7px;
+    padding: 5px 16px;
+    width: 100%;
+    font-weight: 700;
+    border: 1px solid rgba(128, 28, 28, 0);
+}
+.login-formm h3 {
     padding-bottom: 1.5rem;
     text-align: left;
 }

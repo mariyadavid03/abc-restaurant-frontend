@@ -39,8 +39,6 @@ function ServicePage() {
             <div className="service-page">
                 <div className="service-heading-container">
                     <h2>Our Services</h2>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor 
-                    incididunt ut </p>
                 </div>
                 {/* Search Bar */}
                 <div className="service-search-container">

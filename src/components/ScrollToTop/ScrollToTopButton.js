@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import './ScrollToTopButton.css'; // Create this CSS file for styling
+import './ScrollToTopButton.css'; 
 
 const ScrollToTopButton = () => {
   const [showButton, setShowButton] = useState(false);
 
   const handleScroll = () => {
-    if (window.scrollY > 300) { // Show the button after scrolling 300px
+    if (window.scrollY > 300) { 
       setShowButton(true);
     } else {
       setShowButton(false);

@@ -107,6 +107,6 @@
 }
 
 .confirm-button:hover {
-  background-color: var(--pink);
+  background-color: var(--yellow);
   color: var(--white);
 }
