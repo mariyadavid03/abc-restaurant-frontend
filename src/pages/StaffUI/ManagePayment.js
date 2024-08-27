@@ -2,11 +2,14 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 import './PagesStyle.css';
+import SessionManager from '../../services/SessionManager';
 
 function ManagePayment() {
     const [payments, setPayments] = useState([]);
     const [error, setError] = useState('');
-    const userRole = sessionStorage.getItem('role');
+    const session = SessionManager.getInstance();
+    const userRole = session.getRole();
+    
     const fetchData = async () => {
         try {
             const response = await axios.get('http://localhost:8080/payment');

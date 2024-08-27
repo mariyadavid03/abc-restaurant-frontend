@@ -4,6 +4,7 @@ import Form from 'react-bootstrap/Form';
 import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import './FormStyles.css';
+import SessionManager from '../../../../services/SessionManager';
 
 function LoginForm(){
   const [username, setUsername] = useState('');
@@ -11,6 +12,7 @@ function LoginForm(){
   const [error, setError] = useState('');
   const navigate = useNavigate();
   const role = "customer";
+  const session = SessionManager.getInstance();
 
 
   const handleLogin = async () => {
@@ -33,9 +35,9 @@ function LoginForm(){
             });
 
             // Store user ID in session
-            sessionStorage.setItem('userId', userIdResponse.data);
-            sessionStorage.setItem('user', JSON.stringify(data));
-            sessionStorage.setItem('isLoggedIn', 'true');
+            session.setUserId(userIdResponse.data);
+            session.setUser(data);
+            session.setIsLoggedIn(true);
             navigate('/');
           } catch (error) {
             console.error('Error fetching user ID:', error.response ? error.response.data : error.message);

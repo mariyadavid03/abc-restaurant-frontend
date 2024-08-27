@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import SessionManager from "../../services/SessionManager";
 
 function MainCourses() {
     const [mainDishes, setMainDishes] = useState([]);
     const [cartItems, setCartItems] = useState([]);
+    const session = SessionManager.getInstance();
 
     useEffect(() => {
         const fetchMain = async () => {
@@ -16,18 +18,18 @@ function MainCourses() {
         };
 
         fetchMain();
-        const storedCartItems = JSON.parse(sessionStorage.getItem('cartItems')) || [];
+        const storedCartItems = session.getCartItems();
         setCartItems(storedCartItems);
     }, []);
 
 
     const handleAddToCart = (itemId) => {
-        const user = sessionStorage.getItem('user');
+        const user = session.getUser();
         if (user) {
             if (!cartItems.includes(itemId)) {
                 const updatedCartItems = [...cartItems, itemId];
                 setCartItems(updatedCartItems);
-                sessionStorage.setItem('cartItems', JSON.stringify(updatedCartItems));
+                session.setCartItems(updatedCartItems);
                 alert('Item added to cart!');
             } else {
                 alert('Item is already in the cart.');

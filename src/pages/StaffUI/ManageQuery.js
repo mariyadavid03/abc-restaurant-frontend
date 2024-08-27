@@ -3,14 +3,16 @@ import './PagesStyle.css';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 import QueryRespond from '../../components/OffCanvas/QueryRespond';
+import SessionManager from '../../services/SessionManager';
 
 function ManageQuery() {
     const [queries, setQueries] = useState([]);
     const [showOffCanvas, setShowOffCanvas] = useState(false);
     const [successMessage, setSuccessMessage] = useState('');
     const [selectedQueryId, setSelectedQueryId] = useState(null);
-    const userRole = sessionStorage.getItem('role');
-
+    const session = SessionManager.getInstance();
+    const userRole = session.getRole();
+    
     useEffect(() => {
         fetchQueries();
     }, []);

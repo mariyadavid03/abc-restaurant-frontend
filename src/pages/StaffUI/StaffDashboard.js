@@ -4,6 +4,7 @@ import './DashboardStyle.css';
 import { useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
+import SessionManager from '../../services/SessionManager';
 
 function getDate() {
     const today = new Date();
@@ -17,11 +18,12 @@ const StaffDashboard = () => {
     const navigate = useNavigate();
     const [username, setUsername] = useState('');
     const [name, setName] = useState('');
+    const session = SessionManager.getInstance();
 
     useEffect(() => {
         const fetchUsername = async () => {
           try {
-            const userId = sessionStorage.getItem('userId');
+            const userId = session.getUserId();
             const response = await axios.get(`http://localhost:8080/user/${userId}`);
             setUsername(response.data.username);
             setName(response.data.name);

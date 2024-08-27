@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import '../AdminUI/LoginPageStyle.css'; 
 import axios from 'axios';
+import SessionManager from '../../services/SessionManager';
 
 function StaffLogin() {
   const [username, setUsername] = useState('');
@@ -9,6 +10,7 @@ function StaffLogin() {
   const [error, setError] = useState('');
   const navigate = useNavigate();
   const role = "staff";
+  const session = SessionManager.getInstance();
 
   const handleLogin = async () => {
     try {
@@ -27,10 +29,10 @@ function StaffLogin() {
               const userIdResponse = await axios.get(`http://localhost:8080/user/getByUsername`, {
                 params: { username }
               });
-              sessionStorage.setItem('userId', userIdResponse.data);
-              sessionStorage.setItem('role', role);
-              sessionStorage.setItem('user', JSON.stringify(data));
-              sessionStorage.setItem('isLoggedIn', 'true');
+              session.setUserId(userIdResponse.data);
+              session.setRole(role);
+              session.setUser(data);
+              session.setIsLoggedIn(true);
               navigate('/staff/dashboard');
               
             } catch (error) {

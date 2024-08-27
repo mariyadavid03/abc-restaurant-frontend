@@ -5,18 +5,21 @@ import AddItemCanvas from '../../components/OffCanvas/AddItemCanvas.js';
 import EditItemCanvas from '../../components/OffCanvas/EditItemCanvas.js';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
+import SessionManager from '../../services/SessionManager.js';
 
 function ManageMenu() {
     const [showAdd, setShowAdd] = useState(false);
     const [showEdit, setShowEdit] = useState(false);
     const [selectedItem, setSelectedItem] = useState(null);
     const [successMessage, setSuccessMessage] = useState('');
-    const userRole = sessionStorage.getItem('role');
     const [appetizers, setAppetizers] = useState([]);
     const [mainDishes, setMainDishes] = useState([]);
     const [beverages, setBeverages] = useState([]);
     const [desserts, setDesserts] = useState([]);
     const [loading, setLoading] = useState(true);
+
+    const session = SessionManager.getInstance();
+    const userRole = session.getRole();
 
     const handleCloseAdd = () => setShowAdd(false);
 

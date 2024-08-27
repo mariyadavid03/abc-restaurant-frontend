@@ -2,17 +2,18 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import './Checkout.css';
 import { useNavigate } from 'react-router-dom';
-
+import SessionManager from "../../../services/SessionManager";
 
 function CheckPage() {
     const [totalAmount, setTotalAmount] = useState(0);
     const [email, setEmail] = useState('');
     const [deliveryCode,setDeliveryCode] = useState('');
     const navigate = useNavigate();
+    const session = SessionManager.getInstance();
 
     useEffect(() => {
-        const amount = sessionStorage.getItem('totalAmount');
-        const deliveryId = sessionStorage.getItem('deliveryId');
+        const amount = session.getTotalAmount();
+        const deliveryId = session.getDeliveryId();
         if (amount) {
             setTotalAmount(amount);
         }
@@ -36,14 +37,12 @@ function CheckPage() {
     const handleBack = () => {
         const isConfirmed = window.confirm("Leave the checkout process? Your cart will be cleared.");
         if (isConfirmed) {
-            sessionStorage.removeItem('cartItems');
-            sessionStorage.removeItem('deliveryId');
-            sessionStorage.removeItem('totalAmount');
+            session.clearCart();
             navigate('/'); 
         }
     };
     const handlePayment = async () => {
-        const deliveryId = sessionStorage.getItem('deliveryId');
+        const deliveryId = session.getDeliveryId();
         if (!deliveryId) {
             alert('Delivery ID not found. Please try again.');
             return;
@@ -67,9 +66,7 @@ function CheckPage() {
                 });
 
                 alert('Successful payment. Email regarding the order placement will be sent to your email.');
-                sessionStorage.removeItem('cartItems');
-                sessionStorage.removeItem('deliveryId');
-                sessionStorage.removeItem('totalAmount');
+                session.clearCart();
                 window.location.href = '/';
             } else {
                 alert('Failed to process payment. Please try again.');

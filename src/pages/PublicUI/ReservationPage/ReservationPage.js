@@ -2,9 +2,11 @@ import React, { useRef, useEffect, useState } from 'react';
 import Header from "../../../components/Header/PublicHeader/Header";
 import axios from 'axios';
 import './ReservationStyle.css';
+import SessionManager from '../../../services/SessionManager';
 
 function ReservationPage() {
     const contactUsRef = useRef(null);
+    const session = SessionManager.getInstance();
     const [userData, setUserData] = useState({
         name: '',
         email: '',
@@ -21,7 +23,7 @@ function ReservationPage() {
     };
 
     useEffect(() => {
-        const userId = sessionStorage.getItem('userId');
+        const userId = session.getUserId();
 
         if (userId) {
             axios.get(`http://localhost:8080/user/${userId}`)
@@ -53,7 +55,7 @@ function ReservationPage() {
 
     const handleReservationSubmit = (e) => {
         e.preventDefault();
-        const userId = sessionStorage.getItem('userId');
+        const userId = session.getUserId();
         const reservationCode = generateReservationCode();
         const userEmail = userData.email;
     

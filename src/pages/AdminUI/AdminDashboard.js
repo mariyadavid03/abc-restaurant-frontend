@@ -4,6 +4,7 @@ import '../StaffUI/DashboardStyle.css';
 import { useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
+import SessionManager from '../../services/SessionManager';
 
 function getDate() {
     const today = new Date();
@@ -17,11 +18,13 @@ function getDate() {
     const navigate = useNavigate();
     const [username, setUsername] = useState('');
     const [name, setName] = useState('');
+    const session = SessionManager.getInstance();
+
   
     useEffect(() => {
         const fetchUsername = async () => {
           try {
-            const userId = sessionStorage.getItem('userId');
+            const userId = session.getUserId();
             const response = await axios.get(`http://localhost:8080/user/${userId}`);
             setUsername(response.data.username);
             setName(response.data.name);
@@ -39,7 +42,7 @@ function getDate() {
             <AdminHeader />
             <div className='main-content'>
                 <div className='user-info-col'>
-                    <img src={require('../../assets/images/user-icon.png')}/>
+                    <img src={require('../../assets/images/user-icon.png')} alt='Username'/>
                     <h6>{username || 'User'}</h6>
                 </div>
                 <div className='welcome-msg'>
@@ -47,7 +50,7 @@ function getDate() {
                         <h6>Good Day {name}!</h6>
                         <p>Today is {getDate()}</p>
                     </div>
-                    <img src={require('../../assets/images/staff-welcome-img.png')}/>
+                    <img src={require('../../assets/images/staff-welcome-img.png')} alt='Main Page'/>
                 </div>
                 <div className='dashboard-content'>
                     <div className='box-grid'>

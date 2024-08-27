@@ -5,16 +5,18 @@ import './CartStyle.css';
 import QuantityScale from '../../../components/QuantityScale/QuantityScale';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
+import SessionManager from '../../../services/SessionManager';
 
 function CartPage() {
     const [cartItems, setCartItems] = useState([]);
     const [deliveryAddress, setDeliveryAddress] = useState('');
     const [specialInstructions, setSpecialInstructions] = useState('');
     const [error, setError] = useState('');
+    const session = SessionManager.getInstance();
 
     useEffect(() => {
         const fetchCartItems = async () => {
-            const cartItemIds = JSON.parse(sessionStorage.getItem('cartItems')) || [];
+            const cartItemIds = session.getCartItems();
             const fetchedItems = [];
 
             for (const itemId of cartItemIds) {
@@ -34,9 +36,9 @@ function CartPage() {
 
     const handleRemoveItem = (itemId) => {
         if (window.confirm('Are you sure you want to remove to item?')) {
-            const cartItemIds = JSON.parse(sessionStorage.getItem('cartItems')) || [];
+            const cartItemIds = session.getCartItems();
             const updatedCartItemIds = cartItemIds.filter(id => id !== itemId);
-            sessionStorage.setItem('cartItems', JSON.stringify(updatedCartItemIds));
+            session.setCartItems(updatedCartItemIds);
     
             setCartItems(cartItems.filter(item => item.id !== itemId));
         }
@@ -61,7 +63,7 @@ function CartPage() {
         e.preventDefault();
     
         if (window.confirm('Are you sure you want to proceed to payment?')) {
-            const userId = sessionStorage.getItem('userId');
+            const userId = session.getUserId();
             if (!userId) {
                 setError('User ID is not found. Please log in again.');
                 return;
@@ -103,8 +105,8 @@ function CartPage() {
                     const totalAmount = orders.reduce((total, order) => total + order.price * order.quantity, 0);
                     
                     // Store deliveryId and totalAmount in sessionStorage
-                    sessionStorage.setItem('deliveryId', deliveryId);
-                    sessionStorage.setItem('totalAmount', totalAmount);
+                    session.setDeliveryId(deliveryId);
+                    session.setTotalAmount(totalAmount);
                     window.location.href = '/cart/payment';
                 } else {
                     setError('Failed to retrieve delivery ID.');

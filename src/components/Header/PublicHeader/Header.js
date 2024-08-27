@@ -3,34 +3,33 @@ import './Header.css';
 import logo from '../../../assets/images/abcshort-high-resolution-logo-transparent.png';
 import { useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom';
+import SessionManager from '../../../services/SessionManager';
 
 function Header({ onContactUsClick }) {
   const [isOpen, setIsOpen] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [cartItemsCount, setCartItemsCount] = useState(0);
   const navigate = useNavigate();
+  const session = SessionManager.getInstance();
 
   const toggleMenu = () => {
     setIsOpen(prevState => !prevState);
   };
 
   useEffect(() => {
-    const user = sessionStorage.getItem('user');
+    const user = session.getUser();
     setIsLoggedIn(user !== null);
 
     // Check cart items in session storage
-    const cartItems = JSON.parse(sessionStorage.getItem('cartItems')) || [];
+    const cartItems = session.getCartItems();
     setCartItemsCount(cartItems.length);
   }, []);
 
   const handleLogout = () => {
     const confirmLogout = window.confirm('Are you sure you want to log out?');
     if (confirmLogout) {
-      sessionStorage.removeItem('cartItems');
-      sessionStorage.removeItem('deliveryId');
-      sessionStorage.removeItem('totalAmount');
-      sessionStorage.removeItem('user');
-      sessionStorage.clear();
+      session.clearCart();
+      session.clearAll();
       setIsLoggedIn(false);
       navigate('/');
     }

@@ -1,8 +1,11 @@
 import React from 'react';
 import { Navigate } from 'react-router-dom';
+import SessionManager from '../services/SessionManager';
 
 const ProtectedRoute = ({ children }) => {
-  const isLoggedIn = sessionStorage.getItem('isLoggedIn') === 'true';
+
+  const session = SessionManager.getInstance();
+  const isLoggedIn = session.getIsLoggedIn();
 
   if (!isLoggedIn) {
     alert('Please log in to access this page.');

@@ -2,13 +2,16 @@ import React, { useState } from 'react';
 import './HeaderStyle.css'; 
 import { useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom';
+import SessionManager from '../../../services/SessionManager';
 
 function StaffHeader(){
   const navigate = useNavigate();
+  const session = SessionManager.getInstance();
+
   const handleLogout = () => {
     const confirmLogout = window.confirm('Are you sure you want to log out?');
     if (confirmLogout) {
-      sessionStorage.clear();
+      session.clearAll();
       navigate('/staff');
     }
   };

@@ -5,11 +5,12 @@ import Tab from 'react-bootstrap/Tab';
 import DineInTable from '../../components/Reservation/DineInTable';
 import DeliveryTable from '../../components/Reservation/DeliveryTable';
 import { Link } from 'react-router-dom';
-
+import SessionManager from '../../services/SessionManager';
 
 function ManageReservation() {
     const [key, setKey] = useState('dineIn');
-    const userRole = sessionStorage.getItem('role');
+    const session = SessionManager.getInstance();
+    const userRole = session.getRole();
     return (
         <div className='page-body'>
             <div className="main-page">
