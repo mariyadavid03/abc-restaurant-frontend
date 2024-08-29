@@ -70,6 +70,9 @@ function Header({ onContactUsClick }) {
                     <span className="badge">{cartItemsCount}</span>
                   )}
                 </Link>
+                <Link to="/profile">
+                  <img src={require('../../../assets/images/customer-user.png')} alt='User Profile' />
+                </Link>
               </div>
               <button type='button' onClick={handleLogout}>Logout</button>
             </>

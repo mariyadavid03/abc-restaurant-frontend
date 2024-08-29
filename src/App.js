@@ -31,6 +31,7 @@ import DeliveryReport from './pages/AdminUI/Reports/DeliveryReport';
 import PaymentReport from './pages/AdminUI/Reports/PaymentReport';
 import QueryReport from './pages/AdminUI/Reports/QueryReport';
 import StaffProtectedRoute from './components/StaffProtectedRoute';
+import ProfilePage from './pages/PublicUI/Profile/ProfilePage';
 
 
 
@@ -51,6 +52,7 @@ function App() {
         <Route path="/reservation" element={<ProtectedRoute><ReservationPage /></ProtectedRoute>}/>
         <Route path="/cart" element={<ProtectedRoute><CartPage /></ProtectedRoute>}/>
         <Route path="/cart/payment" element={<ProtectedRoute><CheckPage /></ProtectedRoute>}/>
+        <Route path="/profile" element={<ProtectedRoute><ProfilePage /></ProtectedRoute>}/>
 
         {/* Staff Protected Routes */}
         <Route path="/staff/dashboard" element={<StaffProtectedRoute><StaffDashboard /></StaffProtectedRoute>} />
