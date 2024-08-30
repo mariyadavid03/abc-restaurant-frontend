@@ -7,7 +7,7 @@ function Slider() {
   const [offers, setOffers] = useState([]);
 
   useEffect(() => {
-    // Fetch the offers from your backend
+    // Fetching offers from backend
     axios.get('http://localhost:8080/offer')
       .then(response => {
         setOffers(response.data);

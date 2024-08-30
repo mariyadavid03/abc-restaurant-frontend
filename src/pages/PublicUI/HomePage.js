@@ -111,17 +111,17 @@ function HomePage(){
           
             <div className='facilities-section'>
                 <div className='facilities-container'>
-                    <h1>Our Services</h1>
+                    <h1>Our Facilities</h1>
                     <p>
                     Discover a range of exceptional services crafted to enhance your dining experience. 
                     From elegant fine dining to seamless delivery options, we cater to your every need 
                     with the highest standards of excellence.
                     </p>
-                    <Link to="/service">
-                    <button type='button'>More Facilities</button>
+                    <Link to="/facilities">
+                    <button type='button'>More</button>
                     </Link>
                 </div>
-                {/* <div className='facilities-img'></div> */}
+
             </div>
             <div className='gallery-section'>
                 <h1><center>Gallery</center></h1>

@@ -22,6 +22,7 @@ function StaffHeader(){
         <ul>
           <li><a href="/staff/dashboard">Home</a></li>
           <li><a href="/manage/reservation">Reservations</a></li>
+          <li><a href="/manage/delivery">Delivery</a></li>
           <li><a href="/manage/query">Queries</a></li>
           <li><a href="/manage/payment">Payment</a></li>
           <li><a href="/manage/menu">Menu</a></li>

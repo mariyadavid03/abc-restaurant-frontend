@@ -11,7 +11,7 @@ import LoginPage from './pages/PublicUI/LoginPage/LoginPage';
 import SignupPage from './pages/PublicUI/LoginPage/SignupPage';
 import AboutUsPage from './pages/PublicUI/AboutPage/AboutUsPage';
 import MenuPage from './pages/PublicUI/MenuPage/MenuPage';
-import ServicePage from './pages/PublicUI/ServicePage/ServicePage';
+import FacilitiesPage from './pages/PublicUI/FacilitiesPage/FacilitiesPage';
 import ReservationPage from './pages/PublicUI/ReservationPage/ReservationPage';
 import CartPage from './pages/PublicUI/CartPage/CartPage';
 import ProtectedRoute from './components/ProtectedRoute';
@@ -32,7 +32,7 @@ import PaymentReport from './pages/AdminUI/Reports/PaymentReport';
 import QueryReport from './pages/AdminUI/Reports/QueryReport';
 import StaffProtectedRoute from './components/StaffProtectedRoute';
 import ProfilePage from './pages/PublicUI/Profile/ProfilePage';
-
+import ManageDelivery from './pages/StaffUI/ManageDelivery';
 
 
 function App() {
@@ -43,7 +43,7 @@ function App() {
         <Route path='/' element={<HomePage/>}/>
         <Route path="/about" element={<AboutUsPage/>} />
         <Route path="/menu" element={<MenuPage />} />
-        <Route path="/service" element={<ServicePage />} />
+        <Route path="/facilities" element={<FacilitiesPage />} />
         <Route path='/admin' element={<AdminLogin/>}/>
         <Route path='/staff' element={<StaffLogin/>}/>
         <Route path='/admin/account' element={<ManageAccount/>}/>
@@ -58,6 +58,7 @@ function App() {
         <Route path="/staff/dashboard" element={<StaffProtectedRoute><StaffDashboard /></StaffProtectedRoute>} />
         <Route path="/admin/dashboard" element={<StaffProtectedRoute><AdminDashboard /></StaffProtectedRoute>} />
         <Route path="/manage/reservation" element={<StaffProtectedRoute><ManageReservation /></StaffProtectedRoute>} />
+        <Route path="/manage/delivery" element={<StaffProtectedRoute><ManageDelivery /></StaffProtectedRoute>} />
         <Route path="/manage/query" element={<StaffProtectedRoute><ManageQuery /></StaffProtectedRoute>} />
         <Route path="/manage/payment" element={<StaffProtectedRoute><ManagePayment /></StaffProtectedRoute>} />
         <Route path="/manage/menu" element={<StaffProtectedRoute><ManageMenu /></StaffProtectedRoute>} />

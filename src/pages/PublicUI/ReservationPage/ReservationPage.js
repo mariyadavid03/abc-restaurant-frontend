@@ -148,35 +148,17 @@ function ReservationPage() {
                                 <h2>Personal Details</h2>
                                 <div className="form-group">
                                     <label htmlFor="name">Name:</label>
-                                    <input 
-                                        type="text" 
-                                        id="name" 
-                                        name="name" 
-                                        value={userData.name} 
-                                        disabled 
-                                    />
+                                    <input type="text" id="name" name="name" value={userData.name} disabled />
                                 </div>
 
                                 <div className="form-group">
                                     <label htmlFor="email">Email:</label>
-                                    <input 
-                                        type="email" 
-                                        id="email" 
-                                        name="email" 
-                                        value={userData.email} 
-                                        disabled 
-                                    />
+                                    <input  type="email" id="email" name="email" value={userData.email} disabled />
                                 </div>
 
                                 <div className="form-group">
                                     <label htmlFor="contact-no">Contact Number:</label>
-                                    <input 
-                                        type="tel" 
-                                        id="contactNo" 
-                                        name="contactNo" 
-                                        value={userData.contactNo} 
-                                        disabled 
-                                    />
+                                    <input type="tel" id="contactNo" name="contactNo" value={userData.contactNo} disabled />
                                 </div>
 
                                 <button type="submit" className='submit-btn'>Reserve</button>

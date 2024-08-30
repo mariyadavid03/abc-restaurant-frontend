@@ -28,7 +28,7 @@ function LoginForm(){
       if (response.ok) {
         const data = await response.json();
         if (data.role === 'customer') {
-          // ID by username
+
           try {
             const userIdResponse = await axios.get(`http://localhost:8080/user/getByUsername`, {
               params: { username }

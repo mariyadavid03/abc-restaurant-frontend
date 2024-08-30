@@ -89,7 +89,7 @@ function QueryReport() {
     return (
         <div className='page'>
             <div className="report-main-page">
-                <Link to="/admin/report">
+                <Link to="/manage/report">
                     <img src={require("../../../assets/images/arrow-white.png")} className="back-arrow" alt="Go Back" />
                 </Link>
                 <h2 className='report-heading'>Customer Query Report</h2>

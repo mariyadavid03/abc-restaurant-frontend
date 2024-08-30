@@ -56,7 +56,7 @@ function Header({ onContactUsClick }) {
             <li><a href="/">Home</a></li>
             <li><a href="/about">About</a></li>
             <li><a href="/menu">Menu</a></li>
-            <li><a href="/service">Services</a></li>
+            <li><a href="/facilities">Facilities</a></li>
             <li><a onClick={handleContactUsClick}>Contact Us</a></li>
           </ul>
         </nav>
@@ -64,14 +64,14 @@ function Header({ onContactUsClick }) {
           {isLoggedIn && (
             <>
               <div className='cart'>
+                <Link to="/profile">
+                  <img src={require('../../../assets/images/customer-user.png')} alt='User Profile' />
+                </Link>
                 <Link to="/cart">
                   <img src={require('../../../assets/images/cart.png')} alt='Cart' />
                   {cartItemsCount > 0 && (
                     <span className="badge">{cartItemsCount}</span>
                   )}
-                </Link>
-                <Link to="/profile">
-                  <img src={require('../../../assets/images/customer-user.png')} alt='User Profile' />
                 </Link>
               </div>
               <button type='button' onClick={handleLogout}>Logout</button>
@@ -91,7 +91,7 @@ function Header({ onContactUsClick }) {
             <a href='/'>Home</a>
             <a href='/about'>About</a>
             <a href='/menu'>Menu</a>
-            <a href='/service'>Services</a>
+            <a href='/facilities'>Facilities</a>
             <a onClick={handleContactUsClick}>Contact Us</a>
           </div>
         )}

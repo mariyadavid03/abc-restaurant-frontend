@@ -88,11 +88,15 @@ function ReportPage() {
     const handleGenerateReportClick = () => {
         if (reportType === 'reservation') {
             handleGenerateReport();
+
         } else if (reportType === 'delivery') {
             handleGenerateDeliveryReport();
+
         } else if(reportType == 'payment'){
             handleGeneratePaymentReport();
+
         } else if(reportType == 'query'){
+            
             handleGenerateQueryReport();
         }
     };

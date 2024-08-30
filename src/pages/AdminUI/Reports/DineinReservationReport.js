@@ -52,7 +52,7 @@ function DineinReservationReport() {
     return (
         <div className='page'>
             <div className="report-main-page">
-                <Link to="/admin/report">
+                <Link to="/manage/report">
                     <img src={require("../../../assets/images/arrow-white.png")} className="back-arrow" alt="Go Back" onClick={handleBack}/>
                 </Link>
                 <h2 className='report-heading'>Reservation Report</h2>

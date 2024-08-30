@@ -2,19 +2,23 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import './PagesStyle.css';
 import { Link } from 'react-router-dom';
-import SmallModal from '../../components/Modals/SmallModal';
-import Button from 'react-bootstrap/esm/Button';
 import SessionManager from '../../services/SessionManager';
+import LargeModal from '../../components/Modals/LargeModal';
+import Button from 'react-bootstrap/esm/Button';
 
-function ManageReservation() {
+function ManageDelivery() {
     const [key, setKey] = useState('dineIn');
     const session = SessionManager.getInstance();
     const userRole = session.getRole();
+
     const [reservations, setReservations] = useState([]);
-    const [modalShow, setModalShow] = useState(false);
-    const [modalContent, setModalContent] = useState('');
+    const [orders, setOrders] = useState([]);
+    const [payment, setPayment] = useState('')
     const [successMessage, setSuccessMessage] = useState('');
     const [searchTerm, setSearchTerm] = useState('');
+    const [showModal, setShowModal] = useState(false);
+    const [orderDetails, setOrderDetails] = useState([]);
+    const [totalAmount, setTotalAmount] = useState(0);
 
     useEffect(() => {
         fetchReservations();
@@ -23,17 +27,43 @@ function ManageReservation() {
     // Fetch reservations data
     const fetchReservations = async () => {
         try {
-            const response = await axios.get('http://localhost:8080/dinein'); 
+            const response = await axios.get('http://localhost:8080/delivery'); 
             setReservations(response.data);
         } catch (error) {
             console.error('Error fetching reservations:', error);
         }
     };
 
-    const handleShowModal = (data) => {
-        setModalContent(data);
-        setModalShow(true);
-    };
+    //Fetch orders & payment
+    const fetchOrders = async (id) => {
+        try{
+            const orderResponse = await axios.get(`http://localhost:8080/order/getbydelivery/${id}`);
+            setOrders(orderResponse.data);
+
+            const paymentResponse = await axios.get(`http://localhost:8080/payment/getbydelivery/${id}`);
+            setPayment(paymentResponse.data);
+
+        } catch (error) {
+            console.error('Error fetching orders:', error);
+        }
+    }
+    //Modal 
+    const handleModalOpen = (deliveryId) => {
+        axios.get(`http://localhost:8080/order/getbydelivery/${deliveryId}`)
+          .then(response => {
+            setOrderDetails(response.data);
+            return axios.get(`http://localhost:8080/payment/getbydelivery/${deliveryId}`);
+          })
+          .then(response => {
+            setTotalAmount(response.data.amount);
+            setShowModal(true);
+          })
+          .catch(error => {
+            console.error('Error fetching order or payment data:', error);
+          });
+      };
+    const handleModalClose = () => setShowModal(false);
+
 
     const handleSearchChange = (event) => {
         setSearchTerm(event.target.value);
@@ -44,7 +74,7 @@ function ManageReservation() {
     
         if (isConfirmed) {
             try {
-                await axios.delete(`http://localhost:8080/dinein/remove/${id}`);
+                await axios.delete(`http://localhost:8080/delivery/remove/${id}`);
                 setReservations(reservations.filter(reservation => reservation.id !== id));
                 fetchReservations();
 
@@ -61,9 +91,10 @@ function ManageReservation() {
 
     // Filter the reservations 
     const filteredReservations = reservations.filter(reservation => 
-        reservation.reservation_code.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        reservation.delivery_code.toLowerCase().includes(searchTerm.toLowerCase()) ||
         reservation.user.name.toLowerCase().includes(searchTerm.toLowerCase())
     );
+
 
     return (
         <div className='page-body'>
@@ -79,11 +110,9 @@ function ManageReservation() {
                         </Link>
                     ) : null
                 }
-                
-                
 
-                <h2>Reservations</h2>
-                 <>
+                <h2>Delivery Order</h2>
+                <>
                     <div className="search-bar-container">
                         <input 
                             type="text" 
@@ -98,38 +127,41 @@ function ManageReservation() {
                         <thead>
                             <tr>
                                 <th>ID</th>
-                                <th>Date & Time</th>
-                                <th>No.of Guests</th>
                                 <th>Customer Name</th>
+                                <th>Username</th>
                                 <th>Contact</th>
-                                <th>Email</th>
-                                <th>Special Requests</th>
-                                <th> - </th>
+                                <th>Address</th>
+                                <th>Delivery Instructions</th>
+                                <th>Order</th>
+                                <th>-</th>
                             </tr>
                         </thead>
                         <tbody>
                         {filteredReservations.length > 0 ? (
-                            filteredReservations.map(reservation => (
+                            filteredReservations.map(reservation =>(
                                 <tr key={reservation.id}>
-                                    <td>{reservation.reservation_code}</td>
-                                    <td>{new Date(reservation.reservation_date_time).toLocaleString()}</td>
-                                    <td>{reservation.num_guests}</td>
+                                    <td>{reservation.delivery_code}</td>
                                     <td>{reservation.user.name}</td>
+                                    <td>{reservation.user.username}</td>
                                     <td>{reservation.user.mobileNo}</td>
-                                    <td>{reservation.user.email}</td>
+                                    <td>{reservation.delivery_address}</td>
+                                    <td>{reservation.special_instructions}</td>    
                                     <td
-                                        onClick={() => handleShowModal(reservation.special_requests)} 
+                                        onClick={() => {
+                                            fetchOrders(reservation.id);
+                                            handleModalOpen(reservation.id);
+                                        }} 
                                         style={{ cursor: 'pointer', color: 'blue', textDecoration: 'underline' }}
                                     >
-                                        view
-                                    </td>
+                                        View
+                                    </td>          
                                     <td>
-                                        <Button 
-                                            className='delete-btn'
-                                            onClick={() => handleDelete(reservation.id)}
-                                        >
-                                        Delete
-                                        </Button>
+                                    <Button 
+                                        className='delete-btn'
+                                        onClick={() => handleDelete(reservation.id)}
+                                    >
+                                    Delete
+                                    </Button>
                                     </td>
                                 </tr>
                             ))
@@ -140,10 +172,13 @@ function ManageReservation() {
                         )}
                         </tbody>
                     </table>
-                    <SmallModal 
-                        show={modalShow} 
-                        onHide={() => setModalShow(false)} 
-                        content={modalContent} 
+
+                    {/* Order Details Modal */}
+                    <LargeModal 
+                    show={showModal} 
+                    onHide={handleModalClose} 
+                    orderDetails={orderDetails} 
+                    totalAmount={totalAmount} 
                     />
                 </>
             </div>
@@ -151,4 +186,4 @@ function ManageReservation() {
     );
 }
 
-export default ManageReservation;
+export default ManageDelivery;

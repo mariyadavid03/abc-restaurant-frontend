@@ -75,8 +75,7 @@ function CartPage() {
                 user: { id: Number(userId) },
                 delivery_address: deliveryAddress,
                 special_instructions: specialInstructions,
-                delivery_date_time: null,
-                status: 'PENDING'
+                status: 'Pending'
             };
     
             try {

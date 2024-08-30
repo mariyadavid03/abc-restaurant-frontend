@@ -56,6 +56,7 @@ const StaffDashboard = () => {
                 <div className='dashboard-content'>
                     <div className='box-grid'>
                         <Link to="/manage/reservation"><div className='box'>Manage Reservations</div></Link>
+                        <Link to="/manage/delivery"><div className='box'>Manage Delivery</div></Link>
                         <Link to="/manage/query"><div className='box'>Respond Queries</div></Link>
                         <Link to="/manage/payment"><div className='box'>View Payments</div></Link>
                         <Link to="/manage/menu"><div className='box'>Manage Menu</div></Link>

@@ -24,7 +24,7 @@ function QueryForm() {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        
+        //Add query
         axios.post('http://localhost:8080/query/add', {
             sender_name: formData.sender_name,
             email: formData.email,

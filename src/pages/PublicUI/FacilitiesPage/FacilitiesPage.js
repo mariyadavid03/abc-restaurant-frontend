@@ -3,7 +3,7 @@ import axios from 'axios';
 import './ServiceStyle.css';
 import Header from "../../../components/Header/PublicHeader/Header";
 
-function ServicePage() {
+function FacilitiesPage() {
     const [services, setServices] = useState([]);
     const [filteredServices, setFilteredServices] = useState([]);
     const [searchTerm, setSearchTerm] = useState('');
@@ -38,13 +38,13 @@ function ServicePage() {
             <Header onContactUsClick={scrollToContactUs} />
             <div className="service-page">
                 <div className="service-heading-container">
-                    <h2>Our Services</h2>
+                    <h2>Our Facilities</h2>
                 </div>
                 {/* Search Bar */}
                 <div className="service-search-container">
                     <input
                         type="text"
-                        placeholder="Search services..."
+                        placeholder="Search facilities..."
                         className="service-search-input"
                         value={searchTerm}
                         onChange={handleSearchChange}
@@ -66,7 +66,7 @@ function ServicePage() {
                             </div>
                         ))
                     ) : (
-                        <p className="no-services-message">No such service found</p>
+                        <p className="no-services-message">No such facility found</p>
                     )}
                 </div>
             </div>
@@ -74,4 +74,4 @@ function ServicePage() {
     );
 }
 
-export default ServicePage;
+export default FacilitiesPage;
