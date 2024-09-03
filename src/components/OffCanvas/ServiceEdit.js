@@ -75,7 +75,7 @@ function ServiceEdit({show, handleClose, item, onSuccess}){
     return (
         <Offcanvas show={show} onHide={handleClose} placement="end">
             <Offcanvas.Header closeButton>
-                <Offcanvas.Title>Edit Service</Offcanvas.Title>
+                <Offcanvas.Title>Edit Facility</Offcanvas.Title>
             </Offcanvas.Header>
             <Offcanvas.Body>
                 <div className='item-info'>
@@ -94,11 +94,11 @@ function ServiceEdit({show, handleClose, item, onSuccess}){
                         onChange={handleFileSelect}
                     />
 
-                    <label>Service Title</label>
-                    <input type="text" value={serviceName} onChange={handleNameChange} placeholder="Service Title" />
+                    <label>Facility Title</label>
+                    <input type="text" value={serviceName} onChange={handleNameChange} placeholder="Facility Title" />
                     
-                    <label>Service Description</label>
-                    <textarea value={serviceDesc} onChange={handleDescChange} placeholder="Service Description" />
+                    <label>Facility Description</label>
+                    <textarea value={serviceDesc} onChange={handleDescChange} placeholder="Facility Description" />
                 </div>
                 
                 <Button className='submit-btn' style={{ marginTop: '10px' }} onClick={handleSaveChanges}>

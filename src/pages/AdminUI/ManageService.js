@@ -74,9 +74,9 @@ function ManageService() {
                     <img src={require("../../assets/images/arrow-white.png")} className="back-arrow" alt="Go Back" />
                 </Link>
                 <div className='menu-add-button-line'>
-                    <h2>Manage Services</h2>
+                    <h2>Manage Facilities</h2>
                     <Button onClick={handleShowAdd} className='add-btn'>
-                            Add New Service
+                            Add New Facility
                     </Button>
                 </div>
 
@@ -87,7 +87,7 @@ function ManageService() {
                         <thead>
                             <tr>
                                 <th>ID</th>
-                                <th>Service Name</th>
+                                <th>Facilitiy Name</th>
                                 <th>Description</th>
                                 <th>-</th>
                             </tr>

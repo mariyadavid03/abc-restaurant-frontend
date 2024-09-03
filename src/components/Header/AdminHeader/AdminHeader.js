@@ -1,7 +1,6 @@
-import React, { useState } from 'react';
+import React from 'react';
 import '../StaffHeader/HeaderStyle.css'; 
 import { useNavigate } from 'react-router-dom';
-import { Link } from 'react-router-dom';
 import SessionManager from '../../../services/SessionManager';
 
 
@@ -19,7 +18,7 @@ function AdminHeader(){
   return (
     <div>
       <div className='side-nav'>
-        <img src={require('../../../assets/images/logo.png')}/>
+        <img src={require('../../../assets/images/logo.png')} alt='logo'/>
         <ul>
           <li><a href="/admin/dashboard">Home</a></li>
           <li><a href="/manage/reservation">Reservations</a></li>
@@ -28,7 +27,7 @@ function AdminHeader(){
           <li><a href="/manage/payment">Payment</a></li>
           <li><a href="/manage/menu">Menu</a></li>
           <li><a href="/manage/account">Accounts</a></li>
-          <li><a href="/manage/service">Services</a></li>
+          <li><a href="/manage/facility">Services</a></li>
           <li><a href="/manage/gallery">Gallery</a></li>
           <li><a href="/manage/offer">Offers</a></li>
           <li><a href="/manage/report">Reports</a></li>

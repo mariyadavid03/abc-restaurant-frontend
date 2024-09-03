@@ -1,7 +1,6 @@
-import React, { useState } from 'react';
+import React from 'react';
 import './HeaderStyle.css'; 
 import { useNavigate } from 'react-router-dom';
-import { Link } from 'react-router-dom';
 import SessionManager from '../../../services/SessionManager';
 
 function StaffHeader(){
@@ -18,7 +17,7 @@ function StaffHeader(){
   return (
     <div>
       <div className='side-nav'>
-        <img src={require('../../../assets/images/logo.png')}/>
+        <img src={require('../../../assets/images/logo.png')} alt='logo'/>
         <ul>
           <li><a href="/staff/dashboard">Home</a></li>
           <li><a href="/manage/reservation">Reservations</a></li>

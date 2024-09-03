@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState , useCallback } from "react";
 import './ProfileStyles.css';
 import SessionManager from "../../../services/SessionManager";
 import axios from "axios";
@@ -13,7 +13,7 @@ function ProfilePage() {
     const [error, setError] = useState('');
     const userId = session.getUserId();
 
-    const fetchProfileData = async () => {
+    const fetchProfileData = useCallback(async () => {
         try {
             const userResponse = await axios.get(`http://localhost:8080/user/${userId}`);
             setUserDetails(userResponse.data);
@@ -21,9 +21,9 @@ function ProfilePage() {
             console.error('Error fetching user details:', error.response ? error.response.data : error.message);
             setError('Failed to fetch user details');
         }
-    };
+    }, [userId]);
 
-    const fetchReservationData = async () => {
+    const fetchReservationData = useCallback(async () => {
         try {
             const reservationResponse = await axios.get(`http://localhost:8080/dinein/getReservationByUser/${userId}`);
             const sortedReservations = reservationResponse.data.sort((a, b) => new Date(b.reservation_date_time) - new Date(a.reservation_date_time));
@@ -32,9 +32,9 @@ function ProfilePage() {
             console.error('Error fetching reservation details:', error.response ? error.response.data : error.message);
             setError('Failed to fetch details');
         }
-    };
+    }, [userId]);
 
-    const fetchDeliveryData = async () => {
+    const fetchDeliveryData = useCallback(async () => {
         try {
             const deliveryResponse = await axios.get(`http://localhost:8080/delivery/getDeliverynByUser/${userId}`);
             const sortedDeliveries = deliveryResponse.data.sort((a, b) => new Date(b.created_at) - new Date(a.created_at));
@@ -43,7 +43,7 @@ function ProfilePage() {
             console.error('Error fetching details:', error.response ? error.response.data : error.message);
             setError('Failed to fetch details');
         }
-    };
+    }, [userId]);
 
     const handleCancel = async (id) => {
         const isConfirmed = window.confirm('Are you sure you want to cancel this reservation?');
@@ -81,7 +81,7 @@ function ProfilePage() {
         fetchProfileData();
         fetchReservationData();
         fetchDeliveryData();
-    }, []);
+    }, [fetchProfileData, fetchReservationData, fetchDeliveryData]);
 
     return (
         <div className="profile-page">

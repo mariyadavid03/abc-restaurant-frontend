@@ -7,7 +7,6 @@ import Button from 'react-bootstrap/esm/Button';
 import SessionManager from '../../services/SessionManager';
 
 function ManageReservation() {
-    const [key, setKey] = useState('dineIn');
     const session = SessionManager.getInstance();
     const userRole = session.getRole();
     const [reservations, setReservations] = useState([]);

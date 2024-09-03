@@ -7,13 +7,11 @@ import LargeModal from '../../components/Modals/LargeModal';
 import Button from 'react-bootstrap/esm/Button';
 
 function ManageDelivery() {
-    const [key, setKey] = useState('dineIn');
+
     const session = SessionManager.getInstance();
     const userRole = session.getRole();
 
     const [reservations, setReservations] = useState([]);
-    const [orders, setOrders] = useState([]);
-    const [payment, setPayment] = useState('')
     const [successMessage, setSuccessMessage] = useState('');
     const [searchTerm, setSearchTerm] = useState('');
     const [showModal, setShowModal] = useState(false);
@@ -34,19 +32,16 @@ function ManageDelivery() {
         }
     };
 
-    //Fetch orders & payment
-    const fetchOrders = async (id) => {
-        try{
-            const orderResponse = await axios.get(`http://localhost:8080/order/getbydelivery/${id}`);
-            setOrders(orderResponse.data);
+    // //Fetch orders & payment
+    // const fetchOrders = async (id) => {
+    //     try{
+    //         const orderResponse = await axios.get(`http://localhost:8080/order/getbydelivery/${id}`);
+    //         const paymentResponse = await axios.get(`http://localhost:8080/payment/getbydelivery/${id}`);
 
-            const paymentResponse = await axios.get(`http://localhost:8080/payment/getbydelivery/${id}`);
-            setPayment(paymentResponse.data);
-
-        } catch (error) {
-            console.error('Error fetching orders:', error);
-        }
-    }
+    //     } catch (error) {
+    //         console.error('Error fetching orders:', error);
+    //     }
+    // }
     //Modal 
     const handleModalOpen = (deliveryId) => {
         axios.get(`http://localhost:8080/order/getbydelivery/${deliveryId}`)
@@ -148,7 +143,7 @@ function ManageDelivery() {
                                     <td>{reservation.special_instructions}</td>    
                                     <td
                                         onClick={() => {
-                                            fetchOrders(reservation.id);
+                                            // fetchOrders(reservation.id);
                                             handleModalOpen(reservation.id);
                                         }} 
                                         style={{ cursor: 'pointer', color: 'blue', textDecoration: 'underline' }}

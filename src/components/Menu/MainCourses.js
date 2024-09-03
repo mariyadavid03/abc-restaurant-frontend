@@ -20,7 +20,7 @@ function MainCourses() {
         fetchMain();
         const storedCartItems = session.getCartItems();
         setCartItems(storedCartItems);
-    }, []);
+    }, [session]);
 
 
     const handleAddToCart = (itemId) => {

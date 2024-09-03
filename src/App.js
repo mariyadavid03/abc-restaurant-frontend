@@ -64,7 +64,7 @@ function App() {
         <Route path="/manage/menu" element={<StaffProtectedRoute><ManageMenu /></StaffProtectedRoute>} />
         <Route path="/manage/account" element={<StaffProtectedRoute><ManageAccount /></StaffProtectedRoute>} />
         <Route path="/manage/gallery" element={<StaffProtectedRoute><ManageGallery /></StaffProtectedRoute>} />
-        <Route path="/manage/service" element={<StaffProtectedRoute><ManageService /></StaffProtectedRoute>} />
+        <Route path="/manage/facility" element={<StaffProtectedRoute><ManageService /></StaffProtectedRoute>} />
         <Route path="/manage/offer" element={<StaffProtectedRoute><ManageOffer /></StaffProtectedRoute>} />
         <Route path="/manage/report" element={<StaffProtectedRoute><ReportPage /></StaffProtectedRoute>} />
         <Route path="/report-display/reservation" element={<StaffProtectedRoute><DineinReservationReport /></StaffProtectedRoute>} />

@@ -32,7 +32,7 @@ function CheckPage() {
             };
             fetchEmail();
         }
-    }, []);
+    }, [session]);
 
     const handleBack = () => {
         const isConfirmed = window.confirm("Leave the checkout process? Your cart will be cleared.");

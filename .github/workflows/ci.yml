@@ -4,12 +4,12 @@ on:
   push:
     branches:
       - main
-      - development
+      - develop
       - "feature/*"
   pull_request:
     branches:
       - main
-      - development
+      - develop
       - "feature/*"
 
 jobs:
@@ -31,5 +31,5 @@ jobs:
       #   - name: Run tests
       #     run: npm test -- --coverage
 
-      # - name: Build
-      #   run: npm run build
+      - name: Build
+        run: npm run build

@@ -39,7 +39,7 @@ function ReservationPage() {
                     console.error('Error fetching user data:', error);
                 });
         }
-    }, []);
+    }, [session]);
 
     const handleInputChange = (e) => {
         const { name, value } = e.target;

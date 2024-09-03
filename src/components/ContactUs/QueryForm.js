@@ -12,9 +12,6 @@ function QueryForm() {
         query_message: '',
     });
   
-    const [responseMessage, setResponseMessage] = useState('');
-    const [errorMessage, setErrorMessage] = useState('');
-
     const handleChange = (e) => {
         setFormData({
             ...formData,
@@ -33,14 +30,10 @@ function QueryForm() {
         })
         .then(response => {
             alert('Your query has been submitted successfully! A reply will be sent to your email.');
-            setErrorMessage('');
-            setResponseMessage('');
             setFormData({ sender_name: '', email: '', query_subject: '', query_message: '' });
         })
         .catch(error => {
             alert('There was an error submitting your query.');
-            setResponseMessage('');
-            setErrorMessage('');
         });
     };
 

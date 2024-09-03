@@ -44,7 +44,7 @@ function DeliveryReport() {
     return (
         <div className='page'>
             <div className="report-main-page">
-                <Link to="/admin/report">
+                <Link to="/manage/report">
                     <img src={require("../../../assets/images/arrow-white.png")} className="back-arrow" alt="Go Back" />
                 </Link>
                 <h2 className='report-heading'>Delivery Report</h2>
@@ -58,7 +58,7 @@ function DeliveryReport() {
                         <label>Date Range:</label>
                         <p>
                             {data.length > 0 
-                                ? `${new Date(data[0].delivery_date_time).toLocaleDateString()} - ${new Date(data[data.length - 1].delivery_date_time).toLocaleDateString()}` 
+                                ? `${new Date(data[0].created_at).toLocaleDateString()} - ${new Date(data[data.length - 1].created_at).toLocaleDateString()}` 
                                 : 'No Data'}
                         </p>
                     </div>

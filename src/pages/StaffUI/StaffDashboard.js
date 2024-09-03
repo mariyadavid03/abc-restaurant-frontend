@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import StaffHeader from '../../components/Header/StaffHeader/StaffHeader';
 import './DashboardStyle.css';
-import { useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 import SessionManager from '../../services/SessionManager';
@@ -15,7 +14,6 @@ function getDate() {
   }
 
 const StaffDashboard = () => {
-    const navigate = useNavigate();
     const [username, setUsername] = useState('');
     const [name, setName] = useState('');
     const session = SessionManager.getInstance();
@@ -33,7 +31,7 @@ const StaffDashboard = () => {
         };
     
         fetchUsername();
-      }, []);
+      }, [session]);
     
 
 
@@ -43,7 +41,7 @@ const StaffDashboard = () => {
             <StaffHeader />
             <div className='main-content'>
                 <div className='user-info-col'>
-                    <img src={require('../../assets/images/user-icon.png')}/>
+                    <img src={require('../../assets/images/user-icon.png')} alt='User'/>
                     <h6>{username || 'User'}</h6>
                 </div>
                 <div className='welcome-msg'>
@@ -51,7 +49,7 @@ const StaffDashboard = () => {
                         <h6>Good Day {name}!</h6>
                         <p>Today is {getDate()}</p>
                     </div>
-                    <img src={require('../../assets/images/staff-welcome-img.png')}/>
+                    <img src={require('../../assets/images/staff-welcome-img.png')} alt='Welcome'/>
                 </div>
                 <div className='dashboard-content'>
                     <div className='box-grid'>

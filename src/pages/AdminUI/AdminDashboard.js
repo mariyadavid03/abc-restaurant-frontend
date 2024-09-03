@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import AdminHeader from '../../components/Header/AdminHeader/AdminHeader';
 import '../StaffUI/DashboardStyle.css';
-import { useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 import SessionManager from '../../services/SessionManager';
@@ -15,7 +14,6 @@ function getDate() {
   }
 
   function AdminDashboard(){
-    const navigate = useNavigate();
     const [username, setUsername] = useState('');
     const [name, setName] = useState('');
     const session = SessionManager.getInstance();
@@ -34,7 +32,7 @@ function getDate() {
         };
     
         fetchUsername();
-    }, []);
+    }, [session]);
 
     return(
         <>
@@ -60,7 +58,7 @@ function getDate() {
                         <Link to="/manage/payment"><div className='box'>View Payments</div></Link>
                         <Link to="/manage/menu"><div className='box'>Manage Menu</div></Link>
                         <Link to="/manage/account"><div className='box'>Manage Accounts</div></Link>
-                        <Link to="/manage/gallery"><div className='box'>Manage Gallery</div></Link>
+                        <Link to="/manage/facility"><div className='box'>Manage Gallery</div></Link>
                         <Link to="/manage/service"><div className='box'>Manage Services</div></Link>
                         <Link to="/manage/offer"><div className='box'>Manage Offers</div></Link>
                         <Link to="/manage/report"><div className='box'>Reports</div></Link>

@@ -92,10 +92,10 @@ function ReportPage() {
         } else if (reportType === 'delivery') {
             handleGenerateDeliveryReport();
 
-        } else if(reportType == 'payment'){
+        } else if(reportType === 'payment'){
             handleGeneratePaymentReport();
 
-        } else if(reportType == 'query'){
+        } else if(reportType === 'query'){
             
             handleGenerateQueryReport();
         }

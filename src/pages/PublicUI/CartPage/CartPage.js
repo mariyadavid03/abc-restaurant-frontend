@@ -11,7 +11,6 @@ function CartPage() {
     const [cartItems, setCartItems] = useState([]);
     const [deliveryAddress, setDeliveryAddress] = useState('');
     const [specialInstructions, setSpecialInstructions] = useState('');
-    const [error, setError] = useState('');
     const session = SessionManager.getInstance();
 
     useEffect(() => {
@@ -32,7 +31,7 @@ function CartPage() {
         };
 
         fetchCartItems();
-    }, []);
+    }, [session]);
 
     const handleRemoveItem = (itemId) => {
         if (window.confirm('Are you sure you want to remove to item?')) {
@@ -65,7 +64,6 @@ function CartPage() {
         if (window.confirm('Are you sure you want to proceed to payment?')) {
             const userId = session.getUserId();
             if (!userId) {
-                setError('User ID is not found. Please log in again.');
                 return;
             }
     
@@ -90,16 +88,16 @@ function CartPage() {
                         price: item.price
                     }));
     
-                    const orderResponses = await Promise.all(
-                        orders.map(order => 
-                            axios.post('http://localhost:8080/order/add', order)
-                            .then(res => res.data)
-                            .catch(error => {
-                                console.error(`Error saving order for item ${order.menu.id}:`, error.response ? error.response.data : error.message);
-                                throw new Error(`Failed to save order for item ${order.menu.id}`);
-                            })
-                        )
-                    );
+                    // const orderResponses = await Promise.all(
+                    //     orders.map(order => 
+                    //         axios.post('http://localhost:8080/order/add', order)
+                    //         .then(res => res.data)
+                    //         .catch(error => {
+                    //             console.error(`Error saving order for item ${order.menu.id}:`, error.response ? error.response.data : error.message);
+                    //             throw new Error(`Failed to save order for item ${order.menu.id}`);
+                    //         })
+                    //     )
+                    // );
 
                     const totalAmount = orders.reduce((total, order) => total + order.price * order.quantity, 0);
                     
@@ -108,11 +106,10 @@ function CartPage() {
                     session.setTotalAmount(totalAmount);
                     window.location.href = '/cart/payment';
                 } else {
-                    setError('Failed to retrieve delivery ID.');
+                   console.error("Error");
                 }
             } catch (error) {
                 console.error('Error creating delivery or orders:', error.response ? error.response.data : error.message);
-                setError('Failed to create delivery or orders. Please try again.');
             }
         }
     };

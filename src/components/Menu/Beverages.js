@@ -20,7 +20,7 @@ function Beverages() {
         fetchBeverages();
         const storedCartItems = session.getCartItems();
         setCartItems(storedCartItems);
-    }, []);
+    }, [session]);
 
     const handleAddToCart = (itemId) => {
         const user = session.getUser();

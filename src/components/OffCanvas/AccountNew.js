@@ -10,12 +10,9 @@ function AccountNew({ show, handleClose, onSuccess }) {
     const [name, setName] = useState('');
     const [mobileNo, setMobileNo] = useState('');
     const [role, setRole] = useState('');
-    const [error, setError] = useState('');
-    const [success, setSuccess] = useState('');
 
     const handleAddAccount = async () => {
         if (!email || !username || !password || !name || !mobileNo || !role) {
-            setError('Please fill in all fields');
             return;
         }
     
@@ -31,9 +28,6 @@ function AccountNew({ show, handleClose, onSuccess }) {
                 throw new Error(`HTTP error! status: ${response.status}, message: ${errorData.message || 'Unknown error'}`);
             }
     
-            setSuccess('Account created successfully!');
-            setError(''); 
-
             setEmail('');
             setUsername('');
             setPassword('');
@@ -44,7 +38,6 @@ function AccountNew({ show, handleClose, onSuccess }) {
             onSuccess();
         } catch (error) {
             console.error('Fetch error:', error);
-            setError(`Account creation failed: ${error.message}`);
         }
     };
     

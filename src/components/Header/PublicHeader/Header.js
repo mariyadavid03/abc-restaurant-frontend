@@ -23,7 +23,7 @@ function Header({ onContactUsClick }) {
     // Check cart items in session storage
     const cartItems = session.getCartItems();
     setCartItemsCount(cartItems.length);
-  }, []);
+  }, [session]);
 
   const handleLogout = () => {
     const confirmLogout = window.confirm('Are you sure you want to log out?');
@@ -52,13 +52,13 @@ function Header({ onContactUsClick }) {
       <div className='menu'>
         <img src={logo} alt="Logo" />
         <nav>
-          <ul>
-            <li><a href="/">Home</a></li>
-            <li><a href="/about">About</a></li>
-            <li><a href="/menu">Menu</a></li>
-            <li><a href="/facilities">Facilities</a></li>
-            <li><a onClick={handleContactUsClick}>Contact Us</a></li>
-          </ul>
+        <ul>
+          <li><Link to="/">Home</Link></li>
+          <li><Link to="/about">About</Link></li>
+          <li><Link to="/menu">Menu</Link></li>
+          <li><Link to="/facilities">Facilities</Link></li>
+          <li><button onClick={handleContactUsClick} className="link-button">Contact Us</button></li>
+        </ul>
         </nav>
         <div className='header-btn'>
           {isLoggedIn && (
@@ -88,12 +88,12 @@ function Header({ onContactUsClick }) {
         </div>
         {isOpen && (
           <div className='dropdown-menu'>
-            <a href='/'>Home</a>
-            <a href='/about'>About</a>
-            <a href='/menu'>Menu</a>
-            <a href='/facilities'>Facilities</a>
-            <a onClick={handleContactUsClick}>Contact Us</a>
-          </div>
+          <Link to="/">Home</Link>
+          <Link to="/about">About</Link>
+          <Link to="/menu">Menu</Link>
+          <Link to="/facilities">Facilities</Link>
+          <button onClick={handleContactUsClick} className="link-button">Contact Us</button>
+        </div>
         )}
       </div>
     </header>

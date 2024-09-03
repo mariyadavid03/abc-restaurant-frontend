@@ -16,14 +16,13 @@ const Footer = () => {
         <h3>Quick Links</h3>
         <div className="quick-links">
           <ul>
-            <Link to="/"><li><a>Home</a></li></Link>
-            <Link to="/menu"><li><a >Menu</a></li></Link>
-            <Link to="/reservation"><li><a >Reserve</a></li></Link>
-            
+            <li><Link to="/">Home</Link></li>
+            <li><Link to="/menu">Menu</Link></li>
+            <li><Link to="/reservation">Reserve</Link></li>
           </ul>
           <ul>
-          <Link to="/about"><li><a>About Us</a></li></Link>
-          <Link to="/facilities"><li><a >Facilities</a></li></Link>
+            <li><Link to="/about">About Us</Link></li>
+            <li><Link to="/facilities">Facilities</Link></li>
           </ul>
         </div>
       </div>

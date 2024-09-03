@@ -75,10 +75,10 @@ function ServiceNew({ show, handleClose, onSuccess }) {
     return (
         <Offcanvas show={show} onHide={handleClose} placement="end">
             <Offcanvas.Header closeButton>
-                <Offcanvas.Title>Add Service</Offcanvas.Title>
+                <Offcanvas.Title>Add Facility</Offcanvas.Title>
             </Offcanvas.Header>
             <Offcanvas.Body>
-                <h5>Service Details</h5>
+                <h5>Facility Details</h5>
                 <div className='item-info'>
 
                     <label>Select Image</label>
@@ -97,14 +97,14 @@ function ServiceNew({ show, handleClose, onSuccess }) {
 
                     <input
                         type="text"
-                        placeholder="Service Name"
+                        placeholder="Facility Name"
                         name="serviceName"
                         value={formData.serviceName}
                         onChange={handleInputChange}
                     />
 
                     <textarea
-                        placeholder="Service Description"
+                        placeholder="Facility Description"
                         name="serviceDesc"
                         value={formData.serviceDesc}
                         onChange={handleInputChange}
