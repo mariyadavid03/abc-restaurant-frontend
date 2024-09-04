@@ -22,6 +22,7 @@ function HomePage(){
     };
 
     useEffect(() => {
+        //Fetching menu items to display
         const fetchMain = async () => {
             try {
                 const response = await axios.get('http://localhost:8080/menu/type/main');
@@ -37,26 +38,30 @@ function HomePage(){
     return(
         <div className='home-page'>
             <Header onContactUsClick={scrollToContactUs} />
+
+            {/* Main title */}
             <div className='main-title-container'>
                 <img src={mainTitleImage} alt='Main Title' className='title-bg-image' />
                 <div className='main-title'>
                     <img src={titleLogo} alt='Title' className='title-image' />
                     <p>Elevating culinary standards with exquisite flavors and unparalleled service</p>
                     <div className='main-title-btn'>
-                    <Link to="/reservation">
-                        <button type='button'>Reserve Now</button>
-                    </Link>
-                    <Link to="/cart">
-                        <button type='button'>Order Now</button>
-                    </Link>
+                        <Link to="/reservation">
+                            <button type='button'>Reserve Now</button>
+                        </Link>
+                        <Link to="/cart">
+                            <button type='button'>Order Now</button>
+                        </Link>
                     </div>
                 </div>
             </div>
+
+            {/* Offer and Promotion Section */}
             <div className='offer-section'>
                 <Slider/>
-
             </div>
 
+            {/* Menu Section */}
             <div className='menu-section-updated'>
                 <div className='menu-img-updated'>
                     <img src={require('../../assets/images/imgage.jpg')} alt='Menu' />
@@ -85,7 +90,7 @@ function HomePage(){
                 </div>
             </div>
 
-
+            {/* About Us Section */}
             <div className='about-us-section'>
                 <div className='about-us-container'>
                     <img src={require('../../assets/images/about-us-img-1.jpg')} alt='About Us 1' />
@@ -94,21 +99,21 @@ function HomePage(){
                 <div className='about-us-container-img'>
                     <h1><center>About Us</center></h1>
                     <h4>Discover Our story</h4>
-                    <p>At ABC Restaurant, we're more than just a place to dine— we're a journey into culinary excellence. <br/>
-                        Explore our rich heritage, meet our talented chefs, and find out what makes us stand out in the culinary world.
+                    <p>At ABC Restaurant, we're more than just a place to dine— we're a 
+                        journey into culinary excellence. <br/>
+                        Explore our rich heritage, meet our talented chefs, 
+                        and find out what makes us stand out in the culinary world.
                     </p>
                     <Link to="/about">
                         <button type='button'>Learn More</button>
                     </Link>
                 </div>
-
                 <div className='about-us-container'>
                     <img src={require('../../assets/images/about-us-root.jpg')} alt='About Us 2' />
                 </div>
-                
-      
             </div>
           
+            {/* Facilities Section */}
             <div className='facilities-section'>
                 <div className='facilities-container'>
                     <h1>Our Facilities</h1>
@@ -121,8 +126,9 @@ function HomePage(){
                     <button type='button'>More</button>
                     </Link>
                 </div>
-
             </div>
+
+            {/* Gallery Section */}
             <div className='gallery-section'>
                 <h1><center>Gallery</center></h1>
                 <p>Explore the vibrant essence of our restaurant through our gallery. 
@@ -131,9 +137,9 @@ function HomePage(){
                 <div className='gallery-box'>
                     <GalleryCarousel />
                 </div>
-                
             </div>
 
+            {/* Reservation & Delivery Banner */}
             <div className='reserve-section'>
                 <div className='reserve-container'>
                 <div className='reserve-box' style={{ borderRight: '1px solid var(--yellow)', paddingRight: '9%' }}>
@@ -143,7 +149,6 @@ function HomePage(){
                         </Link>
                     </div>
                     <div className='reserve-box'>
-                    
                         <h4>ORDER YOUR DISH NOW!</h4>
                         <Link to="/cart">
                             <button type='button'>ORDER NOW</button>
@@ -152,6 +157,7 @@ function HomePage(){
                 </div>
             </div>
 
+            {/* Conatct Us Section */}
             <div className='contact-us-section' ref={contactUsRef}>
                 <div className='contact-us-container'>
                     <div className='contact-us-img'>
@@ -164,6 +170,7 @@ function HomePage(){
                 </div>               
             </div>
 
+            {/* Locations Section */}
             <div className='location-section'>
                 <h1><center>Our Places</center></h1>
                 <div className='location-container'>
@@ -188,7 +195,6 @@ function HomePage(){
                         <p>78/C, Colombo Road, Kegalle</p>
                     </div>
                 </div>
-            
             </div>
 
             <div className='contact-details'>
@@ -203,7 +209,6 @@ function HomePage(){
                 <ScrollToTopButton/>
             </div>
             <Footer/>
-            
         </div>
     )
 }

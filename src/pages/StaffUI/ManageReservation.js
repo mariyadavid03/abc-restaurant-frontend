@@ -79,10 +79,9 @@ function ManageReservation() {
                     ) : null
                 }
                 
-                
-
                 <h2>Reservations</h2>
                  <>
+                    {/* Searching Bar */}
                     <div className="search-bar-container">
                         <input 
                             type="text" 

@@ -96,7 +96,6 @@ function ReportPage() {
             handleGeneratePaymentReport();
 
         } else if(reportType === 'query'){
-            
             handleGenerateQueryReport();
         }
     };

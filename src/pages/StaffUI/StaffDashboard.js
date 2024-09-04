@@ -32,9 +32,7 @@ const StaffDashboard = () => {
     
         fetchUsername();
       }, [session]);
-    
-
-
+      
     return(
         <>
         <div className='dashboard'>

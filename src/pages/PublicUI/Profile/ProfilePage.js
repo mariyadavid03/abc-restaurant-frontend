@@ -13,6 +13,7 @@ function ProfilePage() {
     const [error, setError] = useState('');
     const userId = session.getUserId();
 
+    // Fetching profile data
     const fetchProfileData = useCallback(async () => {
         try {
             const userResponse = await axios.get(`http://localhost:8080/user/${userId}`);
@@ -23,6 +24,7 @@ function ProfilePage() {
         }
     }, [userId]);
 
+    // Fetching user's reservations
     const fetchReservationData = useCallback(async () => {
         try {
             const reservationResponse = await axios.get(`http://localhost:8080/dinein/getReservationByUser/${userId}`);
@@ -34,6 +36,7 @@ function ProfilePage() {
         }
     }, [userId]);
 
+    // Fetching user's delivery orders
     const fetchDeliveryData = useCallback(async () => {
         try {
             const deliveryResponse = await axios.get(`http://localhost:8080/delivery/getDeliverynByUser/${userId}`);
@@ -45,6 +48,7 @@ function ProfilePage() {
         }
     }, [userId]);
 
+    // Handling reservation canceling
     const handleCancel = async (id) => {
         const isConfirmed = window.confirm('Are you sure you want to cancel this reservation?');
         if (isConfirmed) {
@@ -61,6 +65,7 @@ function ProfilePage() {
         }
     };
 
+    // Cancleing delivery canceling
     const handleDeliveryCancel = async (id) => {
         const isConfirmed = window.confirm('Are you sure you want to cancel this delivery?');
         if (isConfirmed) {
@@ -87,6 +92,8 @@ function ProfilePage() {
         <div className="profile-page">
             <Header />
             <div className="profile-page-content">
+
+                {/* User info */}
                 <h4 className="heading-profile"><center>Profile Details</center></h4>
                 <div className="user-info-section">
                     <div>
@@ -99,6 +106,8 @@ function ProfilePage() {
                         <h6>Contact Number: {userDetails.mobileNo}</h6>
                     </div>
                 </div>
+
+                {/* User's reservations */}
                 <h4 className="profile-sub-heading">Your Reservations</h4>
                 <div className="user-reservation-section">
                     {successMessage && <div className="success-message">{successMessage}</div>}
@@ -138,6 +147,7 @@ function ProfilePage() {
                     )}
                 </div>
 
+                {/* User's Delivery Orders */}
                 <h4 className="profile-sub-heading">Your Delivery Orders</h4>
                 <div className="user-delivery-section">
                     {successMessage && <div className="success-message">{successMessage}</div>}

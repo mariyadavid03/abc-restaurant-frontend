@@ -25,6 +25,7 @@ function ReservationPage() {
     useEffect(() => {
         const userId = session.getUserId();
 
+        // Fetching user details
         if (userId) {
             axios.get(`http://localhost:8080/user/${userId}`)
                 .then(response => {
@@ -50,7 +51,7 @@ function ReservationPage() {
     };
 
     const generateReservationCode = () => {
-        return `DIN${Math.floor(10000 + Math.random() * 90000)}`;
+        return `REV-${Math.floor(10000 + Math.random() * 90000)}`;
     };
 
     const handleReservationSubmit = (e) => {
@@ -67,13 +68,14 @@ function ReservationPage() {
             reservation_date_time: reservationDetails.date,
             num_guests: reservationDetails.numGuests,
             special_requests: reservationDetails.specialRequests,
-            status: 'RESERVED'
+            status: 'Reserved'
 
         };
     
         axios.post('http://localhost:8080/dinein/add', reservationData)
             .then(response => {
-                // Send the reservation details email
+
+                // Sending the reservation details to email
                 axios.post('http://localhost:8080/sendReservationEmail', {
                     email: userEmail,
                     reservation_code: reservationCode,
@@ -98,9 +100,11 @@ function ReservationPage() {
                 console.error('Error making reservation:', error.response.data);
             });
     };
+
     return (
         <>
             <Header onContactUsClick={scrollToContactUs} />
+
             <div className="reservation-page">
                 <h2 className="reservation-heading">Make Your Reservations</h2>
 
@@ -108,7 +112,7 @@ function ReservationPage() {
                     <div className="reservation-form-container">
                         <div className="reservation-details">
 
-                            {/* Reservation Form 1 */}
+                            {/* Reservation Form*/}
                             <form className="reservation-form" onSubmit={handleReservationSubmit}>
                                 <h2>Booking Details</h2>
                                 <div className="form-group">
@@ -165,6 +169,8 @@ function ReservationPage() {
                             </form>
                         </div>
                     </div>
+
+                    {/* Restaurant Availibilty Details */}
                     <div className="reservation-info-container">
                         <h3>Open Hours</h3>
                         <p>Monday - Friday <br />11:00AM - 10:00PM</p>

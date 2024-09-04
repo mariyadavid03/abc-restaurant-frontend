@@ -29,6 +29,7 @@ function StaffLogin() {
               const userIdResponse = await axios.get(`http://localhost:8080/user/getByUsername`, {
                 params: { username }
               });
+              // Setting session user data
               session.setUserId(userIdResponse.data);
               session.setRole(role);
               session.setUser(data);

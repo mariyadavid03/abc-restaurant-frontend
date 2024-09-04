@@ -1,9 +1,12 @@
-import React from "react";
+import React, { useEffect } from "react";
 import './AboutUsStyle.css';
 import Header from "../../../components/Header/PublicHeader/Header";
 import Footer from "../../../components/Footer/PublicFooter/Footer";
 
 function AboutUsPage() {
+    useEffect(() => {
+        window.scrollTo(0, 0);
+    }, []);
     return (
         <>
             <Header />
@@ -11,7 +14,8 @@ function AboutUsPage() {
 
                 <div className="service-heading-container">
                     <h2>About Us</h2>
-                    <p>ABC Restaurant offers a unique dining experience that combines the rich flavors of Sri Lanka with the elegance of Western cuisine. </p>
+                    <p>ABC Restaurant offers a unique dining experience that combines the 
+                        rich flavors of Sri Lanka with the elegance of Western cuisine. </p>
                 </div>
                 
                 <section className="our-story-section">

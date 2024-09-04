@@ -14,6 +14,7 @@ function CartPage() {
     const session = SessionManager.getInstance();
 
     useEffect(() => {
+        // Fetching items from cart session
         const fetchCartItems = async () => {
             const cartItemIds = session.getCartItems();
             const fetchedItems = [];
@@ -26,10 +27,8 @@ function CartPage() {
                     console.error('Error fetching cart item:', error.response ? error.response.data : error.message);
                 }
             }
-
             setCartItems(fetchedItems);
         };
-
         fetchCartItems();
     }, [session]);
 
@@ -44,12 +43,14 @@ function CartPage() {
         
     };
 
+    // Quantity Increasing Componrnt
     const handleIncrease = (index) => {
         const newCartItems = [...cartItems];
         newCartItems[index].quantity += 1;
         setCartItems(newCartItems);
     };
 
+    // Quantity IncDescreasing reasing Componrnt
     const handleDecrease = (index) => {
         const newCartItems = [...cartItems];
         if (newCartItems[index].quantity > 1) {
@@ -67,7 +68,7 @@ function CartPage() {
                 return;
             }
     
-            const deliveryCode = `del${Math.floor(10000 + Math.random() * 90000)}`;
+            const deliveryCode = `DEL-${Math.floor(10000 + Math.random() * 90000)}`;
             const deliveryData = {
                 delivery_code: deliveryCode,
                 user: { id: Number(userId) },
@@ -88,17 +89,6 @@ function CartPage() {
                         price: item.price
                     }));
     
-                    // const orderResponses = await Promise.all(
-                    //     orders.map(order => 
-                    //         axios.post('http://localhost:8080/order/add', order)
-                    //         .then(res => res.data)
-                    //         .catch(error => {
-                    //             console.error(`Error saving order for item ${order.menu.id}:`, error.response ? error.response.data : error.message);
-                    //             throw new Error(`Failed to save order for item ${order.menu.id}`);
-                    //         })
-                    //     )
-                    // );
-
                     const totalAmount = orders.reduce((total, order) => total + order.price * order.quantity, 0);
                     
                     // Store deliveryId and totalAmount in sessionStorage
@@ -125,77 +115,77 @@ function CartPage() {
                         </div>
                     ):(
                         <><div className='cart-order-container'>
+                            {cartItems.map((item, index) => (
+                                <div key={item.id} className='item-container'>
+                                    <div className='item-img'>
+                                        <img src={`data:image/jpeg;base64,${item.item_image_data}`} alt='Cart Item' />
+                                    </div>
+                                    <div className='item-info-cart'>
+                                        <h5 className='item-title-cart'>{item.item_name}</h5>
+                                        <h6 className='item-price'>LKR {item.price}</h6>
+                                    </div>
+                                    <div className='quantity-container'>
+                                        <QuantityScale
+                                            quantity={item.quantity}
+                                            onIncrease={() => handleIncrease(index)}
+                                            onDecrease={() => handleDecrease(index)} />
+                                    </div>
+                                    <Button 
+                                        variant="danger" 
+                                        className='remove-item-btn' 
+                                        onClick={() => handleRemoveItem(item.id)} >
+                                        -
+                                    </Button>
+                                </div>
+                            ))}
+                        </div>
+                        <div className='order-summary-container'>
+                            <div className='order-summary'>
+                                <h5>Order Summary</h5>
                                 {cartItems.map((item, index) => (
-                                    <div key={item.id} className='item-container'>
-                                        <div className='item-img'>
-                                            <img src={`data:image/jpeg;base64,${item.item_image_data}`} alt='Cart Item' />
-                                        </div>
-                                        <div className='item-info-cart'>
-                                            <h5 className='item-title-cart'>{item.item_name}</h5>
-                                            <h6 className='item-price'>LKR {item.price}</h6>
-                                        </div>
-                                        <div className='quantity-container'>
-                                            <QuantityScale
-                                                quantity={item.quantity}
-                                                onIncrease={() => handleIncrease(index)}
-                                                onDecrease={() => handleDecrease(index)} />
-                                        </div>
-                                        <Button 
-                                            variant="danger" 
-                                            className='remove-item-btn' 
-                                            onClick={() => handleRemoveItem(item.id)} >
-                                            -
-                                        </Button>
+                                    <div key={index} className='order-summary-section'>
+                                        <h6 className='order-summary-title'>{item.item_name}</h6>
+                                        <h6 className='order-summary-quantity'>x{item.quantity}</h6>
+                                        <h6 className='order-summary-price'>LKR {item.price * item.quantity}</h6>
                                     </div>
                                 ))}
                             </div>
-                            <div className='order-summary-container'>
-                                <div className='order-summary'>
-                                    <h5>Order Summary</h5>
-                                    {cartItems.map((item, index) => (
-                                        <div key={index} className='order-summary-section'>
-                                            <h6 className='order-summary-title'>{item.item_name}</h6>
-                                            <h6 className='order-summary-quantity'>x{item.quantity}</h6>
-                                            <h6 className='order-summary-price'>LKR {item.price * item.quantity}</h6>
-                                        </div>
-                                    ))}
-                                </div>
-                                <div className='summary-total'>
-                                    <h6>Total Cost: </h6>
-                                    <h6>
-                                        LKR {cartItems.reduce((total, item) => total + item.price * item.quantity, 0)}
-                                    </h6>
-                                </div>
-                                <div className='order-info'>
-                                    <h5>Order Details</h5>
-
-                                    <Form onSubmit={handleSubmit} className="query-form" style={{ padding: "0vh 6vh" }}>
-                                        <Form.Group className="mb-3" controlId="formAddress">
-                                            <Form.Label>Address</Form.Label>
-                                            <Form.Control
-                                                type="text"
-                                                placeholder="Enter Delivery Address"
-                                                value={deliveryAddress}
-                                                onChange={(e) => setDeliveryAddress(e.target.value)}
-                                                required />
-                                        </Form.Group>
-
-                                        <Form.Group className="mb-3" controlId="formMessage">
-                                            <Form.Label>Note (Optional)</Form.Label>
-                                            <Form.Control
-                                                as="textarea"
-                                                rows={3}
-                                                placeholder="Enter Note"
-                                                value={specialInstructions}
-                                                onChange={(e) => setSpecialInstructions(e.target.value)} />
-                                        </Form.Group>
-
-                                        <Button variant="primary" type="submit" className='submit-btn'>
-                                            Proceed to Checkout
-                                        </Button>
-                                    </Form>
-                                </div>
+                            <div className='summary-total'>
+                                <h6>Total Cost: </h6>
+                                <h6>
+                                    LKR {cartItems.reduce((total, item) => total + item.price * item.quantity, 0)}
+                                </h6>
                             </div>
+                            <div className='order-info'>
+                                <h5>Order Details</h5>
+
+                                <Form onSubmit={handleSubmit} className="query-form" style={{ padding: "0vh 6vh" }}>
+                                    <Form.Group className="mb-3" controlId="formAddress">
+                                        <Form.Label>Address</Form.Label>
+                                        <Form.Control
+                                            type="text"
+                                            placeholder="Enter Delivery Address"
+                                            value={deliveryAddress}
+                                            onChange={(e) => setDeliveryAddress(e.target.value)}
+                                            required />
+                                    </Form.Group>
+
+                                    <Form.Group className="mb-3" controlId="formMessage">
+                                        <Form.Label>Note (Optional)</Form.Label>
+                                        <Form.Control
+                                            as="textarea"
+                                            rows={3}
+                                            placeholder="Enter Note"
+                                            value={specialInstructions}
+                                            onChange={(e) => setSpecialInstructions(e.target.value)} />
+                                    </Form.Group>
+
+                                    <Button variant="primary" type="submit" className='submit-btn'>
+                                        Proceed to Checkout
+                                    </Button>
+                                </Form>
+                            </div>
+                        </div>
                         </>
                     )}
                     

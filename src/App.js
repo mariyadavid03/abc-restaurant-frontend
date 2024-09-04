@@ -1,8 +1,9 @@
-
 import React from 'react';
 import {BrowserRouter as Router, Route, Routes} from 'react-router-dom';
-import HomePage from './pages/PublicUI/HomePage';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import './App.css';
+
+import HomePage from './pages/PublicUI/HomePage';
 import AdminLogin from './pages/AdminUI/AdminLogin';
 import StaffLogin from './pages/StaffUI/StaffLogin';
 import StaffDashboard from './pages/StaffUI/StaffDashboard';
@@ -46,8 +47,7 @@ function App() {
         <Route path="/facilities" element={<FacilitiesPage />} />
         <Route path='/admin' element={<AdminLogin/>}/>
         <Route path='/staff' element={<StaffLogin/>}/>
-        <Route path='/admin/account' element={<ManageAccount/>}/>
-
+        
        {/* Customer Protected Routes */}
         <Route path="/reservation" element={<ProtectedRoute><ReservationPage /></ProtectedRoute>}/>
         <Route path="/cart" element={<ProtectedRoute><CartPage /></ProtectedRoute>}/>
@@ -58,6 +58,7 @@ function App() {
         <Route path="/staff/dashboard" element={<StaffProtectedRoute><StaffDashboard /></StaffProtectedRoute>} />
         <Route path="/admin/dashboard" element={<StaffProtectedRoute><AdminDashboard /></StaffProtectedRoute>} />
         <Route path="/manage/reservation" element={<StaffProtectedRoute><ManageReservation /></StaffProtectedRoute>} />
+        <Route path='/admin/account' element={<StaffProtectedRoute><ManageAccount /></StaffProtectedRoute>} />
         <Route path="/manage/delivery" element={<StaffProtectedRoute><ManageDelivery /></StaffProtectedRoute>} />
         <Route path="/manage/query" element={<StaffProtectedRoute><ManageQuery /></StaffProtectedRoute>} />
         <Route path="/manage/payment" element={<StaffProtectedRoute><ManagePayment /></StaffProtectedRoute>} />
@@ -72,21 +73,10 @@ function App() {
         <Route path="/report-display/payment" element={<StaffProtectedRoute><PaymentReport /></StaffProtectedRoute>} />
         <Route path="/report-display/query" element={<StaffProtectedRoute><QueryReport /></StaffProtectedRoute>} />
 
-
-       
-         {/* Animated Routes */}
-         <Route path='/login' element={
-            <AnimatedRoute>
-              <LoginPage/>
-            </AnimatedRoute>
-          }
-          />
-          <Route path='/signup' element={
-            <AnimatedRoute>
-              <SignupPage/>
-            </AnimatedRoute>
-          }
-          />
+        {/* Animated Routes */}
+        <Route path='/login' element={<AnimatedRoute><LoginPage/></AnimatedRoute>}/>
+        <Route path='/signup' element={<AnimatedRoute><SignupPage/></AnimatedRoute>}/>
+        
       </Routes>
        
           

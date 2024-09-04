@@ -57,7 +57,7 @@ function CheckPage() {
         try {
             const paymentResponse = await axios.post('http://localhost:8080/payment/add', paymentData);
             if (paymentResponse.status === 201) {
-                // Send email
+                // Send email about payment
                 await axios.post('http://localhost:8080/sendPaymentEmail', {
                     email: email,
                     code: deliveryCode,
@@ -82,6 +82,8 @@ function CheckPage() {
                 <img src={require("../../../assets/images/arrow.png")} alt="Back" className="back-arrow" onClick={handleBack} />
                 <h2>Checkout</h2>
             </div>
+
+            {/* Card details */}
             <div className="payment-container">
                 <div className="total-cost">
                     <h5>Total Cost:</h5>

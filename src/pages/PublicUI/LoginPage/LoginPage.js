@@ -13,8 +13,7 @@ function LoginPage() {
                 <div className="login-form-container">
                     <div className="login-formm">
                         <h3>Welcome Back!</h3>
-                        <LoginForm
-                        />
+                        <LoginForm/>
                     </div>
                 </div>
                 <div className="login-img-container">

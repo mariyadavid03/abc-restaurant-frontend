@@ -9,6 +9,7 @@ function FacilitiesPage() {
     const [searchTerm, setSearchTerm] = useState('');
     const contactUsRef = useRef(null);
 
+    // Fetching facilities data
     useEffect(() => {
         axios.get('http://localhost:8080/service') 
             .then(response => {
@@ -20,6 +21,7 @@ function FacilitiesPage() {
             });
     }, []);
 
+    // Searching logic
     const handleSearchChange = (event) => {
         const query = event.target.value.toLowerCase();
         setSearchTerm(query);
@@ -40,6 +42,7 @@ function FacilitiesPage() {
                 <div className="service-heading-container">
                     <h2>Our Facilities</h2>
                 </div>
+                
                 {/* Search Bar */}
                 <div className="service-search-container">
                     <input
@@ -49,8 +52,8 @@ function FacilitiesPage() {
                         value={searchTerm}
                         onChange={handleSearchChange}
                     />
-
                 </div>
+
                 <div className="service-content-container">
                     {filteredServices.length > 0 ? (
                         filteredServices.map((service, index) => (

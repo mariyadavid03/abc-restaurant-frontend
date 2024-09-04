@@ -144,7 +144,15 @@
 .dropdown-menu a:hover {
   background-color: #f2f2f2;
 }
-
+ .link-button{
+  color: #ffa140;
+  /* text-decoration: none; */
+  font-size: 1rem;
+  letter-spacing: 2px;
+  font-family: 'DM Sans', sans-serif;
+  background-color: black;
+  border: none;
+ }
 /* Responsive Styles */
 @media only screen and (max-width: 916px) {
   .menu img {
