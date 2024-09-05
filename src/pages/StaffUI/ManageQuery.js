@@ -21,7 +21,7 @@ function ManageQuery() {
     const fetchQueries = async () => {
         try {
             const response = await axios.get('http://localhost:8080/query'); 
-            const sortedQueries = response.data.sort((a, b) => new Date(b.created_at) - new Date(a.created_at));
+            const sortedQueries = response.data.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
             setQueries(sortedQueries);
         } catch (error) {
             console.error('Error fetching queries:', error);
@@ -99,7 +99,7 @@ function ManageQuery() {
                             {queries.map(query => (
                                 <tr key={query.id}>
                                     <td>{query.id}</td>
-                                    <td>{new Date(query.created_at).toLocaleString()}</td>
+                                    <td>{new Date(query.createdAt).toLocaleString()}</td>
                                     <td>{query.status}</td>
                                     <td>{query.sender_name}</td>
                                     <td>{query.email}</td>

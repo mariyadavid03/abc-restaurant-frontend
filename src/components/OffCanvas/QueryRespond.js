@@ -3,8 +3,11 @@ import './CanvasStyle.css';
 import Button from 'react-bootstrap/Button';
 import Offcanvas from 'react-bootstrap/Offcanvas';
 import axios from 'axios';
+import SessionManager from '../../services/SessionManager';
 
 function QueryRespond({ show, handleClose, queryId, onSuccess }) {
+    const session = SessionManager.getInstance();
+    const userId = session.getUserId();
     const [queryDetails, setQueryDetails] = useState({
         email: '',
         query_subject: '',
@@ -66,9 +69,10 @@ function QueryRespond({ show, handleClose, queryId, onSuccess }) {
     const handleSubmitResponse = async () => {
         try {
             // Submit response
+            
             await axios.post('http://localhost:8080/response/add', {
                 query: { id: queryId },
-                user: { id: 2 },
+                user: { id: userId },
                 response_message: queryDetails.response_message
             });
     

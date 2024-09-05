@@ -23,10 +23,10 @@ function DineinReservationReport() {
                 row.reservation_code,
                 row.user.name,
                 row.user.email,
-                row.reservation_date_time,
+                row.reservationDateTime,
                 row.num_guests,
                 row.status,
-                row.created_at
+                row.createdAt
             ];
             tableRows.push(rowData);
         });
@@ -43,10 +43,10 @@ function DineinReservationReport() {
         { label: "Reservation Code", key: "reservation_code" },
         { label: "Customer Name", key: "user.name" },
         { label: "Email", key: "user.email" },
-        { label: "Reservation Date", key: "reservation_date_time" },
+        { label: "Reservation Date", key: "reservationDateTime" },
         { label: "No. of Guests", key: "num_guests" },
         { label: "Status", key: "status" },
-        { label: "Created At", key: "created_at" }
+        { label: "Created At", key: "createdAt" }
     ]; 
 
     return (
@@ -65,48 +65,57 @@ function DineinReservationReport() {
                         <label>Date Range:</label>
                         <p>
                         {data.length > 0 
-                            ? `${new Date(data[0].reservation_date_time).toLocaleDateString()} - ${new Date(data[data.length - 1].reservation_date_time).toLocaleDateString()}` 
+                            ? `${new Date(data[0].reservationDateTime).toLocaleDateString()} - ${new Date(data[data.length - 1].reservationDateTime).toLocaleDateString()}` 
                             : 'No Data'}
                         </p>
                     </div>
                 </div>
                 <div className="summary-info">
-                    <p><strong>Total Reservations:</strong> {totalReservations}</p>
+                    {data.length > 0 ? (
+                        <>
+                        <p><strong>Total Reservations:</strong> {totalReservations}</p>
+                            
+                        <div className="table-container">
+                            <table className="main-table">
+                                <thead>
+                                    <tr>
+                                        <th>Reservation Code</th>
+                                        <th>Customer Name</th>
+                                        <th>Email</th>
+                                        <th>Reservation Date</th>
+                                        <th>No. of Guests</th>
+                                        <th>Status</th>
+                                        <th>Created At</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {data.map((row, index) => (
+                                        <tr key={index}>
+                                            <td>{row.reservation_code}</td>
+                                            <td>{row.user.name}</td>
+                                            <td>{row.user.email}</td>
+                                            <td>{row.reservationDateTime}</td>
+                                            <td>{row.num_guests}</td>
+                                            <td>{row.status}</td>
+                                            <td>{row.createdAt}</td>
+                                        </tr>
+                                    ))}
+                                </tbody>
+                            </table>
+                        </div>
+                        </>
+                    ) : (
+                        <p>No records found for the selected date range.</p>
+                    )}
                 </div>
-                <div className="table-container">
-                    <table className="main-table">
-                        <thead>
-                            <tr>
-                                <th>Reservation Code</th>
-                                <th>Customer Name</th>
-                                <th>Email</th>
-                                <th>Reservation Date</th>
-                                <th>No. of Guests</th>
-                                <th>Status</th>
-                                <th>Created At</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {data.map((row, index) => (
-                                <tr key={index}>
-                                    <td>{row.reservation_code}</td>
-                                    <td>{row.user.name}</td>
-                                    <td>{row.user.email}</td>
-                                    <td>{row.reservation_date_time}</td>
-                                    <td>{row.num_guests}</td>
-                                    <td>{row.status}</td>
-                                    <td>{row.created_at}</td>
-                                </tr>
-                            ))}
-                        </tbody>
-                    </table>
-                </div>
+                {data.length > 0 && (
                 <div className="button-group">
                     <button className="export-btn" onClick={exportToPDF}>Export to PDF</button>
                     <CSVLink data={data} headers={headers} filename="reservation_report.csv" className="export-btn">
                         Export to CSV
                     </CSVLink>
                 </div>
+                )}
             </div>
         </div>
     );

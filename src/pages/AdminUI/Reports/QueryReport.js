@@ -26,10 +26,10 @@ function QueryReport() {
         sender_name: row.sender_name,
         email: row.email,
         query_subject: row.query_subject,
-        created_at: new Date(row.created_at).toLocaleString(),
+        createdAt: new Date(row.createdAt).toLocaleString(),
         staff_id: row.response && row.response.user ? row.response.user.id : 'No Response',
         response_date_time: row.response ? new Date(row.response.response_date_time).toLocaleString() : 'No Response',
-        response_time: calculateResponseTime(row.created_at, row.response?.response_date_time)
+        response_time: calculateResponseTime(row.createdAt, row.response?.response_date_time)
     }));
 
     const exportToPDF = () => {
@@ -45,10 +45,10 @@ function QueryReport() {
                 row.sender_name,
                 row.email,
                 row.query_subject,
-                new Date(row.created_at).toLocaleString(),
+                new Date(row.createdAt).toLocaleString(),
                 row.response && row.response.user ? row.response.user.username : 'No Response',
                 row.response ? new Date(row.response.response_date_time).toLocaleString() : 'No Response',
-                calculateResponseTime(row.created_at, row.response?.response_date_time)
+                calculateResponseTime(row.createdAt, row.response?.response_date_time)
             ];
             tableRows.push(rowData);
         });
@@ -62,7 +62,7 @@ function QueryReport() {
         { label: "Sender Name", key: "sender_name" },
         { label: "Email", key: "email" },
         { label: "Subject", key: "query_subject" },
-        { label: "Query Added Date", key: "created_at" },
+        { label: "Query Added Date", key: "createdAt" },
         { label: "Staff Responder", key: "username" },
         { label: "Response Time", key: "response_date_time" },
         { label: "Time Taken to Respond", key: "response_time" }
@@ -72,7 +72,7 @@ function QueryReport() {
         let count = 0;
     
         data.forEach(row => {
-            const createdAt = new Date(row.created_at);
+            const createdAt = new Date(row.createdAt);
             const responseAt = row.response ? new Date(row.response.response_date_time) : null;
             if (responseAt) {
                 const diffMs = responseAt - createdAt;
@@ -103,45 +103,53 @@ function QueryReport() {
                         <label>Date Range:</label>
                         <p>
                             {data.length > 0 
-                                ? `${new Date(data[0].created_at).toLocaleDateString()} - ${new Date(data[data.length - 1].created_at).toLocaleDateString()}` 
+                                ? `${new Date(data[0].createdAt).toLocaleDateString()} - ${new Date(data[data.length - 1].createdAt).toLocaleDateString()}` 
                                 : 'No Data'}
                         </p>
                     </div>
                 </div>
                 <div className="summary-info">
-                    <p><strong>Total Queries:</strong> {data.length}</p>
-                    <p><strong>Average Response Time:</strong> {averageResponseTime} minutes</p>
+                    {data.length > 0 ? (
+                        <>
+                            <p><strong>Total Queries:</strong> {data.length}</p>
+                            <p><strong>Average Response Time:</strong> {averageResponseTime} minutes</p>
+                
+                            <div className="table-container">
+                                <table className="main-table">
+                                    <thead>
+                                        <tr>
+                                            <th>ID</th>
+                                            <th>Sender Name</th>
+                                            <th>Email</th>
+                                            <th>Subject</th>
+                                            <th>Query Added Date</th>
+                                            <th>Staff Responder</th>
+                                            <th>Response Time</th>
+                                            <th>Time Taken to Respond</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {data.map((row, index) => (
+                                            <tr key={index}>
+                                                <td>{row.id}</td>
+                                                <td>{row.sender_name}</td>
+                                                <td>{row.email}</td>
+                                                <td>{row.query_subject}</td>
+                                                <td>{new Date(row.createdAt).toLocaleString()}</td>
+                                                <td>{row.response && row.response.user ? row.response.user.username : 'No Response'}</td>
+                                                <td>{row.response ? new Date(row.response.response_date_time).toLocaleString() : 'No Response'}</td>
+                                                <td>{calculateResponseTime(row.createdAt, row.response?.response_date_time)}</td>
+                                            </tr>
+                                        ))}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </>
+                    ) : (
+                        <p>No records found for the selected date range.</p>
+                    )}
                 </div>
-                <div className="table-container">
-                    <table className="main-table">
-                        <thead>
-                            <tr>
-                                <th>ID</th>
-                                <th>Sender Name</th>
-                                <th>Email</th>
-                                <th>Subject</th>
-                                <th>Query Added Date</th>
-                                <th>Staff Responder</th>
-                                <th>Response Time</th>
-                                <th>Time Taken to Respond</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {data.map((row, index) => (
-                                <tr key={index}>
-                                    <td>{row.id}</td>
-                                    <td>{row.sender_name}</td>
-                                    <td>{row.email}</td>
-                                    <td>{row.query_subject}</td>
-                                    <td>{new Date(row.created_at).toLocaleString()}</td>
-                                    <td>{row.response && row.response.user ? row.response.user.username : 'No Response'}</td>
-                                    <td>{row.response ? new Date(row.response.response_date_time).toLocaleString() : 'No Response'}</td>
-                                    <td>{calculateResponseTime(row.created_at, row.response?.response_date_time)}</td>
-                                </tr>
-                            ))}
-                        </tbody>
-                    </table>
-                </div>
+                {data.length > 0 && (
                 <div className="button-group">
                     <button className="export-btn" onClick={exportToPDF}>Export to PDF</button>
                     <CSVLink 
@@ -153,6 +161,7 @@ function QueryReport() {
                         Export to CSV
                     </CSVLink>
                 </div>
+                )}
             </div>
         </div>
     );

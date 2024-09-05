@@ -66,39 +66,47 @@ function PaymentReport() {
                     </div>
                 </div>
                 <div className="summary-info">
-                    <p><strong>Total Payments:</strong> {totalPayments}</p>
-                    <p><strong>Total Amount:</strong> LKR {totalAmount}</p>
+                    {data.length > 0 ? (
+                        <>
+                            <p><strong>Total Payments:</strong> {totalPayments}</p>
+                            <p><strong>Total Amount:</strong> LKR {totalAmount}</p>
+                            <div className="table-container">
+                                <table className="main-table">
+                                    <thead>
+                                        <tr>
+                                            <th>ID</th>
+                                            <th>Payment Date & Time</th>
+                                            <th>Amount (LKR)</th>
+                                            <th>Delivery Code</th>
+                                            <th>Customer Name</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {data.map((row, index) => (
+                                            <tr key={index}>
+                                                <td>{row.id}</td>
+                                                <td>{new Date(row.createdAt).toLocaleString()}</td>
+                                                <td>{row.amount}</td>
+                                                <td>{row.delivery.delivery_code}</td>
+                                                <td>{row.delivery.user.name}</td>
+                                            </tr>
+                                        ))}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </>
+                    ) : (
+                        <p>No records found for the selected date range.</p>
+                    )}
                 </div>
-                <div className="table-container">
-                    <table className="main-table">
-                        <thead>
-                            <tr>
-                                <th>ID</th>
-                                <th>Payment Date & Time</th>
-                                <th>Amount (LKR)</th>
-                                <th>Delivery Code</th>
-                                <th>Customer Name</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {data.map((row, index) => (
-                                <tr key={index}>
-                                    <td>{row.id}</td>
-                                    <td>{new Date(row.createdAt).toLocaleString()}</td>
-                                    <td>{row.amount}</td>
-                                    <td>{row.delivery.delivery_code}</td>
-                                    <td>{row.delivery.user.name}</td>
-                                </tr>
-                            ))}
-                        </tbody>
-                    </table>
-                </div>
-                <div className="button-group">
-                    <button className="export-btn" onClick={exportToPDF}>Export to PDF</button>
-                    <CSVLink data={data} headers={headers} filename="payment_report.csv" className="export-btn">
-                        Export to CSV
-                    </CSVLink>
-                </div>
+                {data.length > 0 && (
+                    <div className="button-group">
+                        <button className="export-btn" onClick={exportToPDF}>Export to PDF</button>
+                        <CSVLink data={data} headers={headers} filename="payment_report.csv" className="export-btn">
+                            Export to CSV
+                        </CSVLink>
+                    </div>
+                )}
             </div>
         </div>
     );

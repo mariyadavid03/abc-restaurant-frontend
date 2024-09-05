@@ -20,52 +20,55 @@ function ReportPage() {
 
     const handleGenerateReport = async () => {
         try {
-            const response = await axios.get('http://localhost:8080/dinein', {
+            const response = await axios.get('http://localhost:8080/dinein/filter', {
                 params: {
-                    startDate: `${startDate}T00:00:00`,
-                    endDate: `${endDate}T23:59:59`
+                    startDate: startDate,
+                    endDate: endDate
                 }
             });
             navigate('/report-display/reservation', { state: { data: response.data } });
         } catch (error) {
             console.error('Error generating report:', error);
+            alert('An error occurred while generating the reservation report. Please try again later.');
         }
     };
 
     const handleGenerateDeliveryReport = async () => {
         try {
-            const response = await axios.get('http://localhost:8080/delivery', {
+            const response = await axios.get('http://localhost:8080/delivery/filter', {
                 params: {
-                    startDate: `${startDate}T00:00:00`,
-                    endDate: `${endDate}T23:59:59`
+                    startDate: startDate,
+                    endDate: endDate
                 }
             });
             navigate('/report-display/delivery', { state: { data: response.data } });
         } catch (error) {
             console.error('Error generating delivery report:', error);
+            alert('An error occurred while generating the delivery report. Please try again later.');
         }
     };
 
     const handleGeneratePaymentReport = async () => {
         try {
-            const response = await axios.get('http://localhost:8080/payment', {
+            const response = await axios.get('http://localhost:8080/payment/filter', {
                 params: {
-                    startDate: `${startDate}T00:00:00`,
-                    endDate: `${endDate}T23:59:59`
+                    startDate: startDate, 
+                    endDate: endDate
                 }
             });
             navigate('/report-display/payment', { state: { data: response.data } });
         } catch (error) {
             console.error('Error generating payment report:', error);
+            alert('An error occurred while generating the payment report. Please try again later.');
         }
     };
 
     const handleGenerateQueryReport = async () => {
         try {
-            const queryResponse = await axios.get('http://localhost:8080/query', {
+            const queryResponse = await axios.get('http://localhost:8080/query/filter', {
                 params: {
-                    startDate: `${startDate}T00:00:00`,
-                    endDate: `${endDate}T23:59:59`
+                    startDate: startDate,
+                    endDate: endDate
                 }
             });
     
@@ -83,6 +86,7 @@ function ReportPage() {
     
         } catch (error) {
             console.error('Error generating query report:', error);
+            alert('An error occurred while generating the query report. Please try again later.');
         }
     };
     const handleGenerateReportClick = () => {
@@ -114,7 +118,7 @@ function ReportPage() {
                         value={reportType} 
                         onChange={(e) => setReportType(e.target.value)}
                     >
-                        <option value="reservation">Reservation</option>
+                        <option value="reservation" selected>Reservation</option>
                         <option value="delivery">Delivery</option>
                         <option value="query">Query</option>
                         <option value="payment">Payment</option>

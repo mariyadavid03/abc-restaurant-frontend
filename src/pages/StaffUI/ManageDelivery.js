@@ -69,7 +69,7 @@ function ManageDelivery() {
     
         if (isConfirmed) {
             try {
-                await axios.delete(`http://localhost:8080/delivery/remove/${id}`);
+                await axios.delete(`http://localhost:8080/delivery/removeList/${id}`);
                 setReservations(reservations.filter(reservation => reservation.id !== id));
                 fetchReservations();
 

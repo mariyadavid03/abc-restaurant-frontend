@@ -21,7 +21,7 @@ function DeliveryReport() {
             const rowData = [
                 row.delivery_code,
                 row.delivery_address,
-                new Date(row.created_at).toLocaleString(),
+                new Date(row.createdAt).toLocaleString(),
                 row.status,
                 row.price,
                 row.user.name
@@ -36,7 +36,7 @@ function DeliveryReport() {
     const headers = [
         { label: "Delivery Code", key: "delivery_code" },
         { label: "Address", key: "delivery_address" },
-        { label: "Date & Time", key: "created_at" },
+        { label: "Date & Time", key: "createdAt" },
         { label: "Status", key: "status" },
         { label: "Customer Name", key: "user.name" }
     ];
@@ -58,38 +58,45 @@ function DeliveryReport() {
                         <label>Date Range:</label>
                         <p>
                             {data.length > 0 
-                                ? `${new Date(data[0].created_at).toLocaleDateString()} - ${new Date(data[data.length - 1].created_at).toLocaleDateString()}` 
+                                ? `${new Date(data[0].createdAt).toLocaleDateString()} - ${new Date(data[data.length - 1].createdAt).toLocaleDateString()}` 
                                 : 'No Data'}
                         </p>
                     </div>
                 </div>
                 <div className="summary-info">
-                    <p><strong>Total Deliveries:</strong> {totalDeliveries}</p>
+                {data.length > 0 ? (
+                    <>
+                        <p><strong>Total Deliveries:</strong> {totalDeliveries}</p>
+                        <div className="table-container">
+                            <table className="main-table">
+                                <thead>
+                                    <tr>
+                                        <th>Delivery Code</th>
+                                        <th>Address</th>
+                                        <th>Date & Time</th>
+                                        <th>Status</th>
+                                        <th>Customer Name</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {data.map((row, index) => (
+                                        <tr key={index}>
+                                            <td>{row.delivery_code}</td>
+                                            <td>{row.delivery_address}</td>
+                                            <td>{new Date(row.createdAt).toLocaleString()}</td>
+                                            <td>{row.status}</td>
+                                            <td>{row.user.name}</td>
+                                        </tr>
+                                    ))}
+                                </tbody>
+                            </table>
+                        </div>
+                    </>
+                ) : (
+                    <p>No records found for the selected date range.</p>
+                )}
                 </div>
-                <div className="table-container">
-                    <table className="main-table">
-                        <thead>
-                            <tr>
-                                <th>Delivery Code</th>
-                                <th>Address</th>
-                                <th>Date & Time</th>
-                                <th>Status</th>
-                                <th>Customer Name</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {data.map((row, index) => (
-                                <tr key={index}>
-                                    <td>{row.delivery_code}</td>
-                                    <td>{row.delivery_address}</td>
-                                    <td>{new Date(row.created_at).toLocaleString()}</td>
-                                    <td>{row.status}</td>
-                                    <td>{row.user.name}</td>
-                                </tr>
-                            ))}
-                        </tbody>
-                    </table>
-                </div>
+                {data.length > 0 && (
                 <div className="button-group">
                     <button className="export-btn" onClick={exportToPDF}>Export to PDF</button>
                     
@@ -97,6 +104,7 @@ function DeliveryReport() {
                         Export to CSV
                     </CSVLink>
                 </div>
+                )}
             </div>
         </div>
     );

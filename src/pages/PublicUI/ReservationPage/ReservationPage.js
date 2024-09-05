@@ -65,7 +65,7 @@ function ReservationPage() {
             user: {
                 id: userId
             },
-            reservation_date_time: reservationDetails.date,
+            reservationDateTime: reservationDetails.date,
             num_guests: reservationDetails.numGuests,
             special_requests: reservationDetails.specialRequests,
             status: 'Reserved'
@@ -79,7 +79,7 @@ function ReservationPage() {
                 axios.post('http://localhost:8080/sendReservationEmail', {
                     email: userEmail,
                     reservation_code: reservationCode,
-                    reservation_date_time: reservationDetails.date,
+                    reservationDateTime: reservationDetails.date,
                     num_guests: reservationDetails.numGuests,
                     special_requests: reservationDetails.specialRequests
                 })

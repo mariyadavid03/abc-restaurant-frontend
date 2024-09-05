@@ -110,7 +110,7 @@ function ManageReservation() {
                             filteredReservations.map(reservation => (
                                 <tr key={reservation.id}>
                                     <td>{reservation.reservation_code}</td>
-                                    <td>{new Date(reservation.reservation_date_time).toLocaleString()}</td>
+                                    <td>{new Date(reservation.reservationDateTime).toLocaleString()}</td>
                                     <td>{reservation.num_guests}</td>
                                     <td>{reservation.user.name}</td>
                                     <td>{reservation.user.mobileNo}</td>

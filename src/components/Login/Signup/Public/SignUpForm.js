@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 function SignUpForm() {
@@ -13,6 +13,15 @@ function SignUpForm() {
   const [error, setError] = useState('');
   const navigate = useNavigate();
 
+  useEffect(() => {
+    if (error) {
+      const timer = setTimeout(() => {
+        setError('');
+      }, 6000);
+      return () => clearTimeout(timer);
+    }
+  }, [error]);
+  
   const handleEmailConfirm = async () => {
     try {
         const response = await fetch('http://localhost:8080/request-otp', {
@@ -24,7 +33,8 @@ function SignUpForm() {
         });
 
         if (!response.ok) {
-            throw new Error(`HTTP error! status: ${response.status}`);
+            const errorData = await response.text();
+            throw new Error(errorData);
         }
 
         const data = await response.text();
@@ -32,7 +42,7 @@ function SignUpForm() {
         setIsOtpSent(true);
     } catch (error) {
         console.error('Fetch error:', error);
-        setError('Failed to send OTP');
+        setError(error.message);
     }
 };
 const handleOtpVerify = async () => {
@@ -65,7 +75,8 @@ const handleSignup = async () => {
       });
 
       if (!response.ok) {
-          throw new Error(`HTTP error! status: ${response.status}`);
+        const errorData = await response.text(); 
+        throw new Error(errorData);
       }
 
       const data = await response.text();
@@ -73,7 +84,7 @@ const handleSignup = async () => {
       navigate('/login'); 
   } catch (error) {
       console.error('Fetch error:', error);
-      setError('Signup failed');
+      setError(error.message);
   }
 };
 

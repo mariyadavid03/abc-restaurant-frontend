@@ -58,8 +58,8 @@ function getDate() {
                         <Link to="/manage/payment"><div className='box'>View Payments</div></Link>
                         <Link to="/manage/menu"><div className='box'>Manage Menu</div></Link>
                         <Link to="/manage/account"><div className='box'>Manage Accounts</div></Link>
-                        <Link to="/manage/facility"><div className='box'>Manage Gallery</div></Link>
-                        <Link to="/manage/service"><div className='box'>Manage Services</div></Link>
+                        <Link to="/manage/gallery"><div className='box'>Manage Gallery</div></Link>
+                        <Link to="/manage/facility"><div className='box'>Manage Services</div></Link>
                         <Link to="/manage/offer"><div className='box'>Manage Offers</div></Link>
                         <Link to="/manage/report"><div className='box'>Reports</div></Link>
                     </div>

@@ -28,7 +28,7 @@ function ProfilePage() {
     const fetchReservationData = useCallback(async () => {
         try {
             const reservationResponse = await axios.get(`http://localhost:8080/dinein/getReservationByUser/${userId}`);
-            const sortedReservations = reservationResponse.data.sort((a, b) => new Date(b.reservation_date_time) - new Date(a.reservation_date_time));
+            const sortedReservations = reservationResponse.data.sort((a, b) => new Date(b.reservationDateTime) - new Date(a.reservationDateTime));
             setReservations(sortedReservations);
         } catch (error) {
             console.error('Error fetching reservation details:', error.response ? error.response.data : error.message);
@@ -40,7 +40,7 @@ function ProfilePage() {
     const fetchDeliveryData = useCallback(async () => {
         try {
             const deliveryResponse = await axios.get(`http://localhost:8080/delivery/getDeliverynByUser/${userId}`);
-            const sortedDeliveries = deliveryResponse.data.sort((a, b) => new Date(b.created_at) - new Date(a.created_at));
+            const sortedDeliveries = deliveryResponse.data.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
             setDeliveries(sortedDeliveries);
         } catch (error) {
             console.error('Error fetching details:', error.response ? error.response.data : error.message);
@@ -128,7 +128,7 @@ function ProfilePage() {
                                 {reservations.map(reservation => (
                                     <tr key={reservation.id}>
                                         <td>{reservation.reservation_code}</td>
-                                        <td>{new Date(reservation.reservation_date_time).toLocaleString()}</td>
+                                        <td>{new Date(reservation.reservationDateTime).toLocaleString()}</td>
                                         <td>{reservation.num_guests}</td>
                                         <td>{reservation.status}</td>
                                         <td>
@@ -168,7 +168,7 @@ function ProfilePage() {
                                 {deliveries.map(delivery => (
                                     <tr key={delivery.id}>
                                         <td>{delivery.delivery_code}</td>
-                                        <td>{new Date(delivery.created_at).toLocaleString()}</td>
+                                        <td>{new Date(delivery.createdAt).toLocaleString()}</td>
                                         <td>{delivery.delivery_address}</td>
                                         <td>{delivery.status}</td>
                                         <td>

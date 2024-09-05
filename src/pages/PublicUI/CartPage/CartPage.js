@@ -74,7 +74,7 @@ function CartPage() {
                 user: { id: Number(userId) },
                 delivery_address: deliveryAddress,
                 special_instructions: specialInstructions,
-                status: 'Pending'
+                status: 'Ordered'
             };
     
             try {
@@ -88,6 +88,16 @@ function CartPage() {
                         quantity: item.quantity,
                         price: item.price
                     }));
+                    (
+                        orders.map(order => 
+                            axios.post('http://localhost:8080/order/add', order)
+                            .then(res => res.data)
+                            .catch(error => {
+                                console.error(`Error saving order for item ${order.menu.id}:`, error.response ? error.response.data : error.message);
+                                throw new Error(`Failed to save order for item ${order.menu.id}`);
+                            })
+                        )
+                    );
     
                     const totalAmount = orders.reduce((total, order) => total + order.price * order.quantity, 0);
                     
