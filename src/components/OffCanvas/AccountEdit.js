@@ -9,6 +9,8 @@ function AccountEdit({ show, handleClose, item, onSuccess }) {
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
     const [mobileNo, setMobileNo] = useState('');
+    const [editPassword, setEditPassword] = useState(false);
+    const [password, setPassword] = useState('');
 
     useEffect(() => {
         if (item) {
@@ -24,20 +26,25 @@ function AccountEdit({ show, handleClose, item, onSuccess }) {
             const data = {
                 name: name,
                 email: email,
-                mobileNo: mobileNo
+                mobileNo: mobileNo,
             };
-    
+
+            if (editPassword && password) {
+                data.password = password; 
+            }
+
             console.log('Sending data:', data);
-    
+
             await axios.put(`http://localhost:8080/user/update/${item.id}`, data, {
                 headers: {
                     'Content-Type': 'application/json',
                 },
             });
-    
+
             setEmail('');
             setMobileNo('');
             setName('');
+            setPassword('');
             handleClose();
             onSuccess();
         } catch (error) {
@@ -69,13 +76,6 @@ function AccountEdit({ show, handleClose, item, onSuccess }) {
                         onChange={(e) => setName(e.target.value)} 
                         placeholder="Name" 
                     />
-                    <label>Email</label>
-                    <input 
-                        type="email" 
-                        value={email} 
-                        onChange={(e) => setEmail(e.target.value)} 
-                        placeholder="Email" 
-                    />
                     <label>Phone</label>
                     <input 
                         type="text" 
@@ -85,6 +85,31 @@ function AccountEdit({ show, handleClose, item, onSuccess }) {
                     />
                 </div>
                 
+                <div className='item-info'>
+                    <label>
+                        <input 
+                            type="checkbox" 
+                            checked={editPassword} 
+                            onChange={() => setEditPassword(!editPassword)} 
+                            style={{ width: "23px" }}
+                        />
+                        Edit Password
+                    </label>
+                </div>
+
+                {/* Conditional Password Field */}
+                {editPassword && (
+                    <div className='item-info'>
+                        <label>New Password</label>
+                        <input 
+                            type="password" 
+                            value={password} 
+                            onChange={(e) => setPassword(e.target.value)} 
+                            placeholder="Enter new password" 
+                        />
+                    </div>
+                )}
+
                 <Button className='submit-btn' style={{ marginTop: '10px' }} onClick={handleSave}>
                     Save Changes
                 </Button>

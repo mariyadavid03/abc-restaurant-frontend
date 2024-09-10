@@ -87,7 +87,6 @@ function ManageOffer() {
                     <table className='main-table'>
                         <thead>
                             <tr>
-                                <th>ID</th>
                                 <th>Offer Name</th>
                                 <th>Description</th>
                                 <th>Rate</th>

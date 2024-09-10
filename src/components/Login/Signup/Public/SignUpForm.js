@@ -37,56 +37,56 @@ function SignUpForm() {
             throw new Error(errorData);
         }
 
+            const data = await response.text();
+            console.log('Success:', data);
+            setIsOtpSent(true);
+        } catch (error) {
+            console.error('Fetch error:', error);
+            setError(error.message);
+        }
+    };
+    const handleOtpVerify = async () => {
+    try {
+        const response = await fetch('http://localhost:8080/verify-otp', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ email, otp }), 
+        });
+
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
+
         const data = await response.text();
         console.log('Success:', data);
-        setIsOtpSent(true);
+        setIsOtpVerified(true); 
+    } catch (error) {
+        console.error('Fetch error:', error);
+        setError('Invalid OTP');
+    }
+    };
+
+    const handleSignup = async () => {
+    try {
+        const response = await fetch('http://localhost:8080/user/signup', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ email, username, password, name, mobileNo }),
+        });
+
+        if (!response.ok) {
+            const errorData = await response.text(); 
+            throw new Error(errorData);
+        }
+
+        const data = await response.text();
+        console.log('Success:', data);
+        navigate('/login'); 
     } catch (error) {
         console.error('Fetch error:', error);
         setError(error.message);
     }
-};
-const handleOtpVerify = async () => {
-  try {
-      const response = await fetch('http://localhost:8080/verify-otp', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ email, otp }), 
-      });
-
-      if (!response.ok) {
-          throw new Error(`HTTP error! status: ${response.status}`);
-      }
-
-      const data = await response.text();
-      console.log('Success:', data);
-      setIsOtpVerified(true); 
-  } catch (error) {
-      console.error('Fetch error:', error);
-      setError('Invalid OTP');
-  }
-};
-
-const handleSignup = async () => {
-  try {
-      const response = await fetch('http://localhost:8080/user/signup', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ email, username, password, name, mobileNo }),
-      });
-
-      if (!response.ok) {
-        const errorData = await response.text(); 
-        throw new Error(errorData);
-      }
-
-      const data = await response.text();
-      console.log('Success:', data);
-      navigate('/login'); 
-  } catch (error) {
-      console.error('Fetch error:', error);
-      setError(error.message);
-  }
-};
+    };
 
   return (
       <div>
@@ -114,8 +114,8 @@ const handleSignup = async () => {
               </div>
           )}
 
-          {isOtpVerified && (
-              <div>
+            {isOtpVerified && (
+                <div>
                   <input
                       type="text"
                       value={username}
@@ -141,9 +141,9 @@ const handleSignup = async () => {
                       placeholder="Enter contact number"
                   />
                   <button onClick={handleSignup}>Signup</button>
-              </div>
-          )}
-<br></br>
+                </div>
+            )}
+            <br></br>
           {error && <p className="error-message">{error}</p>}
       </div>
   );

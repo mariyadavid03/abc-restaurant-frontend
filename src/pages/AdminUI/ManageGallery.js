@@ -65,7 +65,6 @@ function ManageGallery() {
                     <table className='main-table'>
                         <thead>
                             <tr>
-                                <th>ID</th>
                                 <th>Image</th>
                                 <th>Title</th>
                                 <th>-</th>
@@ -74,7 +73,7 @@ function ManageGallery() {
                         <tbody>
                             {galleryImages.map(item => (
                                 <tr key={item.id}>
-                                    <td>{item.id}</td>
+                                    {/* <td>{item.id}</td> */}
                                     <td>
                                         <img 
                                             src={`data:image/jpeg;base64,${item.image_data}`} 

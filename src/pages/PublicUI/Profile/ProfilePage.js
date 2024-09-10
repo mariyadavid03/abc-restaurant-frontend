@@ -3,6 +3,7 @@ import './ProfileStyles.css';
 import SessionManager from "../../../services/SessionManager";
 import axios from "axios";
 import Header from "../../../components/Header/PublicHeader/Header";
+import ProfileEditModal from "../../../components/Modals/ProfileEditModal";
 
 function ProfilePage() {
     const [userDetails, setUserDetails] = useState({});
@@ -12,6 +13,9 @@ function ProfilePage() {
     const session = SessionManager.getInstance();
     const [error, setError] = useState('');
     const userId = session.getUserId();
+    const [show, setShow] = useState(false);
+    const handleClose = () => setShow(false);
+    const handleShow = () => setShow(true);
 
     // Fetching profile data
     const fetchProfileData = useCallback(async () => {
@@ -96,8 +100,13 @@ function ProfilePage() {
                 {/* User info */}
                 <h4 className="heading-profile"><center>Profile Details</center></h4>
                 <div className="user-info-section">
+                <img 
+                    src={require("../../../assets/images/edit-profile.png")}
+                    className="profile-edit"
+                    alt="Edit Profile"
+                    onClick={handleShow}/>
                     <div>
-                        <img src={require('../../../assets/images/user.png')} alt='User' />
+                        <img src={require('../../../assets/images/user.png')} alt='User' className="profile-pic"/>
                     </div>
                     <div className="user-info">
                         <h6>Username: {userDetails.username}</h6>
@@ -188,7 +197,9 @@ function ProfilePage() {
                 </div>
                 {error && <p className="error">{error}</p>}
             </div>
+            <ProfileEditModal userDetails={userDetails} show={show} handleClose={handleClose} onSave={fetchProfileData} />
         </div>
+        
     );
 }
 
