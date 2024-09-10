@@ -1,70 +1,55 @@
-# Getting Started with Create React App
+# ABC Restaurant Web Application - Frontend
+This repository contains the React-based frontend for the ABC Restaurant Web Application. It provides a responsive user interface that interacts with the backend API to deliver restaurant services for three main user types: Customer, Staff, and Admin.
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Features
+### Customer Features
+- User Login/Signup: Secure login and registration with email OTP verification.
+- Profile Management: Customers can view and edit their personal details, including password, name, and contact information.
+- Order & Delivery Management: Customers can view and cancel their orders and deliveries.
+- Reservations & Orders: Customers can place table reservations and delivery orders.
+- Query Submission: Customers can submit inquiries about any issues.
+- Confirmation Emails: Reservation, payment, and query response emails are sent to customer emails.
+  
+### Staff Features
+- User Login: Secure login for staff members.
+- Respond to Queries: Staff can respond to customer inquiries.
+- Gallery Management: Edit, add, and delete menu items in the gallery.
+- Manage Reservations & Orders: View and delete reservation and order records.
 
-## Available Scripts
+### Admin Features (Includes all Staff Features)
+- Gallery Management: Upload images to display on the gallery page.
+- Facilities Management: Upload images and descriptions to display on the facilities page.
+- Account Management: Add and update staff and admin accounts.
+- Report Generation: Generate reports by selecting a type and date range.
+  
+## Technologies Used
+React: Core framework for building the user interface.
+Axios: For making HTTP requests to the backend API.
+React Bootstrap: For responsive and styled components.
+JavaScript (ES6): Primary language for component logic and state management.
+CSS: Custom styling for UI components.
 
-In the project directory, you can run:
+## Installation
+To get started with the frontend locally, follow these steps:
 
-### `npm start`
+1. Clone the repository
+git clone https://github.com/yourusername/abc-restaurant-frontend.git
+cd abc-restaurant-frontend
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+2. Install dependencies
+Ensure you have Node.js installed and run,
+npm install
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+3. Start the development server
+Run the following command:
+npm start
 
-### `npm test`
+The app should now be running at http://localhost:3000.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## Folder Structure
+src/components/: Contains reusable React components such as forms, modals, tables, and tabs.
+src/pages/: Contains page-level components for the Admin, Public, and Staff UIs.
+src/services/: Contains centralized service files such as the session manager.
 
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+## License
+This project is licensed under the MIT License. See the LICENSE file for more details.
