@@ -32,7 +32,7 @@ CSS - Custom styling for UI components.
 ## Installation
 To get started with the frontend locally, follow these steps:
 
-1. Clone the repository - Run, git clone https://github.com/yourusername/abc-restaurant-frontend.git and then cd abc-restaurant-frontend
+1. Clone the repository - Run, git clone https://github.com/mariyadavid03/abc-restaurant-frontend.git and then cd abc-restaurant-frontend
 
 2. Install dependencies - Make sure you have Node.js installed and run, npm install
 
