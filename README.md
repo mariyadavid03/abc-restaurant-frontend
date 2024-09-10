@@ -24,9 +24,13 @@ This repository contains the React-based frontend for the ABC Restaurant Web App
   
 ## Technologies Used
 - React - Core framework for building the user interface.
+
 - Axios - For making HTTP requests to the backend API.
+  
 - React Bootstrap - For responsive and styled components.
+  
 - JavaScript - Primary language for component logic and state management.
+  
 - CSS - Custom styling for UI components.
 
 ## Installation
