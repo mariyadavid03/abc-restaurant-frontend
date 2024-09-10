@@ -46,9 +46,10 @@ To get started with the frontend locally, follow these steps:
 The app should now be running at http://localhost:3000.
 
 ## Folder Structure
-src/components/: Contains reusable React components such as forms, modals, tables, and tabs.
-src/pages/: Contains page-level components for the Admin, Public, and Staff UIs.
-src/services/: Contains centralized service files such as the session manager.
+- src/components/: Contains reusable React components such as forms, modals, tables, and tabs.
+- src/pages/: Contains page-level components for the Admin, Public, and Staff UIs.
+- src/services/: Contains centralized service files such as the session manager.
+- src/assets/: Contains all image files
 
 ## License
 This project is licensed under the MIT License. See the LICENSE file for more details.
